@@ -3,10 +3,10 @@ This has all of the files that I have currently made for my portfolio site.
 
 How it works:
 1. Node.js Runtime
- - MySQL Database
+   - MySQL Database
 2. Express.js Web Framework
- - PUG (Formerly Jade) Templates for pages
- - Uses SASS for styling
+   - PUG (Formerly Jade) Templates for pages
+   - Uses SASS for styling
 3. jQuery Client Side JavaScripts
 
 Things to add:
