@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
 	console.log(errorMsg);
 
 	var images = ['/images/large-screen/building_seeing.jpg',
-					'/images/large-screen/chair_sittin.jpg',
 					'/images/large-screen/mounts.jpg',
 					'/images/large-screen/wood_walkin.jpg']
 
