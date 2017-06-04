@@ -64,3 +64,4 @@ typings/
 public/images/
 uploads/
 *.sql
+secret.js
