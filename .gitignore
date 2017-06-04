@@ -63,3 +63,4 @@ typings/
 # Specialized Stuff
 public/images/
 uploads/
+*.sql
