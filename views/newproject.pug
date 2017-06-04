@@ -1,0 +1,63 @@
+extends layout
+
+block masthead
+	|	New Project
+
+block content
+	.form-wrapper
+		form(action="/projects/newproject" method="post" enctype="multipart/form-data")#project-form
+			.form-header
+				#new-project-upload
+					label(for="project-pics")
+						|	Add (a) project picture(s) <br>
+					input(type="file" name="project-pics" multiple="true")#project-input-pic
+					#project-pic-alert.alert
+				#new-project-title
+					label(for="title")
+						|	Title<br>
+					input(type="text" name="title" placeholder="Insert Project Title Here...")#project-input-title.project-input
+					#project-title-alert.alert
+				#new-project-technologies
+					label(for="tech")
+						|	Technologies<br>
+					input(type="text" name="tech" placeholder="Insert Technologies Used for Project Here (separate values by commas)...")#project-input-technologies.project-input
+					#project-tech-alert.alert
+			.form-dates
+				.date-wrapper
+					.single-date-wrapper
+						label(for="start-month")
+							|	Start Month<br>
+						select(name="start-month")#project-input-start-month
+					.single-date-wrapper
+						label(for="start-day")
+							|	Start Day <br>
+						select(name="start-day")#project-input-start-day
+					.single-date-wrapper
+						label(for="start-year")
+							|	Start Year<br>
+						select(name="start-year")#project-input-start-year
+				.date-wrapper
+					.single-date-wrapper
+						label(for="end-month")
+							|	End Month<br>
+						select(name="end-month")#project-input-end-month
+					.single-date-wrapper
+						label(for="end-day")
+							|	End Day<br>
+						select(name="end-day")#project-input-end-day
+					.single-date-wrapper
+						label(for="end-year")
+							|	End Year<br>
+						select(name="end-year")#project-input-end-year
+					#project-date-alert.alert
+			.form-body
+				#new-project-body
+					textarea(autofocus="true" spellcheck="true" rows="20" name="body" placeholder="Enter a summary of a project...")#project-input-body
+					#project-body-alert.alert
+			.form-submit
+				#new-project-submit
+					input(type="button" value="Post New Project")#project-submit
+
+block append javascripts
+	script(src="/javascripts/newprojecthelper.js")
+	script(src="/javascripts/newprojectErrorCheck.js")

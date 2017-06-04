@@ -1,0 +1,49 @@
+extends layout
+
+block masthead
+	| #{post.title}
+
+block content
+	#single-post-wrapper
+		include mixins/utils
+		+single-post-temp(post)
+		if user
+			#post-edit-button
+				button(value="start-edit" id="start-edit-button")
+					|	Edit Post
+			#post-edit-confirm-button
+				button(value="confirm-edit" id="confirm-edit-button")
+					|	Confirm Edit
+		.single-back-button
+			a(href="/blog") << Back
+
+	#comments-wrapper
+		#comment-toggle-wrap
+			button#comment-toggle Click here to leave a comment!
+		#comment-entry-wrapper
+			#name-wrapper
+				label(for="name") Name/Username
+				br
+				input(name="name" type="text")#comment-input-name
+			#body-wrapper
+				label(for="body") Comment
+				br
+				textarea(name="body")#comment-input-body
+			#save-button-wrapper
+				button#comment-save Post Comment
+		if comments.length === 0
+			h3.hidden Comments
+			#comment-entries-wrapper.hidden
+		else
+			h3 Comments
+			#comment-entries-wrapper
+				include mixins/utils
+				each c in comments
+					+comment-temp(c)
+					if comments.indexOf(c) !== comments.length - 1
+					hr
+
+
+block append javascripts
+	script(src="/javascripts/editPost.js")
+	script(src="/javascripts/singlePostComments.js")

@@ -1,0 +1,187 @@
+//- Template for nav-bar shown on all pages
+mixin navBar(user, page = null)
+	nav(id="main-nav")
+		#mobile-nav-wrapper
+			button(id="nav-button-mobile")
+				.krabby-patty
+				.krabby-patty
+				.krabby-patty
+		#nav-wrapper
+			ul(id="nav-list")
+				li(class="nav-item")
+					a(href="/") Home
+				li(class="nav-item")
+					a(href="/projects") Projects
+				li(class="nav-item") 	
+					a(href="/blog") Blog
+				li(class="nav-item") 	
+					a(href="/contact") Contact
+				if page === 'blog' && user
+					li(class="nav-item")
+						a(href="/blog/newpost") Add New Post
+				if page === 'projects' && user
+					li(class="nav-item")
+						a(href="/projects/newproject") Add New Project
+//- Template for a social media bar
+mixin social-media-wrap(none)
+	.soc-media-wrapper
+		.soc-icon
+			a(href="https://www.facebook.com/kellan.martin")
+				img(src="/images/fb_logo.png")
+		.soc-icon
+			a(href="https://www.instagram.com/spraynard_krueg")
+				img(src="/images/ig_logo_footer.png")
+		.soc-icon
+			a(href="https://github.com/Spraynard")
+				img(src="/images/octo_logo.png").resize
+		.soc-icon
+			a(href="https://www.linkedin.com/in/kellanmartin")
+				img(src="/images/li_logo.png").resize
+
+//- Template for posts on the front `Blog` page
+mixin post-temp(post)
+	- var id = post.ID.toString()
+	- var headerPic = post.header_pic
+	div(id=`post-${id}` class="blog-post")
+		if headerPic !== null
+			.post-image-wrapper
+				img(src=`./uploads/blog/${headerPic}`).post-header-pic
+		.post-display
+			a(href=`/blog?singlepost=true&post=${id}`)
+				h1(class="post-header") #{post.title}
+			.post-body 
+				| <pre>#{post.body}</pre>
+		.post-meta
+			if post.tags !== null
+				.post-tags Tags: #{post.tags}
+			.post-date
+				if !post.modified
+					| Created on: #{post.created}
+				else
+					| Modified on: #{post.modified}
+
+//- Template for singular blog posts!
+mixin single-post-temp(post)
+	- var id = post.ID.toString()
+	- var headerPic = post.header_pic
+	div(id=`post-${id}` class="blog-post")
+		if headerPic !== null
+			#single-post-pic-wrapper
+				img(src=`./uploads/blog/${headerPic}`).single-post-header-pic
+		h1#single-post-header.front-end #{post.title}
+		label#edit-title-label.edit Title
+		input#single-post-header-edit.edit
+		if user
+			#single-post-body-wrap.front-end
+				| #{post.body}
+		else
+			#single-post-body-wrap.front-end
+				pre
+					| #{post.body}			
+		label#edit-body-label.edit Body
+		textarea#single-post-body-edit.edit
+		if post.tags !== null
+			#post-tags.front-end
+				| Tags: <span id="tags">#{post.tags}</span>
+			label#post-tags-label.edit Post Tags
+			input#post-tags-edit.edit
+		#single-post-date
+			if post.modified === null
+				| Created on: #{post.created}
+			else
+				| Modified on: #{post.modified}
+
+//- Template for comments on a single post
+mixin comment-temp(comment)
+	.background-wrapper
+		.comment-entry(id=`comment-${comment.id}`)
+			.comment-author #{comment.username}
+			.comment-date #{comment.showDate}
+			.comment-body #{comment.body}
+
+//- Template for projects shown on the main project page
+mixin project-temp(project)
+	- var id = project.ID.toString()
+	- var pics = project.pics.split(',')[0]
+	a(href=`/projects?singleproject=true&project=${id}`)
+		div(id=`post-${id}` class="project")
+			.project-img-wrap
+				img(src=`./uploads/projects/${pics}` class="project-pic")
+			.project-anim-wrap
+
+			.project-title-wrap
+				h3.project-header #{project.title}
+			//- .project-date-wrapper
+			//- 	|	Start: #{project['start_date']}, End: #{project['end_date']}
+			//- .project-body-wrapper #{project.body}
+//- Template for a single project item. Used when you click on a project icon in the projects page.
+mixin single-project-temp(project)
+	- var id = project.ID.toString()
+	- var pics = project.pics.split(',')
+	- var tech = project.tech.split(',')
+	div(id=`post-${id}` class="single-project")
+		if pics.length === 1
+			#single-pic-wrapper
+				each p in pics 
+					img(src=`/uploads/projects/${p}` class="single-project-pic")
+		else
+			#project-carousel
+				.carousel-main
+					.carousel-left
+						img(src="/images/chevron-left.svg").chevron-select.select-left
+					.carousel-image-wrapper
+						each p in pics
+							if pics.indexOf(p) === 0
+								img(src=`./uploads/projects/${p}` class="single-project-pic current")
+							else
+								img(src=`./uploads/projects/${p}` class="single-project-pic")
+					.carousel-right
+						img(src="/images/chevron-right.svg").chevron-select.select-right
+		#project-data
+			h1#project-header.front-end #{project.title}
+			input#header-edit.edit
+			#project-date-wrapper
+				.project-date
+					span.embellished
+						|	Start:
+					span.data#start-date.front-end
+						|#{project['start_date']}
+					input#start-date-edit.edit
+				.project-date
+					span.embellished
+						|	End:
+					span.data#end-date.front-end
+						|#{project['end_date']}
+					input#end-date-edit.edit
+			#techwrapper
+				#techheader
+					|	<u>Technologies Used</u>:
+				#qualwrapper.techs.front-end
+					each t in tech
+						.qualitem
+							|#{t}
+				input#tech-edit.edit
+			#project-body-wrapper.front-end #{project.body}
+			#body-edit.edit
+				textarea(id="project-body-edit")
+
+//- Template for blog posts shown on the footer 
+mixin footerPost(posts)
+	if posts
+		each post in posts
+			- var id = post.ID.toString()
+			- var maxLen = 50
+			if post.body.length > maxLen
+				- body = post.body.substring(0,maxLen) + '...'
+			else
+				- body = post.body
+			.fpwrap
+				a(href=`/blog?singlepost=true&post=${id}`)
+					.footer-post-title
+						| #{post.title}
+				.footer-post-blurb #{body}
+
+
+
+
+

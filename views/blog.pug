@@ -1,0 +1,10 @@
+extends layout
+
+block masthead
+	| A Beggar's Blog
+
+block content
+	#blog-content-wrapper
+		include mixins/utils
+		each p in posts
+			+post-temp(p)

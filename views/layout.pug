@@ -1,0 +1,56 @@
+doctype html
+html
+	head
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(href="https://fonts.googleapis.com/css?family=Permanent+Marker" 	rel="font stylesheet")
+	body
+	.container
+		header(id="header-wrapper")
+			if page === 'home'
+				#masthead-wrapper.home
+					block carousel-masthead
+			else
+				#masthead-wrapper 
+					block masthead
+			include mixins/utils
+			+navBar(user, page)
+		.body
+			#content
+				block content
+		footer
+			#footer-wrapper
+				#footer-left
+					#footer-nav
+						.header Navigation
+						.nav-item
+							a(href="/") Home
+						.nav-item
+							a(href="/projects") Projects
+						.nav-item
+							a(href="/blog") Blog
+						.nav-item
+							a(href="/contact") Contact
+
+				#footer-mid
+					#footer-social-media
+						include mixins/utils
+						+social-media-wrap
+					#footer-post-wrapper
+						#check-out
+							| Check Out My Latest Blog Posts! <br> (Click on the title to be taken to it)
+						include mixins/utils
+						+footerPost(footerPosts)
+				#footer-right
+					#contact-wrapper
+						.email
+						.phone
+							img(src="/images/phone_icon.svg")
+							| (906) 231 - 0761
+					#copyright-wrapper
+						| &copy; <span id="cr-year"></span> Kellan Martin Productions
+	block javascripts
+		script(src="/jquery/jquery.js")
+		script(src="/javascripts/navmenu.js")
+		script(src="/javascripts/footers.js")

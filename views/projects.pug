@@ -1,0 +1,8 @@
+extends layout
+block masthead 
+	div Projects
+block content
+	.project-wrapper
+		include mixins/utils
+		each p in projects
+			+project-temp(p)

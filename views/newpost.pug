@@ -1,0 +1,39 @@
+extends layout
+
+block masthead
+	| New Post
+
+block content
+	.form-wrapper
+		form(action="/blog/newpost" method="post" enctype="multipart/form-data")#post-form
+			.form-header
+				#newpost-upload
+					label(for="header-pic")
+						|	Choose a post header picture <br>
+					input(type="file" name="header-pic")#input-picture
+					#picture-alert.alert
+				#newpost-title
+					label(for="title")
+						|	Title<br>
+					input(type="text" name="title").post-input#input-title
+					#title-alert.alert
+				#newpost-category
+					label(for="category")
+						|	category<br>
+					input(type="text" name="category").post-input#input-category
+					#category-alert.alert
+				#newpost-tags
+					label(for="tags")
+						|	Tags<br>
+					input(type="text" name="tags").post-input#input-tags
+					#tag-alert.alert
+			.form-body
+				#newpost-body
+					textarea(autofocus="true" spellcheck="true" rows="20" cols="50" name="body")#input-body
+					#body-alert.alert
+			.form-submit
+				#newpost-submit
+					input(type="button" value="Post Blog Entry")#ajaxSubmit
+
+block append javascripts
+	script(src="/javascripts/newpostErrorCheck.js")

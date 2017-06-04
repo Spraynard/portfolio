@@ -1,0 +1,25 @@
+extends layout
+
+//- block masthead
+//- 	| #{project.title}
+
+block content
+	- id = project.ID
+	#single-project-wrapper
+		include mixins/utils
+		+single-project-temp(project)
+		//- Only show edit button on user
+		if user
+			#project-edit-button
+				button(value="start-edit" id="start-edit-button")
+					|	Edit Post
+			#project-edit-confirm-button
+				button(value="confirm-edit" id="confirm-edit-button")
+					|	Confirm Edit
+		#single-back-button
+			a(href="/projects") << Back		
+
+
+block append javascripts
+	script(src="/javascripts/singleprojecthelper.js")
+	script(src="/javascripts/editProject.js")

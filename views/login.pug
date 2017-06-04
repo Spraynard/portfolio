@@ -1,0 +1,23 @@
+extends layout
+
+block masthead 
+	| Admin Sign-In
+
+block content
+	.form-wrapper
+		form(action="/admin/login" method='post')#login-form
+			.username
+				label(for="username") 
+					| <span class="text">Username</span>
+				input(type="text" name="username")#username
+				#username-alert.alert
+			.password
+				label(for="password") 
+					| <span class="text">Password</span>
+				input(type="password" name="password")#password
+				#password-alert.alert
+			button(type="button")#login-submit
+				|Submit
+
+block append javascripts
+	script(src="/javascripts/login-ajax.js")

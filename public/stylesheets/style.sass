@@ -1,0 +1,1420 @@
+/* -----INDEX-----
+	*
+	* HEADER CSS - Line 96
+	*
+	* FOOTER CSS - Line 235
+	*
+	* FORM (Contact, Login, Newpost, NewProject) CSS - Line 509
+	*
+	* BLOG CSS - Line 580
+	*	NEW POST CSS - Line 625
+	*	SINGLE POST CSS - Line 651
+	*
+	* PROJECTS PAGE CSS - Line 666
+	*	NEW PROJECT PAGE CSS - Line 769
+	*	SINGLE PROJECT PAGE CSS - Line 837
+	*
+	*
+	*/
+// Main SASS VARIABLES
+$font-stack: "Lucinda Grande", Helvetica, Arial, sans-serif
+$nav-border-color: black
+$background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAYUlEQVQoU2P8+/XZfwY0wMwtxQgSAsmB2CAaLAADME0wSWQarhBZN0gjsiIQH8UKdOtgTgArhJkEU4TuXhgfq9XIJsHcjeE7dEVwXyN7ApsimJMwPIPsIeRgQ/EMNkUwMQDKAHrstpbrFgAAAABJRU5ErkJggg==)
+$masthead-background: #C9CBCF
+$masthead-font-stack: 'Permanent Marker', courier
+
+$footer-height-large-screen: 300px
+$footer-height-mid-screen: 375px
+$footer-height-small-screen: 400px
+$break-small: 480px
+$break-med: 768px
+$break-med-lrg: 900px
+$break-large: 1200px
+$main-content-padding: 20%
+$main-break-content-padding: 5%
+$blog-content-padding: 10%
+$project-content-padding: 5%
+
+// Sass variables for `buttons` shown on home page
+$button-background: #FFB600
+$button-embellish-color: #363636
+$button-text-color: black
+$button-top-border: 1px solid #363636
+$button-side-border: 4px solid $button-embellish-color
+$button-bottom-border: 6px solid $button-embellish-color
+
+// SASS variables for social media bars
+$social-border: 1px solid #A3A0AE
+$social-border-radius: 10px
+$social-background-color: #FF8500
+$social-background-1: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAaUlEQVQoU2P8+/XZfwY0cObaS7CIiZY4A4gNohlPnj4PVwgSAAGYJDINV4isG10xiA9WCFOEbh3MCWCFIDciuwndvTA+VquRTYK5G8VqZCdg+BpmNS5FMA0YnkE2CeY+cDgiewabIpgYAJTdbRIwVt8BAAAAAElFTkSuQmCC)
+$social-bar-width: 200px
+
+// MIXINS AREA
+
+=qualitem()
+	display: inline
+	margin: 5px
+	padding: 5px
+	font-family: $font-stack
+	border: $button-top-border
+	border-bottom: $button-bottom-border
+	border-left: $button-side-border
+	border-right: $button-side-border
+	border-radius: 5px
+	color: $button-text-color
+	background: $button-background
+	-webkit-touch-callout: none
+	-webkit-user-select: none
+	-khtml-user-select: none
+	-moz-user-select: none
+	-ms-user-select: none
+	user-select: none
+
+=gradientbackground()
+	background: -moz-linear-gradient(303deg, rgba(66,142,255,1) 0%, rgba(0,128,128,1) 100%); /* ff3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(66,142,255,1)), color-stop(100%, rgba(0,128,128,1))); /* safari4+,chrome */
+	background: -webkit-linear-gradient(303deg, rgba(66,142,255,1) 0%, rgba(0,128,128,1) 100%); /* safari5.1+,chrome10+ */
+	background: -o-linear-gradient(303deg, rgba(66,142,255,1) 0%, rgba(0,128,128,1) 100%); /* opera 11.10+ */
+	background: -ms-linear-gradient(303deg, rgba(66,142,255,1) 0%, rgba(0,128,128,1) 100%); /* ie10+ */
+	background: linear-gradient(147deg, rgba(66,142,255,1) 0%, rgba(0,128,128,1) 100%); /* w3c */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#428EFF', endColorstr='#008080',GradientType=0 );
+
+=footergradient()
+	background: -moz-linear-gradient(90deg, rgba(255,44,0,1) 0%, rgba(183,83,71,1) 28%, rgba(1,185,255,1) 100%); /* ff3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(1,185,255,1)), color-stop(72%, rgba(183,83,71,1)), color-stop(100%, rgba(255,44,0,1))); /* safari4+,chrome */
+	background: -webkit-linear-gradient(90deg, rgba(255,44,0,1) 0%, rgba(183,83,71,1) 28%, rgba(1,185,255,1) 100%); /* safari5.1+,chrome10+ */
+	background: -o-linear-gradient(90deg, rgba(255,44,0,1) 0%, rgba(183,83,71,1) 28%, rgba(1,185,255,1) 100%); /* opera 11.10+ */
+	background: -ms-linear-gradient(90deg, rgba(255,44,0,1) 0%, rgba(183,83,71,1) 28%, rgba(1,185,255,1) 100%); /* ie10+ */
+	background: linear-gradient(0deg, rgba(255,44,0,1) 0%, rgba(183,83,71,1) 28%, rgba(1,185,255,1) 100%); /* w3c */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#01B9FF', endColorstr='#FF2C00',GradientType=0 ); /* ie6-9 */
+// End MIXINS
+html, body
+	margin: 0px
+	padding: 0px
+	height: 100%
+	width: 100%
+	overflow-x: hidden
+
+hr 
+	width: 40%
+	border: none
+	height: 5px
+	background: black
+	margin-top: 0
+	margin-bottom: 0
+
+// HTML designated body
+body
+  font: 14px $font-stack
+  background: $background
+
+pre
+	white-space: pre-wrap
+
+// My designated body
+.body
+	padding-bottom: $footer-height-large-screen
+	color: #363636
+
+	@media screen and (max-width: $break-med)
+		padding-bottom: $footer-height-mid-screen
+	@media screen and (max-width: $break-small)
+		padding-bottom: $footer-height-small-screen
+	
+a
+  color: #00B7FF
+
+.alert-text
+	font-size: 40px;
+	color: red;
+	font-family: arial;
+
+.alert
+	color: red;
+	
+.container 
+	min-height: 100%
+	position: relative
+
+// `HEADER` CSS
+#header-wrapper
+	width: 100%
+	margin-bottom: 5em
+
+	#masthead-wrapper
+		font-family: $masthead-font-stack
+		background: $masthead-background
+		
+		width: 100%
+		// background-image: url('/images/mounts-right.jpg')
+		font-size: 5em
+		text-align: center
+		//This stuff would be cool when I figure out the animations to 
+		//	drop down to the nav tabs
+		// border-bottom-left-radius: 50%
+		// border-bottom-right-radius: 50%
+		p:first-child
+			margin-top: 0
+
+		&:not(.home)
+			min-height: 250px
+
+		&.home
+			// background-image: url('/images/large-screen/building_seeing.jpg')
+			// min-height: 800px
+			min-height: 835px
+
+			#masthead-text
+				position: absolute
+				padding-left: 10%
+				padding-right: 10%
+				padding-top: 30%
+				z-index: 4
+
+			#masthead-carousel
+
+				.carousel-main
+
+					.carousel-image-wrapper
+
+						.masthead-pic
+							display: none
+
+							&.current, &.trans
+								display: block
+
+							&.current
+								z-index: 3
+								position: absolute
+
+							&.trans
+								position: absolute
+								z-index: 2
+
+	#main-nav
+
+		#mobile-nav-wrapper
+			display: none
+
+			.nav-button
+
+		#nav-wrapper
+			display: inline
+
+			#nav-list
+				padding: 0
+				margin: 0 auto
+				width: 90%
+				// text-align: center
+				display: flex
+				justify-content: center
+				flex-wrap: wrap
+
+			.nav-item
+				z-index: 0
+				list-style-type: none
+				display: inline
+				font-family: $masthead-font-stack
+				font-size: 2em
+				padding-left: 4%
+				padding-right: 4%
+				padding-top: 2px
+				border-bottom-right-radius: 10px
+				border-bottom-left-radius: 10px
+				text-align: center
+				opacity: 0.5
+				transition: opacity 1.0s ease-out
+
+				a
+					opacity: 0.7
+					transition: opacity 0.2s ease-out
+
+					&.current
+						opacity: 1.0
+
+				+ .nav-item
+					margin-left: 0.5%
+
+				&.current
+					opacity: 1.0
+					background: $masthead-background
+					background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAaUlEQVQoU2P8+/XZfwY0cObaS7CIiZY4A4gNohlPnj4PVwgSAAGYJDINV4isG10xiA9WCFOEbh3MCWCFIDciuwndvTA+VquRTYK5G8VqZCdg+BpmNS5FMA0YnkE2CeY+cDgiewabIpgYAJTdbRIwVt8BAAAAAElFTkSuQmCC)
+					// border-top: solid $masthead-background
+					a
+						opacity: 1.0
+			#nav-list a
+				text-decoration: none
+				color: black
+
+		// Media query for navbar
+		$mobile-background-color: white
+		$mobile-main-color: grey
+		$mobile-nav-border: 5px solid black
+		$mobile-inner-nav-border: 1px solid black
+		@media screen and (max-width: $break-med)
+
+			#mobile-nav-wrapper
+				display: inline
+
+				#nav-button-mobile
+					position: absolute
+					z-index: 1
+					display: relative
+					margin-top: 7px
+					right: 0
+					margin-right: 10px
+					margin-bottom: 10px
+					width: 50px
+					height: 40px
+					border-radius: 10px
+					border: 2px solid $mobile-main-color
+					background: $mobile-background-color
+
+					.krabby-patty
+						width: 80%
+						height: 7%
+						border-radius: 10%
+						margin: 0 auto
+						background: $mobile-main-color
+						// border: 2px solid #
+
+						+ .krabby-patty
+							margin-top: 20%
+
+
+			#nav-wrapper
+				display: none
+
+				&.open
+					display: inline
+
+				#nav-list
+					width: 100%
+
+					.nav-item
+						width: 100%
+						border-radius: 0
+						padding-left: 0
+						padding-right: 0
+						margin-left: 0
+						border-top: $mobile-inner-nav-border
+						border-bottom: $mobile-inner-nav-border
+
+						a
+							opacity: 1.0
+
+						&:first-child
+							border-top: $mobile-nav-border
+
+						&:last-child
+							border-bottom: $mobile-nav-border
+
+
+// End `Header` Related CSS
+
+// Start `Footer` Related CSS
+footer
+	background: $masthead-background
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAYElEQVQoU22QQQ4AIQgD9UkezP7/uNmDT3JTkzEV4YJAC631/cYsIZ7eqlqa6a28GgQkhp430NkiOkj1cSKeQ8ICsglQ1EudnvZN6L7cRdB27SYyEJIuM27Iv+0wk4Ho/boid7mJS9cXAAAAAElFTkSuQmCC)
+	// +footergradient
+	position: absolute
+	height: $footer-height-large-screen
+	bottom: 0
+	width: 100%
+
+	@media screen and (max-width: $break-med)
+		height: $footer-height-mid-screen
+	@media screen and (max-width: $break-small)
+		height: $footer-height-small-screen
+
+	$footer-content-padding: 10%
+	$footer-background-color: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAaUlEQVQoU2P8+/XZfwY0cObaS7CIiZY4A4gNohlPnj4PVwgSAAGYJDINV4isG10xiA9WCFOEbh3MCWCFIDciuwndvTA+VquRTYK5G8VqZCdg+BpmNS5FMA0YnkE2CeY+cDgiewabIpgYAJTdbRIwVt8BAAAAAElFTkSuQmCC)
+	$secondary-footer-background-color: #9B9FA9
+	$footer-nav-non-hover-color: #A3A0AE
+	$footer-nav-hover-color: black
+	#footer-wrapper
+		color: #363636
+		padding-left: $footer-content-padding
+		padding-right: $footer-content-padding
+		margin-top: 20px
+
+		#footer-left
+			display: inline-block
+			width: 25%
+			text-align: left
+			vertical-align: top
+
+			#footer-nav
+				font-family: $masthead-font-stack
+
+				.header
+					margin-bottom: 5px;
+
+					@media screen and (max-width: $break-small)
+						display: none
+				
+				.nav-item
+					padding-left: 5px
+
+					a
+						text-decoration: none
+						color: $footer-nav-non-hover-color
+
+						&:hover
+							color: $footer-nav-hover-color
+							text-decoration: underline
+
+					+ .nav-item
+						margin-top: 7px
+
+		#footer-mid
+			position: relative
+			display: inline-block
+			width: 50%
+			vertical-align: bottom
+
+			#footer-social-media
+				border-radius: $social-border-radius
+				width: $social-bar-width
+				margin: 0 auto 10px auto
+
+				.soc-media-wrapper
+					// width: 200px
+					padding-left: 20px
+					padding-right: 20px
+					height: 40px
+					text-align: center
+					background: $social-background-1
+					border-radius: $social-border-radius
+					border: $social-border
+
+
+					.soc-icon
+						display: inline-block
+						padding-top: 7.5px
+						
+						+ .soc-icon
+							margin-left: 10px
+
+						img
+							width: 25px
+							height: 25px
+
+						&:last-child img
+							width: 30px
+
+			#footer-post-wrapper
+				background: $footer-background-color
+				border: 5px solid #A3A0AE
+				padding: 5px
+				padding-left: 10px
+				padding-right: 10px
+				border-radius: 10px
+				width: 400
+				margin: 0 auto
+
+				#check-out
+					text-align: center
+					font-family: $masthead-font-stack
+					margin-bottom: 10px
+
+				.fpwrap
+					padding: 5px
+					background: $secondary-footer-background-color
+					overflow-wrap: break-word
+
+					a
+						color: #FDF0E6
+						letter-spacing: 3px
+						font-family: $masthead-font-stack
+
+						&:visited
+							color: #FDF0E6
+
+						.footer-post-title
+							margin-bottom: 5px
+
+					+ .fpwrap
+						margin-top: 10px
+
+					&:last-child
+						margin-bottom: 5px
+		
+		#footer-right
+			display: inline-block
+			vertical-align: top
+			width: 25%
+			text-align: right
+
+			#contact-wrapper
+
+				.phone
+					font-size: 10px
+
+					img
+						height: 15px
+
+		@media screen and (max-width: $break-small)
+			#footer-left
+				width: 100%
+				margin-bottom: 20px
+				text-align: center
+
+				#footer-nav
+
+					.nav-item
+						display: inline-block
+
+						+ .nav-item
+							margin-left: 10px
+
+			#footer-mid
+				width: 100%
+
+				#footer-social-media
+					width: 250px
+
+					.soc-media-wrapper
+						// margin: 0 auto
+						text-align: center
+
+						.soc-icon
+
+							+ .soc-icon
+								margin-left: 30px
+
+
+			#footer-right
+				width: 100%
+				margin-top: 2px
+				text-align: center
+
+				#contact-wrapper
+
+					.phone
+						margin-top: 10px
+						margin-bottom: 10px
+// Controls main content wrapper.
+// 	Page specific content wrappers
+//  will be used instead of one basic
+// 	content wrapper.
+#content
+	margin-bottom: 50px;
+	overflow-y: hidden
+
+// `HOME` PAGE CSS
+#home-content-wrapper
+
+	margin-left: $main-content-padding
+	margin-right: $main-content-padding
+
+	#profile-area
+		display: inline-block
+		vertical-align: top
+		min-width: 39%
+		max-width: 40%
+
+		img
+			width: 100%
+
+		#profile-name
+			margin-top: 0px
+			margin-bottom: 0px
+			font-family: $masthead-font-stack
+
+		#profile-social-media
+			border-radius: $social-border-radius
+			width: $social-bar-width
+			margin-bottom: 10px
+
+			.soc-media-wrapper
+				padding-left: 20px
+				padding-right: 20px
+				height: 40px
+				text-align: center
+				// background: $social-background-color
+				background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAYElEQVQoU22QQQ4AIQgD9UkezP7/uNmDT3JTkzEV4YJAC631/cYsIZ7eqlqa6a28GgQkhp430NkiOkj1cSKeQ8ICsglQ1EudnvZN6L7cRdB27SYyEJIuM27Iv+0wk4Ho/boid7mJS9cXAAAAAElFTkSuQmCC)
+				border-radius: $social-border-radius
+				border: $social-border
+
+				.soc-icon
+					display: inline-block
+					padding-top: 7.5px
+
+					+ .soc-icon
+						margin-left: 10px
+
+					img
+						width: 25px
+						height: 25px
+
+						&.resize
+							width: 30px
+
+
+		#additionalinfo
+			text-align: left
+			padding-top: 10px
+			line-height: 2
+		
+	#quality-cont
+		display: inline-block
+		width: 60%
+
+		h1
+			margin-top: 0
+			text-align: center
+			font-family: $masthead-font-stack
+
+		#qualwrapper
+			padding: 10px
+			padding-left: 5em
+			padding-top: 0
+
+
+			h3:first-child
+				
+				margin-top: 0
+
+			h3
+				font-family: $masthead-font-stack
+
+			ul
+				display: flex
+				flex-wrap: wrap
+
+				.qualitem
+					+qualitem
+					animation-name: tilts
+					animation-duration: 5s
+					animation-iteration-count: infinite
+					animation-timing-function: linear
+
+				@keyframes tilts
+					0%
+						transform: rotateZ(0)
+					25%
+						transform: rotateZ(10deg)
+					50%
+						transform: rotateZ(0)
+					75%
+						transform: rotateZ(-10deg)
+					100%
+						transform: rotateZ(0)
+
+	@media screen and (max-width: $break-med)
+		margin-left: $main-break-content-padding
+		margin-right: $main-break-content-padding
+
+		#profile-area, #quality-cont
+			width: 100%
+			text-align: center
+
+		#profile-area
+			max-width: 100%
+
+			#additionalinfo
+				margin-left: 30px
+
+			img 
+				width: 60%
+
+			#profile-social-media
+				margin: 0 auto
+				margin-bottom: 10px
+
+			#additionalinfo
+				margin-left: 30px
+
+		#quality-cont
+			padding-top: 1em
+
+			#qualwrapper
+				padding-left: 0
+				padding-right: 0
+
+				.qualheader
+					font-size: 20px
+
+				ul 
+					justify-content: center
+					padding: 0
+
+//Global CSS for Forms - Literally all form CSS is here, for all pages
+.form-wrapper
+	position: relative
+	font-family: $masthead-font-stack
+	padding-left: $main-content-padding
+	padding-right: $main-content-padding
+
+	@media screen and (max-width: $break-med)
+		padding-left: $main-break-content-padding
+		padding-right: $main-break-content-padding
+
+	// Contact Page CSS
+
+	#contact-form
+
+		width: 90%
+		margin: 0 auto
+
+		#first-name, #last-name
+			display: inline-block
+			width: 50%
+
+			.name-input
+				width: 50%
+
+		#subject
+			margin-top: .5em
+
+		#subject input
+			width: 100%
+
+		#body textarea
+			width: 100%
+			height: 300px
+
+		#contact-submit
+
+			input
+				float: right
+
+		@media screen and (max-width: $break-med)
+
+			#first-name, #last-name
+				width: 100%
+
+				.name-input
+					width: 100%
+
+	// End Contact Page CSS
+
+
+//login page CSS
+.username, .password 
+	width: 100%
+
+.username label, .password label
+	display: inline-block;
+	text-align: right
+	width: auto
+
+label > .text
+	padding-right: 5%
+
+.username input, .password input
+	width: auto
+	margin-left: 10%
+
+//	Start `Blog` CSS
+$blog-post-background: white
+
+#blog-content-wrapper
+	margin-left: $blog-content-padding
+	margin-right: $blog-content-padding
+
+	.blog-post
+		background: $blog-post-background
+		border: 1px solid black
+		border-radius: 5px
+		padding: 1em
+		// min-height: 225px
+		padding-left: 2em
+		padding-right: 2em
+		position: relative
+		box-shadow: 5px 5px 2px black
+
+		&:first-child
+			margin-bottom: 2em
+
+		+ .blog-post
+			margin-bottom: 2em
+
+		// Used so image doesn't overflow past parent div (`post` object) no
+		// 	matter the size of the content of the post.
+		&::after
+			content: " "
+			display: block
+			height: 0
+			clear: both;
+
+		.post-image-wrapper
+			// height: 180px
+			width: 20%
+			min-width: 200px
+			float: left
+			margin-right: 15px
+			margin-bottom: 10px
+			margin-top
+
+			.post-header-pic
+				width: 100%
+				height: 100%
+				// margin-right: 1.5em
+				// margin-bottom: 1.5em
+
+		.post-display
+			overflow-wrap: break-word
+
+			a
+
+				.post-header
+					margin-top: 0
+					font-family: $masthead-font-stack
+
+		.post-meta
+			margin-top: 20px
+			clear: both
+
+			.post-tags, .post-date
+				display: inline-block
+				width: 50%
+
+			.post-date
+				display: inline-block
+				text-align: right
+				font-size: 0.7em
+
+	@media screen and (max-width: $break-med)
+		margin-left: $main-break-content-padding
+		margin-right: $main-break-content-padding
+
+		.blog-post
+
+			.post-image-wrapper
+				float: none
+				margin: 10px auto 0 auto
+				width: 80%
+				height: auto
+
+			.post-display
+
+				a
+
+					.post-header
+						display: block
+						text-align: center
+
+	@media screen and (max-width: $break-small)
+		margin-left: $main-break-content-padding
+		margin-right: $main-break-content-padding
+
+		.blog-post
+			padding-left: 1em
+			padding-right: 1em
+
+
+// End `Blog` CSS
+
+// 'Newpost' page CSS
+#newpost-upload
+	width: 80%
+	text-align: center
+	border: 2px solid black
+	padding: 5px
+	margin-left: auto
+	margin-right: auto
+	margin-bottom: 10px
+
+.post-input
+	width: 100%
+
+#input-category
+	width: 50%
+
+#input-tags
+	width: 50%
+
+#newpost-body textarea
+	width: 100%
+
+#newpost-tags
+	margin-bottom: 10px;
+// end 'Newpost' page CSS
+
+// `Single Post` Page CSS
+#single-post-wrapper
+	padding-left: $main-content-padding
+	padding-right: $main-content-padding
+	overflow-wrap: break-word
+	margin-bottom: 20px
+
+	#post-edit-button, #post-edit-confirm-button
+		display: inline-block
+		width: 50%
+
+	.single-back-button
+		margin-top: 20px
+
+	.blog-post
+
+		.edit
+			display: none
+
+			&.show
+				display: block
+
+		#single-post-header
+			font-family: $masthead-font-stack
+			margin-left: 2em
+
+		#single-post-header-edit
+			margin-bottom: 10px
+			width: 100%
+
+		#single-post-body-wrap, #single-post-body-edit
+			margin-bottom: 20px
+
+		#single-post-body-edit
+			width: 100%
+			height: 300px
+		#post-tags, #single-post-date, #tags
+			display: inline-block
+			width: 50%
+
+		#single-post-date
+			text-align: right
+
+		#single-post-pic-wrapper
+			text-align: center
+
+			img 
+				width: 100%
+				max-width: 375px
+				margin: 0 auto
+
+	// Uncomment when editing is first implemented
+	#confirm-edit-button
+		display: none
+
+	@media screen and (max-width: $break-med)
+		padding-left: $main-break-content-padding
+		padding-right: $main-break-content-padding
+
+	@media screen and (max-width: $break-small)
+
+		.blog-post
+
+			#single-post-header
+				margin-left: 0em
+				text-align: center
+
+// End `Single Post` CSS
+
+// `Comments` CSS
+$comment-entry-border: 2px solid #A3A0AE
+#comments-wrapper
+	padding-left: $main-content-padding
+	padding-right: $main-content-padding
+
+	.hidden
+		display: none
+
+	h3
+		font-family: $masthead-font-stack
+		text-align: center
+
+	#comment-toggle-wrap
+		text-align: center
+
+		#comment-toggle
+			margin-bottom: 20px
+
+	#comment-entry-wrapper
+		display: none
+
+		#save-button-wrapper
+			text-align: right
+
+		#name-wrapper
+			margin-bottom: 10px
+
+		#body-wrapper
+			margin-bottom: 10px
+
+		#name-wrapper, #body-wrapper, #save-button-wrapper
+			width: 80%
+			margin-left: auto
+			margin-right: auto
+
+			#comment-input-name, #comment-input-body
+				width: 100%
+
+			#comment-input-body
+				height: 200px
+
+	#comment-entries-wrapper
+		background: #FDF5E6
+		border: $comment-entry-border
+		border-radius: 10px
+
+		hr
+			background: #C9B793
+			height: 1px
+			width: 90%
+			margin: 0 auto
+
+		.background-wrapper
+			padding-top: 10px
+			padding-bottom: 10px
+			// &:not(:first-child)
+			// 	padding-top: 10px
+
+			// &:not(:last-child)
+			// 	padding-bottom: 10px
+
+			.comment-entry
+				width: 90%
+				margin: 0 auto
+
+				.comment-author
+					font-family: $masthead-font-stack
+					display: inline-block
+				
+				.comment-date::before
+					content: '-'
+					font-size: 16px
+					padding-left: 5px
+					padding-right: 5px
+
+				.comment-date
+					font-size: 10px
+					display: inline-block
+
+				.comment-body
+					padding-left: 20px
+
+	@media screen and (max-width: $break-med)
+		padding-left: $main-break-content-padding
+		padding-right: $main-break-content-padding
+
+// End `Comments` CSS
+
+// `Projects` page CSS
+$anim-wrap-color: #A3A0AE
+.project-wrapper
+	padding-left: $project-content-padding
+	padding-right: $project-content-padding
+	display: flex
+	justify-content: center
+	flex-wrap: wrap
+	
+	.project
+		display: inline-block;
+		position: relative
+		background: white
+		vertical-align: top
+		z-index: 0
+		border-radius: 10px
+		margin: 20px
+		transition: transform .2s ease-out
+		-webkit-transition: transform .2s ease-out
+		-moz-transition: transform .2s ease-out
+		-o-transition: transform .2s ease-out
+
+		.project-img-wrap
+			width: 180px
+			height: 180px
+			margin: 0 auto
+
+			.project-pic
+				width: 100%
+				height: 100%
+				border-radius: 10px
+
+		.project-anim-wrap
+			position: absolute
+			width: 180px
+			height: 60px
+			bottom: 0
+			z-index: 1
+			border-bottom-right-radius: 10px
+			border-bottom-left-radius: 10px
+
+		.project-title-wrap
+			position: absolute
+			width: 180px
+			height: 60px
+			bottom: 0
+			z-index: 2
+			display: none
+			text-align: center
+			color: white
+
+		@media screen and (min-width: $break-small)
+
+			&:hover
+				transform: scale(1.2)
+
+				.project-title-wrap
+					display: inline
+					animation-name: textinsert
+					animation-duration: 1.0s
+					animation-timing-function: ease-out
+
+				@keyframes textinsert
+					0%
+						opacity: 0
+					25%
+						opacity: 0.25
+					50%
+						opacity: 0.5
+					75%
+						opacity: 0.75
+					100%
+						opacity: 1.0
+
+
+				.project-anim-wrap
+					background-color: $anim-wrap-color
+					animation-name: wide
+					animation-duration: 0.5s
+					animation-timing-function: ease-out
+					opacity: 0.7
+					animation-delay: 0
+
+				@keyframes wide
+					0%
+						transform: scaleX(0)
+					50%
+						border-radius: 10%
+					100%
+						transform: scaleX(1)
+
+	@media screen and (max-width: $break-small)
+		.project
+
+			.project-title-wrap
+				display: inline
+
+			.project-anim-wrap
+				background-color: $anim-wrap-color
+				opacity: 0.7
+
+// `Newproject` page CSS
+.form-wrapper
+		
+	.form-header
+
+		#new-project-title
+			width: 80%
+			margin: 0 auto
+			margin-bottom: 10px;
+
+			#project-input-title
+				width: 100%
+
+		#new-project-upload
+			width: 80%
+			margin: 0 auto;
+			text-align: center;
+			margin-bottom: 20px
+
+		#new-project-technologies
+			width: 80%
+			margin: 0 auto;
+			margin-bottom: 10px
+
+			#project-input-technologies
+				width: 100%
+
+	.date-wrapper
+		width: 80%
+		margin: 0 auto
+		text-align: center
+
+		.alert
+			text-align: left
+
+		.single-date-wrapper
+			display: inline-block
+			width: 25%
+
+		@media screen and (max-width: $break-med)
+			width: 100%
+
+	#project-form
+		// Textarea CSS
+		.form-body
+			width: 100%
+			height: 100%
+
+			#new-project-body
+				width: 80%
+				margin: 0 auto
+				margin-top: 20px
+
+				textarea
+					width: 100%
+
+		//	Submit button css
+		#new-project-submit
+			float: right
+			margin-right: 5em
+
+			@media screen and (max-width: $break-med)
+				margin-right: 2em
+//	end `newproject` css
+
+// `Single Project` CSS
+$carousel-width: 450px
+$carousel-height: 350px
+$paddle-width: 50px
+$select-placement-y: 157.5px
+$select-placement-x: 5px
+#single-project-wrapper
+	padding-left: $main-content-padding
+	padding-right: $main-content-padding
+
+	// Css for edit buttons, only shown if there is a user
+	#project-edit-button, #project-edit-confirm-button
+		display: inline-block
+		width: 50%
+		margin-bottom: 20px
+
+		#confirm-edit-button
+			display: none
+
+	.edit
+		display: none
+
+	.single-project
+
+		#project-data
+
+			h1, #header-edit
+				margin-bottom: 10px
+
+			#header-edit
+				width: 100%
+
+			#techwrapper
+				margin-bottom: 15px
+
+				#techheader
+					font-family: $masthead-font-stack
+					font-size: 20px
+
+				#qualwrapper
+					display: flex
+					flex-wrap: wrap
+					position: relative
+
+					.qualitem
+						display: border-box
+						+qualitem
+
+			#project-date-wrapper
+				margin-bottom: 5px
+
+				.project-date + .project-date
+					margin-left: 10px
+
+				.project-date
+					border: 2px solid black
+					border-radius: 5px
+					display: inline-block
+
+					.embellished
+						font-family: $masthead-font-stack
+						background: $masthead-background
+						border-right: 1px solid black
+						border-top-left-radius: 5px
+						border-bottom-left-radius: 5px
+						padding:
+							left: 5px
+							right: 5px
+
+					.data
+						padding-right: 5px
+						padding-left: 5px
+
+			#project-header
+				font-family: $masthead-font-stack
+
+			#project-body-wrapper, #body-edit
+				margin-bottom: 20px
+
+			#body-edit
+
+				#project-body-edit
+					width: 100%
+					height: 300px
+
+		#single-pic-wrapper 
+			width: $carousel-width
+			margin: 0 auto
+
+			img
+				width: $carousel-width
+				height: $carousel-height
+
+		#project-carousel
+
+			.chevron-select
+				height: 35px
+				width: 35px
+				top: $select-placement-y
+				position: absolute
+
+			.select-left
+				left: $select-placement-x
+				opacity: 0
+				transition: opacity 0.4s ease-out
+
+			.select-right
+				right: $select-placement-x
+				opacity: 0
+				transition: opacity 0.4s ease-out
+
+
+			.carousel-main
+				width: $carousel-width
+				height: $carousel-height
+				margin: 0 auto
+				position: relative
+				overflow: hidden
+				border: 1px solid #A3A0AE
+
+				&:hover
+
+					.select-left
+						display: block
+						opacity: 1.0
+
+
+					.select-right
+						display: block
+						opacity: 1.0
+
+					@keyframes sel-display
+						0%
+							opacity: 0
+						25%
+							opacity: 25%
+						50%
+							opacity: 50%
+						75%
+							opacity: 75%
+						100%
+							opacity: 100%
+
+
+			.carousel-left
+				position: absolute
+				height: $carousel-height
+				width: $paddle-width
+				background: transparent
+				left: 0
+				bottom: 0
+
+			.carousel-image-wrapper
+				
+				.single-project-pic
+					width: $carousel-width
+					height: $carousel-height
+
+				.single-project-pic:not(.current)
+					display: none
+
+
+			.carousel-right
+				position: absolute
+				height: $carousel-height
+				width: $paddle-width
+				right: 0
+				bottom: 0
+
+@media screen and (max-width: $break-med)
+
+	#single-project-wrapper
+		padding-left: 10%
+		padding-right: 10%
+
+		.single-project
+
+			#single-pic-wrapper
+				width: 100%
+
+				img
+					width: 100%
+					height: auto
+
+$small-media-select-placement-y: 310px
+$small-media-select-placement-x: 5px
+$carousel-full-screen-margins: -30%
+
+
+@media screen and (max-width: $break-small)
+	#single-project-wrapper
+
+		padding-left: 0
+		padding-right: 0
+
+		.single-project
+			
+			#project-carousel
+
+				.carousel-main
+					width: 100%
+
+					.carousel-image-wrapper
+
+						.single-project-pic
+							width: 100%
+							height: $carousel-height
+
+					.select-left
+						opacity: 0.7
+						left: $small-media-select-placement-x
+
+					.select-right
+						opacity: 0.7
+						right: $small-media-select-placement-x
+				.chevron-select
+					top: $small-media-select-placement-y
+			
+			#project-data
+				padding-left: $main-break-content-padding
+				padding-right: $main-break-content-padding
+
+				#project-header
+					text-align: center
+
+				#project-date-wrapper
+
+					.project-date
+						display: block
+						width: 40%
+						min-width: 220px
+
+						.embellished
+							display: inline-block
+							text-align: center
+							width: 25%
+						.data
+							margin-left: 5px;
+
+						+ .project-date
+							margin-left: 0
+							margin-top: 10px
+
+				.techheader
+					text-align: center
+
+				.qualwrapper
+					justify-content: center
+
+				.project-body-wrapper
+					margin-left: 10%
+					margin-right: 10%
+
+		.single-back-button
+			margin-left: -5%
+
+// End `Single Project` CSS
+#thank-you-message
+	font-family: $masthead-font-stack
+	font-size: 5em
