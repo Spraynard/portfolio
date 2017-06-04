@@ -43,7 +43,8 @@ $(function() {
 	function togglePostEdit() {
 		toggleEditMode()
 		$titleEdit.val($title.text());
-		$bodyEdit.val($body.text());
+		// Using HTML to be able to correctly see what HTML is being put in this area
+		$bodyEdit.val($body.html());
 		$tagsEdit.val($tags.text());
 	}
 
@@ -65,7 +66,8 @@ $(function() {
 			toggleEditMode();
 
 			$title.text(newTitle);
-			$body.text(newBody);
+			// On update, puts the HTML content from the text box into the body, not just the text
+			$body.html(newBody);
 			$tags.text(newTags);
 		})
 	}

@@ -4,14 +4,36 @@ $(function() {
 	var commentSave = $('#comment-save');
 	var entryWrapper = $('#comment-entry-wrapper');
 	var entriesWrapper = $('#comment-entries-wrapper');
+	var animWrap = $('#comment-entry-anim-wrap');
 	var nameInput = $('#comment-input-name');
 	var bodyInput = $('#comment-input-body');
 	var state = false;
+	var inTrans = false;
 
 	function toggleCommentState() {
+		if (inTrans) {
+			return
+		}
+		inTrans = true;
 		state = state ? false : true;
-		$(this).text( state ? "Close" : commentToggleText )
-		entryWrapper.toggle();
+		commentToggle.text( state ? "Close" : commentToggleText )
+		if (state) {
+			entryWrapper.toggle();
+			animWrap.animate({
+				'bottom': '0'
+			}, 500, function() {
+				inTrans = false;
+			})
+		}
+		else {
+			animWrap.animate({
+				'bottom': '300px'
+			}, 500, function() {
+				entryWrapper.toggle();
+				inTrans = false;
+			})
+		}
+
 	}
 
 	function getTimestamp(dateObj) {

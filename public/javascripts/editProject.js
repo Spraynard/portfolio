@@ -1,3 +1,5 @@
+// YO, REFACTOR THIS POS NOW, LOL!!!!
+
 $(function() {
 
 	function removeWhiteSpace(string) {

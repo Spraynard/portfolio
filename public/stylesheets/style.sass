@@ -26,6 +26,7 @@ $nav-border-color: black
 $background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAYUlEQVQoU2P8+/XZfwY0wMwtxQgSAsmB2CAaLAADME0wSWQarhBZN0gjsiIQH8UKdOtgTgArhJkEU4TuXhgfq9XIJsHcjeE7dEVwXyN7ApsimJMwPIPsIeRgQ/EMNkUwMQDKAHrstpbrFgAAAABJRU5ErkJggg==)
 $masthead-background: #C9CBCF
 $masthead-font-stack: 'Permanent Marker', courier
+$black-text-color: #363636
 
 $footer-height-large-screen: 300px
 $footer-height-mid-screen: 375px
@@ -39,7 +40,14 @@ $main-break-content-padding: 5%
 $blog-content-padding: 10%
 $project-content-padding: 5%
 
-// Sass variables for `buttons` shown on home page
+// General Button Variables
+$gen-button-border: 3px solid #A3A0AE
+$gen-button-background: #FDF5E6
+$gen-button-border-radius: 10px
+$gen-button-padding: 5px
+$gen-button-text-color: $black-text-color
+
+// Sass variables for `keyboard keys` shown on home page
 $button-background: #FFB600
 $button-embellish-color: #363636
 $button-text-color: black
@@ -92,6 +100,14 @@ $social-bar-width: 200px
 	background: -ms-linear-gradient(90deg, rgba(255,44,0,1) 0%, rgba(183,83,71,1) 28%, rgba(1,185,255,1) 100%); /* ie10+ */
 	background: linear-gradient(0deg, rgba(255,44,0,1) 0%, rgba(183,83,71,1) 28%, rgba(1,185,255,1) 100%); /* w3c */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#01B9FF', endColorstr='#FF2C00',GradientType=0 ); /* ie6-9 */
+
+=buttonCSS()
+	background: $gen-button-background
+	border: $gen-button-border
+	border-radius: $gen-button-border-radius
+	padding: $gen-button-padding
+	color: $gen-button-text-color
+
 // End MIXINS
 html, body
 	margin: 0px
@@ -107,7 +123,7 @@ hr
 	background: black
 	margin-top: 0
 	margin-bottom: 0
-
+	
 // HTML designated body
 body
   font: 14px $font-stack
@@ -119,7 +135,7 @@ pre
 // My designated body
 .body
 	padding-bottom: $footer-height-large-screen
-	color: #363636
+	color: $black-text-color
 
 	@media screen and (max-width: $break-med)
 		padding-bottom: $footer-height-mid-screen
@@ -428,6 +444,9 @@ footer
 					background: $secondary-footer-background-color
 					overflow-wrap: break-word
 
+					p
+						margin: 0
+
 					a
 						color: #FDF0E6
 						letter-spacing: 3px
@@ -506,6 +525,9 @@ footer
 #content
 	margin-bottom: 50px;
 	overflow-y: hidden
+
+	button
+		+buttonCSS()
 
 // `HOME` PAGE CSS
 #home-content-wrapper
@@ -908,6 +930,7 @@ $blog-post-background: white
 // End `Single Post` CSS
 
 // `Comments` CSS
+$comment-entry-height: 350px
 $comment-entry-border: 2px solid #A3A0AE
 #comments-wrapper
 	padding-left: $main-content-padding
@@ -928,26 +951,37 @@ $comment-entry-border: 2px solid #A3A0AE
 
 	#comment-entry-wrapper
 		display: none
+		height: $comment-entry-height
+		position: relative
+		overflow-y: hidden
 
-		#save-button-wrapper
-			text-align: right
+		#comment-entry-anim-wrap
+			position: absolute
+			width: 100%
+			bottom: $comment-entry-height
 
-		#name-wrapper
-			margin-bottom: 10px
+			label
+				font-family: $masthead-font-stack
 
-		#body-wrapper
-			margin-bottom: 10px
+			#save-button-wrapper
+				text-align: right
 
-		#name-wrapper, #body-wrapper, #save-button-wrapper
-			width: 80%
-			margin-left: auto
-			margin-right: auto
+			#name-wrapper
+				margin-bottom: 10px
 
-			#comment-input-name, #comment-input-body
-				width: 100%
+			#body-wrapper
+				margin-bottom: 10px
 
-			#comment-input-body
-				height: 200px
+			#name-wrapper, #body-wrapper, #save-button-wrapper
+				width: 80%
+				margin-left: auto
+				margin-right: auto
+
+				#comment-input-name, #comment-input-body
+					width: 100%
+
+				#comment-input-body
+					height: 200px
 
 	#comment-entries-wrapper
 		background: #FDF5E6

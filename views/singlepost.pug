@@ -21,16 +21,17 @@ block content
 		#comment-toggle-wrap
 			button#comment-toggle Click here to leave a comment!
 		#comment-entry-wrapper
-			#name-wrapper
-				label(for="name") Name/Username
-				br
-				input(name="name" type="text")#comment-input-name
-			#body-wrapper
-				label(for="body") Comment
-				br
-				textarea(name="body")#comment-input-body
-			#save-button-wrapper
-				button#comment-save Post Comment
+			#comment-entry-anim-wrap
+				#name-wrapper
+					label(for="name") Name/Username
+					br
+					input(name="name" type="text")#comment-input-name
+				#body-wrapper
+					label(for="body") Comment
+					br
+					textarea(name="body")#comment-input-body
+				#save-button-wrapper
+					button#comment-save Post Comment
 		if comments.length === 0
 			h3.hidden Comments
 			#comment-entries-wrapper.hidden

@@ -22,6 +22,7 @@ mixin navBar(user, page = null)
 				if page === 'projects' && user && user.type === 'admin'
 					li(class="nav-item")
 						a(href="/projects/newproject") Add New Project
+						
 //- Template for a social media bar
 mixin social-media-wrap(none)
 	.soc-media-wrapper
@@ -49,8 +50,7 @@ mixin post-temp(post)
 		.post-display
 			a(href=`/blog?singlepost=true&post=${id}`)
 				h1(class="post-header") #{post.title}
-			.post-body 
-				| <pre>#{post.body}</pre>
+			.post-body !{post.body}
 		.post-meta
 			if post.tags !== null
 				.post-tags Tags: #{post.tags}
@@ -71,13 +71,7 @@ mixin single-post-temp(post)
 		h1#single-post-header.front-end #{post.title}
 		label#edit-title-label.edit Title
 		input#single-post-header-edit.edit
-		if user && user.type === 'admin'
-			#single-post-body-wrap.front-end
-				| #{post.body}
-		else
-			#single-post-body-wrap.front-end
-				pre
-					| #{post.body}			
+		#single-post-body-wrap.front-end !{post.body}		
 		label#edit-body-label.edit Body
 		textarea#single-post-body-edit.edit
 		if post.tags !== null
@@ -108,12 +102,9 @@ mixin project-temp(project)
 			.project-img-wrap
 				img(src=`./uploads/projects/${pics}` class="project-pic")
 			.project-anim-wrap
-
 			.project-title-wrap
 				h3.project-header #{project.title}
-			//- .project-date-wrapper
-			//- 	|	Start: #{project['start_date']}, End: #{project['end_date']}
-			//- .project-body-wrapper #{project.body}
+
 //- Template for a single project item. Used when you click on a project icon in the projects page.
 mixin single-project-temp(project)
 	- var id = project.ID.toString()
@@ -162,7 +153,7 @@ mixin single-project-temp(project)
 							|#{t}
 				input#tech-edit.edit
 			#project-body-wrapper.front-end 
-				pre #{project.body}
+				| !{project.body}
 			#body-edit.edit
 				textarea(id="project-body-edit")
 
@@ -180,7 +171,7 @@ mixin footerPost(posts)
 				a(href=`/blog?singlepost=true&post=${id}`)
 					.footer-post-title
 						| #{post.title}
-				.footer-post-blurb #{body}
+				.footer-post-blurb !{body}
 
 
 

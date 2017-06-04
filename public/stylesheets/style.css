@@ -268,6 +268,8 @@ footer {
           padding: 5px;
           background: #9B9FA9;
           overflow-wrap: break-word; }
+          footer #footer-wrapper #footer-mid #footer-post-wrapper .fpwrap p {
+            margin: 0; }
           footer #footer-wrapper #footer-mid #footer-post-wrapper .fpwrap a {
             color: #FDF0E6;
             letter-spacing: 3px;
@@ -317,6 +319,12 @@ footer {
 #content {
   margin-bottom: 50px;
   overflow-y: hidden; }
+  #content button {
+    background: #FDF5E6;
+    border: 3px solid #A3A0AE;
+    border-radius: 10px;
+    padding: 5px;
+    color: #363636; }
 
 #home-content-wrapper {
   margin-left: 20%;
@@ -635,21 +643,30 @@ label > .text {
     #comments-wrapper #comment-toggle-wrap #comment-toggle {
       margin-bottom: 20px; }
   #comments-wrapper #comment-entry-wrapper {
-    display: none; }
-    #comments-wrapper #comment-entry-wrapper #save-button-wrapper {
-      text-align: right; }
-    #comments-wrapper #comment-entry-wrapper #name-wrapper {
-      margin-bottom: 10px; }
-    #comments-wrapper #comment-entry-wrapper #body-wrapper {
-      margin-bottom: 10px; }
-    #comments-wrapper #comment-entry-wrapper #name-wrapper, #comments-wrapper #comment-entry-wrapper #body-wrapper, #comments-wrapper #comment-entry-wrapper #save-button-wrapper {
-      width: 80%;
-      margin-left: auto;
-      margin-right: auto; }
-      #comments-wrapper #comment-entry-wrapper #name-wrapper #comment-input-name, #comments-wrapper #comment-entry-wrapper #name-wrapper #comment-input-body, #comments-wrapper #comment-entry-wrapper #body-wrapper #comment-input-name, #comments-wrapper #comment-entry-wrapper #body-wrapper #comment-input-body, #comments-wrapper #comment-entry-wrapper #save-button-wrapper #comment-input-name, #comments-wrapper #comment-entry-wrapper #save-button-wrapper #comment-input-body {
-        width: 100%; }
-      #comments-wrapper #comment-entry-wrapper #name-wrapper #comment-input-body, #comments-wrapper #comment-entry-wrapper #body-wrapper #comment-input-body, #comments-wrapper #comment-entry-wrapper #save-button-wrapper #comment-input-body {
-        height: 200px; }
+    display: none;
+    height: 350px;
+    position: relative;
+    overflow-y: hidden; }
+    #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap {
+      position: absolute;
+      width: 100%;
+      bottom: 350px; }
+      #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap label {
+        font-family: "Permanent Marker", courier; }
+      #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #save-button-wrapper {
+        text-align: right; }
+      #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #name-wrapper {
+        margin-bottom: 10px; }
+      #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #body-wrapper {
+        margin-bottom: 10px; }
+      #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #name-wrapper, #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #body-wrapper, #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #save-button-wrapper {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto; }
+        #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #name-wrapper #comment-input-name, #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #name-wrapper #comment-input-body, #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #body-wrapper #comment-input-name, #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #body-wrapper #comment-input-body, #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #save-button-wrapper #comment-input-name, #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #save-button-wrapper #comment-input-body {
+          width: 100%; }
+        #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #name-wrapper #comment-input-body, #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #body-wrapper #comment-input-body, #comments-wrapper #comment-entry-wrapper #comment-entry-anim-wrap #save-button-wrapper #comment-input-body {
+          height: 200px; }
   #comments-wrapper #comment-entries-wrapper {
     background: #FDF5E6;
     border: 2px solid #A3A0AE;
