@@ -2,6 +2,7 @@ $(function() {
 	// `singleprojecthelper.js` is going to hold all of the functionality for
 	//		the carousel that will be available only when there are one or more pics
 	// 		that were uploaded for projects.
+	var carouselWidth= '550px';
 	var leftPaddle = $(".carousel-left");
 	var rightPaddle = $(".carousel-right");
 	var images = document.getElementsByClassName('single-project-pic')
@@ -27,7 +28,7 @@ $(function() {
 		nextImage.setAttribute('style', 'margin-left: 450px;')
 
 		$(currentImage).animate({
-			'margin-left': '-450px'
+			'margin-left': '-' + carouselWidth
 		}, 500, function() {
 			currentImage.removeAttribute('style')
 			$(currentImage).toggleClass('current')
@@ -57,7 +58,7 @@ $(function() {
 		nextImage.setAttribute('style', 'margin-left: -450px;')
 
 		$(currentImage).animate({
-			'margin-left': '450px'
+			'margin-left': carouselWidth
 		}, 500, function() {
 			currentImage.removeAttribute('style')
 			$(currentImage).toggleClass('current')

@@ -16,10 +16,10 @@ mixin navBar(user, page = null)
 					a(href="/blog") Blog
 				li(class="nav-item") 	
 					a(href="/contact") Contact
-				if page === 'blog' && user
+				if page === 'blog' &&  user && user.type === 'admin'
 					li(class="nav-item")
 						a(href="/blog/newpost") Add New Post
-				if page === 'projects' && user
+				if page === 'projects' && user && user.type === 'admin'
 					li(class="nav-item")
 						a(href="/projects/newproject") Add New Project
 //- Template for a social media bar
@@ -71,7 +71,7 @@ mixin single-post-temp(post)
 		h1#single-post-header.front-end #{post.title}
 		label#edit-title-label.edit Title
 		input#single-post-header-edit.edit
-		if user
+		if user && user.type === 'admin'
 			#single-post-body-wrap.front-end
 				| #{post.body}
 		else
@@ -161,7 +161,8 @@ mixin single-project-temp(project)
 						.qualitem
 							|#{t}
 				input#tech-edit.edit
-			#project-body-wrapper.front-end #{project.body}
+			#project-body-wrapper.front-end 
+				pre #{project.body}
 			#body-edit.edit
 				textarea(id="project-body-edit")
 

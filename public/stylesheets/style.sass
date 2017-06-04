@@ -1163,7 +1163,7 @@ $anim-wrap-color: #A3A0AE
 //	end `newproject` css
 
 // `Single Project` CSS
-$carousel-width: 450px
+$carousel-width: 550px
 $carousel-height: 350px
 $paddle-width: 50px
 $select-placement-y: 157.5px
@@ -1276,11 +1276,11 @@ $select-placement-x: 5px
 
 			.carousel-main
 				width: $carousel-width
-				height: $carousel-height
+				// height: $carousel-height
 				margin: 0 auto
 				position: relative
 				overflow: hidden
-				border: 1px solid #A3A0AE
+				// border: 1px solid #A3A0AE
 
 				&:hover
 
@@ -1308,7 +1308,7 @@ $select-placement-x: 5px
 
 			.carousel-left
 				position: absolute
-				height: $carousel-height
+				height: 100% //$carousel-height
 				width: $paddle-width
 				background: transparent
 				left: 0
@@ -1318,7 +1318,7 @@ $select-placement-x: 5px
 				
 				.single-project-pic
 					width: $carousel-width
-					height: $carousel-height
+					// height: $carousel-height
 
 				.single-project-pic:not(.current)
 					display: none
@@ -1326,7 +1326,7 @@ $select-placement-x: 5px
 
 			.carousel-right
 				position: absolute
-				height: $carousel-height
+				height: 100% //$carousel-height
 				width: $paddle-width
 				right: 0
 				bottom: 0

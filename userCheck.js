@@ -3,10 +3,17 @@ var decrypt = require('./userDecrypt')
 
 //	Summary: This module is used to validate cookies for less code in the router
 //	Parameters: a HTTP request
-//	Returns: A valid user. Will throw an error if the user is not valid.
+//	Returns: A valid user object. Will throw an error if the user is not valid.
 exports.validateCookie = function(request) {
 	if (Object.keys(request.cookies).length !== 0) {
+		var adminCookie = null
+		var cookieObj = {name: '', type: ''};
+
 		var unCookie = request.cookies['username'];
+
+		if (request.cookies['type'] === 'admin') {
+			var adminCookie = 'admin'
+		}
 		//If cookie is '', user is logged out so there is no user at
 		//  the time.
 		if (unCookie === undefined) {
@@ -22,8 +29,13 @@ exports.validateCookie = function(request) {
 			throw err;
 		}
 		else {
-			return(cookieArray[0])
+			cookieObj.name = cookieArray[0]
+			cookieObj.type = adminCookie
+			return(cookieObj)
 		}
+	}
+	else {
+		return null
 	}
 }
 

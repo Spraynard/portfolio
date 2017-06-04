@@ -19,9 +19,9 @@ block content
 		if error
 			.welcome-statement.alert-text
 				| #{error}
-		else if user
+		else if user && user.type === 'admin'
 			.welcome-statement
-				| Hello, #{user}
+				| Hello, #{user.name}
 		#profile-area
 			h1#profile-name Kellan Martin
 			#profile-social-media
