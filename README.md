@@ -10,9 +10,10 @@ How it works:
 3. jQuery Client Side JavaScripts
 
 Things to add:
-1. More Comprehensive Cacheing?
-2. Possibility to use front-end framework
-3. ImageMagick to automatically optimize images when I add them with a project
-4. Complete login system (but for what reason!? :3)
+1. Refactor "projectEdit.js" to be more like "postEdit.js".
+2. More Comprehensive Cacheing?
+3. Possibility to use front-end framework
+4. ImageMagick to automatically optimize images when I add them with a project
+5. Complete login system (but for what reason!? :3)
 
 
