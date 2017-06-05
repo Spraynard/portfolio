@@ -122,10 +122,18 @@ a {
       border-bottom-left-radius: 10px;
       text-align: center;
       opacity: 0.5;
-      transition: opacity 1.0s ease-out; }
+      -webkit-transition: all 1s ease-out;
+      -moz-transition: all 1s ease-out;
+      -ms-transition: all 1s ease-out;
+      -o-transition: all 1s ease-out;
+      transition: all 1s ease-out; }
       #header-wrapper #main-nav #nav-wrapper .nav-item a {
         opacity: 0.7;
-        transition: opacity 0.2s ease-out; }
+        -webkit-transition: all 0.2s ease-out;
+        -moz-transition: all 0.2s ease-out;
+        -ms-transition: all 0.2s ease-out;
+        -o-transition: all 0.2s ease-out;
+        transition: all 0.2s ease-out; }
         #header-wrapper #main-nav #nav-wrapper .nav-item a.current {
           opacity: 1.0; }
       #header-wrapper #main-nav #nav-wrapper .nav-item + .nav-item {
@@ -244,7 +252,11 @@ footer {
           footer #footer-wrapper #footer-mid #footer-social-media .soc-media-wrapper .soc-icon {
             display: inline-block;
             padding-top: 7.5px;
-            transition: transform .2s ease-out; }
+            -webkit-transition: all 0.2s ease-out;
+            -moz-transition: all 0.2s ease-out;
+            -ms-transition: all 0.2s ease-out;
+            -o-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out; }
             footer #footer-wrapper #footer-mid #footer-social-media .soc-media-wrapper .soc-icon:hover {
               transform: scale(1.2); }
             footer #footer-wrapper #footer-mid #footer-social-media .soc-media-wrapper .soc-icon + .soc-icon {
@@ -358,7 +370,11 @@ footer {
         #home-content-wrapper #profile-area #profile-social-media .soc-media-wrapper .soc-icon {
           display: inline-block;
           padding-top: 7.5px;
-          transition: transform 0.2s ease-out; }
+          -webkit-transition: all 0.2s ease-out;
+          -moz-transition: all 0.2s ease-out;
+          -ms-transition: all 0.2s ease-out;
+          -o-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out; }
           #home-content-wrapper #profile-area #profile-social-media .soc-media-wrapper .soc-icon:hover {
             transform: scale(1.2); }
           #home-content-wrapper #profile-area #profile-social-media .soc-media-wrapper .soc-icon + .soc-icon {
@@ -720,10 +736,11 @@ label > .text {
     z-index: 0;
     border-radius: 10px;
     margin: 20px;
-    transition: transform .2s ease-out;
-    -webkit-transition: transform .2s ease-out;
-    -moz-transition: transform .2s ease-out;
-    -o-transition: transform .2s ease-out; }
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out; }
     .project-wrapper .project .project-img-wrap {
       width: 180px;
       height: 180px;
@@ -928,11 +945,19 @@ label > .text {
   #single-project-wrapper .single-project #project-carousel .select-left {
     left: 5px;
     opacity: 0;
-    transition: opacity 0.4s ease-out; }
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out; }
   #single-project-wrapper .single-project #project-carousel .select-right {
     right: 5px;
     opacity: 0;
-    transition: opacity 0.4s ease-out; }
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out; }
   #single-project-wrapper .single-project #project-carousel .carousel-main {
     width: 550px;
     margin: 0 auto;

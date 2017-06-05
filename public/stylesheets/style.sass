@@ -108,6 +108,13 @@ $social-bar-width: 200px
 	padding: $gen-button-padding
 	color: $gen-button-text-color
 
+=crossBrowserTransition($animationSpeed, $easing: ease-out)
+	-webkit-transition: all $animationSpeed $easing
+	-moz-transition: all $animationSpeed $easing
+	-ms-transition: all $animationSpeed $easing
+	-o-transition: all $animationSpeed $easing
+	transition: all $animationSpeed $easing
+
 // End MIXINS
 html, body
 	margin: 0px
@@ -244,11 +251,12 @@ a
 				border-bottom-left-radius: 10px
 				text-align: center
 				opacity: 0.5
-				transition: opacity 1.0s ease-out
+				// transition: opacity 1.0s ease-out
+				+crossBrowserTransition(1.0s)
 
 				a
 					opacity: 0.7
-					transition: opacity 0.2s ease-out
+					+crossBrowserTransition(0.2s)
 
 					&.current
 						opacity: 1.0
@@ -413,7 +421,7 @@ footer
 					.soc-icon
 						display: inline-block
 						padding-top: 7.5px
-						transition: transform .2s ease-out
+						+crossBrowserTransition(0.2s)
 
 						&:hover
 							transform: scale(1.2)
@@ -571,7 +579,7 @@ footer
 				.soc-icon
 					display: inline-block
 					padding-top: 7.5px
-					transition: transform 0.2s ease-out
+					+crossBrowserTransition(0.2s)
 
 					&:hover
 						transform: scale(1.2)
@@ -1055,10 +1063,7 @@ $anim-wrap-color: #A3A0AE
 		z-index: 0
 		border-radius: 10px
 		margin: 20px
-		transition: transform .2s ease-out
-		-webkit-transition: transform .2s ease-out
-		-moz-transition: transform .2s ease-out
-		-o-transition: transform .2s ease-out
+		+crossBrowserTransition(0.2s)
 
 		.project-img-wrap
 			width: 180px
@@ -1316,12 +1321,12 @@ $select-placement-x: 5px
 			.select-left
 				left: $select-placement-x
 				opacity: 0
-				transition: opacity 0.4s ease-out
+				+crossBrowserTransition(0.4s)
 
 			.select-right
 				right: $select-placement-x
 				opacity: 0
-				transition: opacity 0.4s ease-out
+				+crossBrowserTransition(0.4s)
 
 
 			.carousel-main
