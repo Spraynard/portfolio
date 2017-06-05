@@ -413,6 +413,10 @@ footer
 					.soc-icon
 						display: inline-block
 						padding-top: 7.5px
+						transition: transform .2s ease-out
+
+						&:hover
+							transform: scale(1.2)
 						
 						+ .soc-icon
 							margin-left: 10px
@@ -567,6 +571,10 @@ footer
 				.soc-icon
 					display: inline-block
 					padding-top: 7.5px
+					transition: transform 0.2s ease-out
+
+					&:hover
+						transform: scale(1.2)
 
 					+ .soc-icon
 						margin-left: 10px
@@ -1234,15 +1242,20 @@ $select-placement-x: 5px
 				#techheader
 					font-family: $masthead-font-stack
 					font-size: 20px
+					margin-bottom: 10px
 
 				#qualwrapper
 					display: flex
 					flex-wrap: wrap
 					position: relative
 
-					.qualitem
-						display: border-box
-						+qualitem
+					#techs
+						margin-top: 5px
+						margin-bottom: 5px
+
+						.qualitem
+							display: border-box
+							+qualitem
 
 			#project-date-wrapper
 				margin-bottom: 5px
@@ -1274,6 +1287,9 @@ $select-placement-x: 5px
 
 			#project-body-wrapper, #body-edit
 				margin-bottom: 20px
+
+			#project-body-wrapper
+				line-height: 2
 
 			#body-edit
 
@@ -1365,9 +1381,7 @@ $select-placement-x: 5px
 				right: 0
 				bottom: 0
 
-@media screen and (max-width: $break-med)
-
-	#single-project-wrapper
+	@media screen and (max-width: $break-med)
 		padding-left: 10%
 		padding-right: 10%
 
@@ -1380,14 +1394,10 @@ $select-placement-x: 5px
 					width: 100%
 					height: auto
 
-$small-media-select-placement-y: 310px
-$small-media-select-placement-x: 5px
-$carousel-full-screen-margins: -30%
-
-
-@media screen and (max-width: $break-small)
-	#single-project-wrapper
-
+	$small-media-select-placement-y: 310px
+	$small-media-select-placement-x: 5px
+	$carousel-full-screen-margins: -30%
+	@media screen and (max-width: $break-small)
 		padding-left: 0
 		padding-right: 0
 
@@ -1422,11 +1432,14 @@ $carousel-full-screen-margins: -30%
 					text-align: center
 
 				#project-date-wrapper
+					width: 40%
+					min-width: 220px
+					margin: 0 auto
+					margin-bottom: 10px
 
 					.project-date
 						display: block
-						width: 40%
-						min-width: 220px
+						width: 100%
 
 						.embellished
 							display: inline-block
@@ -1439,15 +1452,16 @@ $carousel-full-screen-margins: -30%
 							margin-left: 0
 							margin-top: 10px
 
-				.techheader
+				#techheader
 					text-align: center
 
 				.qualwrapper
 					justify-content: center
 
-				.project-body-wrapper
+				#project-body-wrapper
+					line-height: 2
 					margin-left: 10%
-					margin-right: 10%
+					margin-right: 5%
 
 		.single-back-button
 			margin-left: -5%

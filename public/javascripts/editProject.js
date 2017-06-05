@@ -2,11 +2,27 @@
 
 $(function() {
 
+	var header = $("#project-header");
+	var startDate = $("#start-date");
+	var endDate = $("#end-date");
+	var qualItems = $(".qualitem");
+	var body = $("#project-body-wrapper");
+	var techs = $("#techs");
+
+	var headerEdit = $("#header-edit");
+	var startDateEdit = $("#start-date-edit");
+	var endDateEdit = $("#end-date-edit");
+	var bodyEdit = $("#project-body-edit");
+	var techEdit = $("#tech-edit");
+
 	function removeWhiteSpace(string) {
 		string = string.replace(/\s/g, '')
 		return string
 	}
 
+	function getFrontEndValues() {
+
+	}
 // Functions used to toggle between edit mode
 // 	and regular display mode
 	function toggleFrontEnd() {
@@ -34,27 +50,11 @@ $(function() {
 		toggleConfirm();
 	}
 // 
-
-	function toggleProjectEdit() {
-		// Initializer for edit mode.
-		var headerEdit = $("#header-edit");
-		var startDateEdit = $("#start-date-edit");
-		var endDateEdit = $("#end-date-edit");
-		var bodyEdit = $("#project-body-edit");
-		var techEdit = $("#tech-edit");
-
-	// Getting ahold of the values of the front-end dom objects
-		var $startDateValue = $("#start-date").text();
-		var $endDateValue = $("#end-date").text();
-		var $projectTitle = $("#project-header").text();
-		var $projectTechs = $("#techs").text();
-		var $projectBody = $("#project-body-wrapper").text();
-	
-	// Extracting `qual items`
+	function getQualItems() {
 		var qualItemString = '';
 		var string
 
-		$(".qualitem").each(function(item) {
+		$(qualItems).each(function(item) {
 			console.log(item)
 			if ( item === $(".qualitem").length - 1 ) {
 				string = $(this).text();
@@ -64,14 +64,49 @@ $(function() {
 			}
 			qualItemString += string;
 		})
+		return qualItemString
+	}
+
+	function getFrontEndValues() {
+		var obj = {
+			startDateValue: startDate.text(),
+			endDateValue: endDate.text(),
+			headerValue: header.text(),
+			bodyValue: body.html(),
+			qualItemsValue: getQualItems()
+		}
+		return obj;
+	}
+
+	function getEditValues() {
+		var obj = {
+			startDate: startDateEdit.val(),
+			endDate: endDateEdit.val(),
+			title: headerEdit.val(),
+			body: bodyEdit.val(),
+			tech: techEdit.val()
+		}
+		return obj;
+	}
+
+	function toggleProjectEdit() {
+		// Getting ahold of the values of the front-end dom objects
+		vals = getFrontEndValues()
+		$startDateValue = vals.startDateValue
+		$endDateValue = vals.endDateValue
+		$headerValue = vals.headerValue
+		$bodyValue = vals.bodyValue
+		$qualItemsValue = vals.qualItemsValue
+	
+	// Extracting `qual items`
 
 		toggleEditMode();
 
-		headerEdit.val($projectTitle);
+		headerEdit.val($headerValue);
 		startDateEdit.val($startDateValue);
 		endDateEdit.val($endDateValue);
-		bodyEdit.val($projectBody);
-		techEdit.val(removeWhiteSpace(qualItemString));
+		bodyEdit.val($bodyValue);
+		techEdit.val(removeWhiteSpace($qualItemsValue));
 	}
 
 	function produceTechTemplate(text) {
@@ -93,29 +128,16 @@ $(function() {
 	}
 
 	function saveProjectChanges() {
-		// Updates the MySQL database rows for 
-		// 	the current project.
-		var $title = $('#project-header');
-		var $body = $('#project-body-wrapper');
-		var $startDate = $('#start-date');
-		var $endDate = $('#end-date');
-		var $techWrapper = $('#qualwrapper');
 
-		var $titleEdit = $('#header-edit').val();
-		var $bodyEdit = $('#project-body-edit').val();
-		var $startDateEdit = $('#start-date-edit').val();
-		var $endDateEdit = $('#end-date-edit').val();
-		var $techEdit = $('#tech-edit').val();
+		vals = getEditValues()
 
 		var data = {
-			title: $titleEdit,
-			body: $bodyEdit,
-			startDate: $startDateEdit,
-			endDate: $endDateEdit,
-			tech: $techEdit
+			title: vals.title,
+			body: vals.body,
+			startDate: vals.startDate,
+			endDate: vals.endDate,
+			tech: vals.tech
 		}
-
-		console.log(data);
 
 		// When editing is done, make a call to the back end 
 		// 	"/projects/edit" Project route, updating rows in DB.
@@ -129,15 +151,14 @@ $(function() {
 			var currentStartDate = successObj['start_date'];
 			var currentEndDate = successObj['end_date'];
 			var currentTechs = successObj.tech;
-			console.log("This is current techs:", currentTechs)
 
 			toggleEditMode();
 
-			$title.text(currentTitle);
-			$body.text(currentBody);
-			$startDate.text(currentStartDate)
-			$endDate.text(currentEndDate)
-			replaceTechs(currentTechs, $techWrapper);
+			header.text(currentTitle);
+			body.html(currentBody);
+			startDate.text(currentStartDate)
+			endDate.text(currentEndDate)
+			replaceTechs(currentTechs, techs);
 		})
 	}
 	

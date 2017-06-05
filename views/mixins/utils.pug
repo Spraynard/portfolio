@@ -147,10 +147,11 @@ mixin single-project-temp(project)
 			#techwrapper
 				#techheader
 					|	<u>Technologies Used</u>:
-				#qualwrapper.techs.front-end
-					each t in tech
-						.qualitem
-							|#{t}
+				#qualwrapper
+					#techs.front-end
+						each t in tech
+							.qualitem
+								|#{t}
 				input#tech-edit.edit
 			#project-body-wrapper.front-end 
 				| !{project.body}
