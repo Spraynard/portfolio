@@ -10,7 +10,7 @@ How it works:
 3. jQuery Client Side JavaScripts
 
 Things to add:
-<del>1. Refactor "public/javascripts/projectEdit.js" to be more like "public/javascripts/postEdit.js".</del>
+1. <del>Refactor "public/javascripts/projectEdit.js" to be more like "public/javascripts/postEdit.js".</del>
 2. More Comprehensive Cacheing?
 3. Possibility to use front-end framework
 4. ImageMagick to automatically optimize images when I add them with a project
