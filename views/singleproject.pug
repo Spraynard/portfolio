@@ -1,7 +1,11 @@
 extends layout
 
-//- block masthead
-//- 	| #{project.title}
+block masthead
+	#masthead-text
+		|#{project.title}
+	- pic = project.pics.split(',')[0]
+	img(src=`./uploads/projects/${pic}`)
+
 
 block content
 	- id = project.ID

@@ -65,6 +65,7 @@ a {
 
 .container {
   min-height: 100%;
+  width: 100%;
   position: relative; }
 
 #header-wrapper {
@@ -73,13 +74,61 @@ a {
   #header-wrapper #masthead-wrapper {
     font-family: "Permanent Marker", courier;
     background: #C9CBCF;
-    width: 100%;
     font-size: 5em;
     text-align: center; }
     #header-wrapper #masthead-wrapper p:first-child {
       margin-top: 0; }
     #header-wrapper #masthead-wrapper:not(.home) {
-      min-height: 250px; }
+      min-height: 250px;
+      max-height: 350px;
+      position: relative; }
+      #header-wrapper #masthead-wrapper:not(.home) img {
+        height: 350px; }
+      #header-wrapper #masthead-wrapper:not(.home) #masthead-text {
+        position: absolute;
+        z-index: 4;
+        background: rgba(255, 255, 255, 0.95);
+        padding-left: 10%;
+        padding-right: 10%;
+        border-bottom-right-radius: 10px;
+        border-right: 1px solid #363636;
+        border-bottom: 1px solid #363636;
+        color: #363636;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-transition: all 0.2s ease-out;
+        -moz-transition: all 0.2s ease-out;
+        -ms-transition: all 0.2s ease-out;
+        -o-transition: all 0.2s ease-out;
+        transition: all 0.2s ease-out; }
+        #header-wrapper #masthead-wrapper:not(.home) #masthead-text:hover {
+          padding-left: 30%; }
+      @media screen and (max-width: 768px) {
+        #header-wrapper #masthead-wrapper:not(.home) {
+          max-height: 250px; }
+          #header-wrapper #masthead-wrapper:not(.home) img {
+            height: 250px; }
+          #header-wrapper #masthead-wrapper:not(.home) #masthead-text {
+            font-size: 45px;
+            margin-top: 15%;
+            padding-top: 2.5%;
+            padding-bottom: 1.5%;
+            border-top-right-radius: 10px; } }
+      @media screen and (max-width: 480px) {
+        #header-wrapper #masthead-wrapper:not(.home) {
+          min-height: 100px;
+          max-height: 250px; }
+          #header-wrapper #masthead-wrapper:not(.home) img {
+            height: 250px;
+            width: 100%; }
+          #header-wrapper #masthead-wrapper:not(.home) #masthead-text {
+            padding-top: 5%;
+            padding-bottom: 5%;
+            font-size: 30px; } }
     #header-wrapper #masthead-wrapper.home {
       min-height: 835px; }
       #header-wrapper #masthead-wrapper.home #masthead-text {
@@ -334,7 +383,7 @@ footer {
 #content {
   margin-bottom: 50px;
   overflow-y: hidden; }
-  #content button {
+  #content button, #content input[type="submit"] {
     background: #FDF5E6;
     border: 3px solid #A3A0AE;
     border-radius: 10px;
@@ -1012,10 +1061,11 @@ label > .text {
       padding-left: 0;
       padding-right: 0; }
       #single-project-wrapper .single-project #project-carousel .carousel-main {
-        width: 100%; }
+        width: 100%;
+        margin-bottom: 15px; }
         #single-project-wrapper .single-project #project-carousel .carousel-main .carousel-image-wrapper .single-project-pic {
           width: 100%;
-          height: 350px; }
+          height: 250px; }
         #single-project-wrapper .single-project #project-carousel .carousel-main .select-left {
           opacity: 0.7;
           left: 5px; }
@@ -1023,7 +1073,7 @@ label > .text {
           opacity: 0.7;
           right: 5px; }
       #single-project-wrapper .single-project #project-carousel .chevron-select {
-        top: 310px; }
+        top: 210px; }
       #single-project-wrapper .single-project #project-data {
         padding-left: 5%;
         padding-right: 5%; }
@@ -1048,7 +1098,7 @@ label > .text {
               margin-top: 10px; }
         #single-project-wrapper .single-project #project-data #techheader {
           text-align: center; }
-        #single-project-wrapper .single-project #project-data .qualwrapper {
+        #single-project-wrapper .single-project #project-data #qualwrapper {
           justify-content: center; }
         #single-project-wrapper .single-project #project-data #project-body-wrapper {
           line-height: 2;

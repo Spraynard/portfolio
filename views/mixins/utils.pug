@@ -129,7 +129,8 @@ mixin single-project-temp(project)
 					.carousel-right
 						img(src="/images/chevron-right.svg").chevron-select.select-right
 		#project-data
-			h1#project-header.front-end #{project.title}
+			//- Taking out the title of project here because it is displayed in the header. May implement it back.
+			//- h1#project-header.front-end #{project.title}
 			input#header-edit.edit
 			#project-date-wrapper
 				.project-date
@@ -153,8 +154,7 @@ mixin single-project-temp(project)
 							.qualitem
 								|#{t}
 				input#tech-edit.edit
-			#project-body-wrapper.front-end 
-				| !{project.body}
+			#project-body-wrapper.front-end !{project.body}
 			#body-edit.edit
 				textarea(id="project-body-edit")
 

@@ -162,6 +162,7 @@ a
 	
 .container 
 	min-height: 100%
+	width: 100%
 	position: relative
 
 // `HEADER` CSS
@@ -172,8 +173,6 @@ a
 	#masthead-wrapper
 		font-family: $masthead-font-stack
 		background: $masthead-background
-		
-		width: 100%
 		// background-image: url('/images/mounts-right.jpg')
 		font-size: 5em
 		text-align: center
@@ -186,6 +185,59 @@ a
 
 		&:not(.home)
 			min-height: 250px
+			max-height: 350px
+			position: relative
+
+			img
+				height: 350px
+
+			#masthead-text
+				position: absolute
+				z-index: 4
+				background: rgba(255, 255, 255, .95)
+				padding-left: 10%
+				padding-right: 10%
+				border-bottom-right-radius: 10px
+				border-right: 1px solid $black-text-color
+				border-bottom: 1px solid $black-text-color
+				color: $black-text-color
+				-webkit-touch-callout: none
+				-webkit-user-select: none
+				-khtml-user-select: none
+				-moz-user-select: none
+				-ms-user-select: none
+				user-select: none
+				+crossBrowserTransition(0.2s)
+
+				&:hover
+					padding-left: 30%
+
+			@media screen and (max-width: $break-med)
+				min-height 200px
+				max-height: 250px
+
+				img
+					height: 250px
+
+				#masthead-text
+					font-size: 45px
+					margin-top: 15%
+					padding-top: 2.5%
+					padding-bottom: 1.5%
+					border-top-right-radius: 10px
+
+			@media screen and (max-width: $break-small)
+				min-height: 100px
+				max-height: 250px
+
+				img
+					height: 250px
+					width: 100%
+
+				#masthead-text
+					padding-top: 5%
+					padding-bottom: 5%
+					font-size: 30px
 
 		&.home
 			// background-image: url('/images/large-screen/building_seeing.jpg')
@@ -538,7 +590,7 @@ footer
 	margin-bottom: 50px;
 	overflow-y: hidden
 
-	button
+	button, input[type="submit"]
 		+buttonCSS()
 
 // `HOME` PAGE CSS
@@ -1399,8 +1451,9 @@ $select-placement-x: 5px
 					width: 100%
 					height: auto
 
-	$small-media-select-placement-y: 310px
+	$small-media-select-placement-y: 210px
 	$small-media-select-placement-x: 5px
+	$small-carousel-height: 250px
 	$carousel-full-screen-margins: -30%
 	@media screen and (max-width: $break-small)
 		padding-left: 0
@@ -1412,12 +1465,13 @@ $select-placement-x: 5px
 
 				.carousel-main
 					width: 100%
+					margin-bottom: 15px
 
 					.carousel-image-wrapper
 
 						.single-project-pic
 							width: 100%
-							height: $carousel-height
+							height: $small-carousel-height
 
 					.select-left
 						opacity: 0.7
@@ -1460,7 +1514,7 @@ $select-placement-x: 5px
 				#techheader
 					text-align: center
 
-				.qualwrapper
+				#qualwrapper
 					justify-content: center
 
 				#project-body-wrapper
