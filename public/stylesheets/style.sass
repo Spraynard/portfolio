@@ -201,6 +201,7 @@ a
 				border-right: 1px solid $black-text-color
 				border-bottom: 1px solid $black-text-color
 				color: $black-text-color
+				max-width: 75%
 				-webkit-touch-callout: none
 				-webkit-user-select: none
 				-khtml-user-select: none
@@ -221,7 +222,7 @@ a
 
 				#masthead-text
 					font-size: 45px
-					margin-top: 15%
+					margin-top: 5%
 					padding-top: 2.5%
 					padding-bottom: 1.5%
 					border-top-right-radius: 10px
@@ -851,6 +852,7 @@ $blog-post-background: white
 
 		.post-display
 			overflow-wrap: break-word
+			line-height: 2
 
 			a
 
@@ -957,7 +959,10 @@ $blog-post-background: white
 		#single-post-header-edit
 			margin-bottom: 10px
 			width: 100%
-
+		
+		#single-post-body-wrap
+			line-height: 2
+			
 		#single-post-body-wrap, #single-post-body-edit
 			margin-bottom: 20px
 
@@ -1348,6 +1353,21 @@ $select-placement-x: 5px
 			#project-body-wrapper
 				line-height: 2
 
+				.img-caption
+					font-style: italic
+					font-size: 10px
+
+				#before-after
+					display: flex
+					justify-content: center
+
+					.body-image
+						max-width: 45%
+						max-height: 200px
+
+						&+.body-image
+							margin-left: 10px
+
 			#body-edit
 
 				#project-body-edit
@@ -1385,6 +1405,7 @@ $select-placement-x: 5px
 				width: $carousel-width
 				// height: $carousel-height
 				margin: 0 auto
+				margin-bottom: 15px
 				position: relative
 				overflow: hidden
 				// border: 1px solid #A3A0AE
@@ -1451,6 +1472,21 @@ $select-placement-x: 5px
 					width: 100%
 					height: auto
 
+			#project-data
+
+				#project-body-wrapper
+					line-height: 2
+
+					#before-after
+						flex-wrap: wrap
+						
+						.body-image
+							max-width: 100%
+							max-height: 250px
+
+							&+.body-image
+								margin-top: 10px
+
 	$small-media-select-placement-y: 210px
 	$small-media-select-placement-x: 5px
 	$small-carousel-height: 250px
@@ -1465,7 +1501,6 @@ $select-placement-x: 5px
 
 				.carousel-main
 					width: 100%
-					margin-bottom: 15px
 
 					.carousel-image-wrapper
 
@@ -1521,6 +1556,12 @@ $select-placement-x: 5px
 					line-height: 2
 					margin-left: 10%
 					margin-right: 5%
+
+					#before-after
+
+						.body-image
+							max-width: 100%
+							max-height: 175px
 
 		.single-back-button
 			margin-left: -5%

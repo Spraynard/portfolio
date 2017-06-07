@@ -2,7 +2,7 @@
 
 $(function() {
 
-	var header = $("#project-header");
+	var header = $("#masthead-text");
 	var startDate = $("#start-date");
 	var endDate = $("#end-date");
 	var qualItems = $(".qualitem");
