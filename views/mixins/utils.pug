@@ -74,6 +74,7 @@ mixin single-post-temp(post)
 		#single-post-body-wrap.front-end !{post.body}		
 		label#edit-body-label.edit Body
 		textarea#single-post-body-edit.edit
+		hr
 		if post.tags !== null
 			#post-tags.front-end
 				| Tags: <span id="tags">#{post.tags}</span>
@@ -134,13 +135,13 @@ mixin single-project-temp(project)
 			input#header-edit.edit
 			#project-date-wrapper
 				.project-date
-					span.embellished
+					.embellished
 						|	Start:
 					span.data#start-date.front-end
 						|#{project['start_date']}
 					input#start-date-edit.edit
 				.project-date
-					span.embellished
+					.embellished
 						|	End:
 					span.data#end-date.front-end
 						|#{project['end_date']}
@@ -164,6 +165,11 @@ mixin footerPost(posts)
 		each post in posts
 			- var id = post.ID.toString()
 			- var maxLen = 50
+			if post.title.length > 30
+				- title = post.title.substring(0,30) + '...'
+			else
+				- title = post.title
+
 			if post.body.length > maxLen
 				- body = post.body.substring(0,maxLen) + '...'
 			else
@@ -171,7 +177,7 @@ mixin footerPost(posts)
 			.fpwrap
 				a(href=`/blog?singlepost=true&post=${id}`)
 					.footer-post-title
-						| #{post.title}
+						| #{title}
 				.footer-post-blurb !{body}
 
 

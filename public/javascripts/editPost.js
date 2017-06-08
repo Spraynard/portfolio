@@ -26,7 +26,6 @@ $(function() {
 		var editDoms = $(".edit")
 		$(editDoms).toggleClass('show')
 		var toggled = editDoms.is(':visible')
-		console.log(toggled)
 		$('#start-edit-button').text(toggled == true ? 'Cancel' : 'Edit Post')
 	}
 
