@@ -1,18 +1,19 @@
 extends layout
 
-block carousel-masthead
-	#masthead-text 
+block home-masthead
+	#home-header-image
+	#home-masthead-text
 		|	You're looking for a web developer, right?<br>Welcome.
-	#masthead-carousel
+	//- #masthead-carousel
 
-		.carousel-main
+	//- 	.carousel-main
 
-			.carousel-image-wrapper
-				each p in pics
-					if pics.indexOf(p) === 0
-						img(src=`${p}` class="masthead-pic current")
-					else
-						img(src=`${p}` class="masthead-pic")
+	//- 		.carousel-image-wrapper
+	//- 			each p in pics
+	//- 				if pics.indexOf(p) === 0
+	//- 					img(src=`${p}` class="masthead-pic current")
+	//- 				else
+	//- 					img(src=`${p}` class="masthead-pic")
 
 block content
 	#home-content-wrapper

@@ -29,13 +29,13 @@ $masthead-font-stack: 'Permanent Marker', courier
 $content-font-stack: Arial, Helvetica
 $black-text-color: #363636
 
-$footer-height-large-screen: 300px
-$footer-height-mid-screen: 375px
-$footer-height-small-screen: 400px
-$break-small: 480px
-$break-med: 768px
-$break-med-lrg: 900px
-$break-large: 1200px
+$footer-height-large-screen: 350px
+$footer-height-mid-screen: 425px
+$footer-height-small-screen: 450px
+$break-small: 30em
+$break-med: 48em
+$break-med-lrg: 56.25em
+$break-large: 75em
 $main-content-padding: 20%
 $main-break-content-padding: 5%
 $blog-content-padding: 10%
@@ -64,6 +64,50 @@ $social-background-1: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAK
 $social-bar-width: 200px
 
 // MIXINS AREA
+// 	This mixin provides a nice bounce effect on an element
+// 		rotate. Right now only seen on the front page
+=bounceyRotate()
+	0%
+		transform: rotateZ(10deg)
+	
+	40%
+		transform: rotateZ(10deg)
+	42.5%
+		transform: rotateZ(-10deg)
+	43.75%
+		transform: rotateZ(-14deg)
+	45%
+		transform: rotateZ(-16deg)
+	46.25%
+		transform: rotateZ(-14deg)
+	47.5%
+		transform: rotateZ(-10deg)
+	48.75%
+		transform: rotateZ(-8deg)
+	50%
+		transform: rotateZ(-10deg)
+	90%
+		transform: rotateZ(-10deg)
+	92.5%
+		transform: rotateZ(10deg)
+	93.75%
+		transform: rotateZ(14deg)
+	95%
+		transform: rotateZ(16deg)
+	96.25%
+		transform: rotateZ(14deg)
+	97.5%
+		transform: rotateZ(10deg)
+	98.75%
+		transform: rotateZ(8deg)
+	100%
+		transform: rotateZ(10deg)
+
+// This mixin provides a background with a fixed-attachment
+// 	effect at the specified url.
+=pageHeaderBackground($url)
+	background: url($url)
+	background-attachment: fixed
 
 =qualitem()
 	display: inline
@@ -177,6 +221,8 @@ a
 		// background-image: url('/images/mounts-right.jpg')
 		font-size: 5em
 		text-align: center
+		position: relative
+		z-index: 2
 		//This stuff would be cool when I figure out the animations to 
 		//	drop down to the nav tabs
 		// border-bottom-left-radius: 50%
@@ -190,7 +236,70 @@ a
 			position: relative
 
 			img
+				position: relative
 				height: 350px
+
+				&.single-project
+					z-index: 3
+
+			#basic-header-img
+				height: 100%
+				width: 100%
+				left: 0
+				// position: 
+				position: absolute
+				z-index: 1
+
+				&.blog
+					+pageHeaderBackground('/images/large-screen/blog-background-1500x250.jpg')
+					// background: url('/images/large-screen/blog-background-1500x250.jpg')
+					// background-attachment: fixed
+
+				&.projects
+					+pageHeaderBackground('/images/large-screen/projects-background-1500x250.jpg')
+					// background: url('/images/large-screen/projects-background-1500x250.jpg')
+				
+				&.contact
+					+pageHeaderBackground('/images/large-screen/contact-background-1500x310.jpg')
+
+				&.single-project
+					+pageHeaderBackground('/images/header-floral-pattern.jpg')
+			
+			#basic-masthead-text
+				position: relative
+				color: #FDF5E6//white//#0E6049
+				// left: 25%
+				z-index: 2
+				background: url('/images/header-floral-pattern.jpg')//rgba(255, 255, 255, .20)
+				background-attachment: fixed
+
+				.text
+					background: rgba(133, 18, 47, 0.5)
+					padding-left: 10px
+					padding-right: 10px
+					padding-top: 10px
+					padding-bottom: 1px
+
+				@media screen and (max-width: $break-med)
+					min-height: 81px
+
+					.text
+						position: absolute
+						left: 0
+						font-size: 50px
+
+				@media screen and (max-width: $break-small)
+					min-height: 55px
+
+					.text
+						font-size: 35px
+		
+
+			// @media screen and (max-width: $break-small)
+			// 	min-height: 100px
+
+
+
 
 			#masthead-text
 				position: absolute
@@ -234,7 +343,7 @@ a
 
 				img
 					height: 250px
-					width: 100%
+					min-width: 180px
 
 				#masthead-text
 					padding-top: 5%
@@ -244,34 +353,18 @@ a
 		&.home
 			// background-image: url('/images/large-screen/building_seeing.jpg')
 			// min-height: 800px
-			min-height: 835px
+			// min-height: 835px
+			background: url('/images/header-floral-pattern.jpg')
+			background-attachment: fixed
 
 			#masthead-text
 				position: absolute
 				padding-left: 10%
 				padding-right: 10%
 				padding-top: 30%
-				z-index: 4
 
-			#masthead-carousel
-
-				.carousel-main
-
-					.carousel-image-wrapper
-
-						.masthead-pic
-							display: none
-
-							&.current, &.trans
-								display: block
-
-							&.current
-								z-index: 3
-								position: absolute
-
-							&.trans
-								position: absolute
-								z-index: 2
+			@media screen and (max-width: $break-med)
+				font-size: 40px
 
 	#main-nav
 
@@ -325,6 +418,7 @@ a
 					// border-top: solid $masthead-background
 					a
 						opacity: 1.0
+						letter-spacing: 1px
 			#nav-list a
 				text-decoration: none
 				color: black
@@ -497,7 +591,6 @@ footer
 				padding-left: 10px
 				padding-right: 10px
 				border-radius: 10px
-				width: 400
 				margin: 0 auto
 
 				#check-out
@@ -544,7 +637,7 @@ footer
 					img
 						height: 15px
 
-		@media screen and (max-width: $break-small)
+		@media screen and (max-width: $break-med)
 			#footer-left
 				width: 100%
 				margin-bottom: 20px
@@ -554,6 +647,9 @@ footer
 
 					.nav-item
 						display: inline-block
+
+						a
+							color: $black-text-color
 
 						+ .nav-item
 							margin-left: 10px
@@ -688,16 +784,8 @@ footer
 					animation-timing-function: linear
 
 				@keyframes tilts
-					0%
-						transform: rotateZ(0)
-					25%
-						transform: rotateZ(10deg)
-					50%
-						transform: rotateZ(0)
-					75%
-						transform: rotateZ(-10deg)
-					100%
-						transform: rotateZ(0)
+					+bounceyRotate()
+
 
 	@media screen and (max-width: $break-med)
 		margin-left: $main-break-content-padding
@@ -1322,6 +1410,7 @@ $carousel-height: 350px
 $paddle-width: 50px
 $select-placement-y: 157.5px
 $select-placement-x: 5px
+$project-date-border-radius: 5px
 #single-project-wrapper
 	padding-left: $main-content-padding
 	padding-right: $main-content-padding
@@ -1376,9 +1465,10 @@ $select-placement-x: 5px
 					margin-left: 10px
 
 				.project-date
+					margin-top: 10px
 					text-align: center
 					border: 1px solid black
-					border-radius: 10px
+					border-radius: $project-date-border-radius
 					width: 20%
 					display: inline-block
 
@@ -1387,8 +1477,8 @@ $select-placement-x: 5px
 						font-size: 18px
 						background: $button-background
 						border-bottom: 1px solid black
-						border-top-left-radius: 10px
-						border-top-right-radius: 10px
+						border-top-left-radius: $project-date-border-radius
+						border-top-right-radius: $project-date-border-radius
 						padding:
 							left: 5px
 							right: 5px
@@ -1531,6 +1621,7 @@ $select-placement-x: 5px
 			#project-data
 
 				#project-date-wrapper
+					text-align: center
 
 					.project-date
 						width: 40%

@@ -1,10 +1,11 @@
 extends layout
 
 block masthead
+	#basic-header-img.single-project
 	#masthead-text
 		|#{project.title}
 	- pic = project.pics.split(',')[0]
-	img(src=`./uploads/projects/${pic}`)
+		img(src=`./uploads/projects/${pic}`).single-project
 
 
 block content

@@ -19,14 +19,14 @@ router.get('/', function(req, res, next) {
 	var pageTitle = req.app.locals.websiteName + " | Web Developer Currently Based in Kalamazoo, MI"
 
 	var model = {
-		Languages: ['Python', 'Ruby', 'JavaScript', 'Java', 'PHP', 'HTML', 'CSS'],
+		Languages: ['Python', 'Ruby', 'JavaScript', 'Java', 'PHP', 'OCaml', 'Swift', 'Haskell','HTML', 'CSS'],
 		Libraries: ['jQuery', 'Bootstrap'],
 		'Pre-Processors': ['SASS', 'Pug'],
 		Frameworks: ['Knockout.js', 'Express.js', 'Jinja2'],
 		Runtimes: ['Node.js'],
 		CMSs: ['Wordpress', 'Squarespace']
 	}
-  	res.render('index', { title: pageTitle, model: model, user: user, error: errorMsg, page:'home', pics: images});
+  	res.render('index', { title: pageTitle, model: model, user: user, error: errorMsg, page:'home'}) //pics: images});
 });
 
 module.exports = router;

@@ -60,7 +60,7 @@ router.get('/', function(req, res, next) {
 		var projects = null;
 		mySQL.getConn(function(err, connection) {
 	  	if (err) {throw err};
-	  	connection.query("SELECT * FROM projects", function(err, results, fields) {
+	  	connection.query("SELECT * FROM projects ORDER BY id DESC", function(err, results, fields) {
 	  		connection.release()
 	  		if(results) {
 	  			projects = results;
