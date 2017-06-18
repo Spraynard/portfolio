@@ -49,7 +49,7 @@ mixin post-temp(post)
 				img(src=`./uploads/blog/${headerPic}`).post-header-pic
 		.post-display
 			a(href=`/blog?singlepost=true&post=${id}`)
-				h1(class="post-header") #{post.title}
+				h1(class="post-header") !{post.title}
 			.post-body !{post.body}
 		.post-meta
 			if post.tags !== null
@@ -177,7 +177,7 @@ mixin footerPost(posts)
 			.fpwrap
 				a(href=`/blog?singlepost=true&post=${id}`)
 					.footer-post-title
-						| #{title}
+						| !{title}
 				.footer-post-blurb !{body}
 
 

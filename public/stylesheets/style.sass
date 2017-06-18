@@ -264,6 +264,10 @@ a
 
 				&.single-project
 					+pageHeaderBackground('/images/header-floral-pattern.jpg')
+
+				&.single-post
+					+pageHeaderBackground('/images/large-screen/blog-background-1500x250.jpg')
+
 			
 			#basic-masthead-text
 				position: relative
@@ -275,24 +279,33 @@ a
 
 				.text
 					background: rgba(133, 18, 47, 0.5)
-					padding-left: 10px
-					padding-right: 10px
-					padding-top: 10px
-					padding-bottom: 1px
+					padding-left: 20px
+					padding-right: 20px
+					font-size: 60px
 
 				@media screen and (max-width: $break-med)
-					min-height: 81px
+					min-height: 83px
+
+					&.single-post
+						min-height: 150px
 
 					.text
 						position: absolute
 						left: 0
+						padding-bottom: 0
 						font-size: 50px
 
+						&.single-post
+							font-size: 25px
+
 				@media screen and (max-width: $break-small)
-					min-height: 55px
+					min-height: 61px
 
 					.text
 						font-size: 35px
+
+						&.single-post
+							font-size: 15px
 		
 
 			// @media screen and (max-width: $break-small)
@@ -324,7 +337,7 @@ a
 					padding-left: 30%
 
 			@media screen and (max-width: $break-med)
-				min-height 200px
+				min-height 12.5em
 				max-height: 250px
 
 				img
@@ -338,8 +351,7 @@ a
 					border-top-right-radius: 10px
 
 			@media screen and (max-width: $break-small)
-				min-height: 100px
-				max-height: 250px
+				min-height: 
 
 				img
 					height: 250px
@@ -979,6 +991,7 @@ $blog-post-background: white
 			font-size: 16px
 
 			a
+				text-decoration: none
 
 				.post-header
 					margin-top: 0
@@ -1026,7 +1039,12 @@ $blog-post-background: white
 			padding-right: 1em
 
 			.post-display
-				font-size: 20px
+				font-size: 1.0em
+
+				a
+
+					.post-header
+						font-size: 1.5em
 
 
 // End `Blog` CSS

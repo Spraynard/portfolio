@@ -107,6 +107,9 @@ a {
         #header-wrapper #masthead-wrapper:not(.home) #basic-header-img.single-project {
           background: url("/images/header-floral-pattern.jpg");
           background-attachment: fixed; }
+        #header-wrapper #masthead-wrapper:not(.home) #basic-header-img.single-post {
+          background: url("/images/large-screen/blog-background-1500x250.jpg");
+          background-attachment: fixed; }
       #header-wrapper #masthead-wrapper:not(.home) #basic-masthead-text {
         position: relative;
         color: #FDF5E6;
@@ -115,22 +118,28 @@ a {
         background-attachment: fixed; }
         #header-wrapper #masthead-wrapper:not(.home) #basic-masthead-text .text {
           background: rgba(133, 18, 47, 0.5);
-          padding-left: 10px;
-          padding-right: 10px;
-          padding-top: 10px;
-          padding-bottom: 1px; }
+          padding-left: 20px;
+          padding-right: 20px;
+          font-size: 60px; }
         @media screen and (max-width: 48em) {
           #header-wrapper #masthead-wrapper:not(.home) #basic-masthead-text {
-            min-height: 81px; }
+            min-height: 83px; }
+            #header-wrapper #masthead-wrapper:not(.home) #basic-masthead-text.single-post {
+              min-height: 150px; }
             #header-wrapper #masthead-wrapper:not(.home) #basic-masthead-text .text {
               position: absolute;
               left: 0;
-              font-size: 50px; } }
+              padding-bottom: 0;
+              font-size: 50px; }
+              #header-wrapper #masthead-wrapper:not(.home) #basic-masthead-text .text.single-post {
+                font-size: 25px; } }
         @media screen and (max-width: 30em) {
           #header-wrapper #masthead-wrapper:not(.home) #basic-masthead-text {
-            min-height: 55px; }
+            min-height: 61px; }
             #header-wrapper #masthead-wrapper:not(.home) #basic-masthead-text .text {
-              font-size: 35px; } }
+              font-size: 35px; }
+              #header-wrapper #masthead-wrapper:not(.home) #basic-masthead-text .text.single-post {
+                font-size: 15px; } }
       #header-wrapper #masthead-wrapper:not(.home) #masthead-text {
         position: absolute;
         z-index: 4;
@@ -167,16 +176,13 @@ a {
             padding-bottom: 1.5%;
             border-top-right-radius: 10px; } }
       @media screen and (max-width: 30em) {
-        #header-wrapper #masthead-wrapper:not(.home) {
-          min-height: 100px;
-          max-height: 250px; }
-          #header-wrapper #masthead-wrapper:not(.home) img {
-            height: 250px;
-            min-width: 180px; }
-          #header-wrapper #masthead-wrapper:not(.home) #masthead-text {
-            padding-top: 5%;
-            padding-bottom: 5%;
-            font-size: 30px; } }
+        #header-wrapper #masthead-wrapper:not(.home) img {
+          height: 250px;
+          min-width: 180px; }
+        #header-wrapper #masthead-wrapper:not(.home) #masthead-text {
+          padding-top: 5%;
+          padding-bottom: 5%;
+          font-size: 30px; } }
     #header-wrapper #masthead-wrapper.home {
       background: url("/images/header-floral-pattern.jpg");
       background-attachment: fixed; }
@@ -700,9 +706,11 @@ label > .text {
       overflow-wrap: break-word;
       line-height: 2;
       font-size: 16px; }
-      #blog-content-wrapper .blog-post .post-display a .post-header {
-        margin-top: 0;
-        font-family: "Permanent Marker", courier; }
+      #blog-content-wrapper .blog-post .post-display a {
+        text-decoration: none; }
+        #blog-content-wrapper .blog-post .post-display a .post-header {
+          margin-top: 0;
+          font-family: "Permanent Marker", courier; }
     #blog-content-wrapper .blog-post .post-meta {
       margin-top: 20px;
       clear: both; }
@@ -733,7 +741,9 @@ label > .text {
         padding-left: 1em;
         padding-right: 1em; }
         #blog-content-wrapper .blog-post .post-display {
-          font-size: 20px; } }
+          font-size: 1.0em; }
+          #blog-content-wrapper .blog-post .post-display a .post-header {
+            font-size: 1.5em; } }
 
 #newpost-upload {
   width: 80%;

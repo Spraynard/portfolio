@@ -1,7 +1,9 @@
 extends layout
 
 block masthead
-	| #{post.title}
+	#basic-header-img.single-post
+	#basic-masthead-text.single-post
+		span.text.single-post !{post.title}
 
 block content
 	#single-post-wrapper
