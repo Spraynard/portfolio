@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 					'/images/large-screen/mounts.jpg',
 					'/images/large-screen/wood_walkin.jpg']
 
-	var pageTitle = req.app.locals.websiteName + " | Web Developer Currently Based in Kalamazoo, MI"
+	var pageTitle = req.app.locals.websiteName + " | Web Developer"
 
 	var model = {
 		Languages: ['Python', 'Ruby', 'JavaScript', 'Java', 'PHP', 'OCaml', 'Swift', 'Haskell','HTML', 'CSS'],
