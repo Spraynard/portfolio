@@ -28,7 +28,7 @@ var blog = require('./routes/blog');
 var app = express();
 // APP LOCALS
 // Setting the name of the actual website
-app.locals.websiteName = "Website Name";
+app.locals.websiteName = "Kellan Martin";
 app.locals.moment = require('moment');
 app.locals.postID = null;
 app.locals.projectID = null;
