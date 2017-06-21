@@ -363,9 +363,6 @@ a
 					font-size: 30px
 
 		&.home
-			// background-image: url('/images/large-screen/building_seeing.jpg')
-			// min-height: 800px
-			// min-height: 835px
 			background: url('/images/header-floral-pattern.jpg')
 			background-attachment: fixed
 
@@ -851,26 +848,27 @@ footer
 	// Contact Page CSS
 
 	#contact-form
-
 		width: 90%
 		margin: 0 auto
 
-		#first-name, #last-name
+		.name-div
 			display: inline-block
 			width: 50%
 
-			.name-input
-				width: 50%
+			#firstName, #lastName
+				width: 75%
 
-		#subject
-			margin-top: .5em
-
-		#subject input
+		.input-div
 			width: 100%
 
-		#body textarea
-			width: 100%
-			height: 300px
+			#email, #subject
+				width: 100%
+
+			#body
+				width: 100%
+				height: 300px
+				padding: 10px
+				line-spacing: 1.25
 
 		#contact-submit
 
@@ -878,11 +876,10 @@ footer
 				float: right
 
 		@media screen and (max-width: $break-med)
-
-			#first-name, #last-name
+			.name-div
 				width: 100%
 
-				.name-input
+				#firstName, #lastName
 					width: 100%
 
 	// End Contact Page CSS

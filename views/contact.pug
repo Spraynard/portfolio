@@ -8,21 +8,34 @@ block masthead
 block content
 	.form-wrapper
 		form(action="/contact" method="post")#contact-form
-			#first-name
+			.name-div
 				label(for="first-name")
 					|	First Name <br>
-				input(type="text" name="first-name").name-input
-			#last-name
+				input(type="text" name="first-name")#firstName
+				#first-name-error.alert
+			.name-div
 				label(for="last-name")
 					|	Last Name <br>
-				input(type="text" name="last-name").name-input
-			#subject
+				input(type="text" name="last-name")#lastName
+				#last-name-error.alert
+			.input-div
+				label(for="email")
+					|	E-Mail <br>
+				input(type="text" name="email")#email
+				#email-error.alert
+			.input-div
 				label(for="subject")
 					|	Subject <br>
-				input(type="text" name="subject")
-			#body
+				input(type="text" name="subject")#subject
+				#subject-error.alert
+			.input-div
 				label(for="body")
 					|	Body <br>
-				textarea(name="body")
+				textarea(name="body")#body
+				#body-error.alert
 			#contact-submit
-				input(type="submit" value="Send that beautiful e-mail!")
+				input(type="button" value="Send that beautiful e-mail!")#submit-button
+
+block append javascripts
+	script(src="/javascripts/contact-page-checks.js")
+
