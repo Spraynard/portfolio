@@ -15,7 +15,9 @@ Things to add:
 3. Possibility to use front-end framework
 4. ImageMagick to automatically optimize images when I add them with a project
 5. Complete login system (but for what reason!? :3)
-6. Implement URL input capability, as well as editing within the normal editing mode.
+6. <del>Implement URL input capability, as well as editing within the normal editing mode.</del>
+7. Implement e-mail transport on Contact page
+8. Implement AWstats on cloud server
 
 
 
