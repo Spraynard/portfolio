@@ -6,6 +6,12 @@ block masthead
 		span(class="text") Contact
 
 block content
+	#phone-number-wrapper
+		include mixins/utils
+		+social-media-wrap
+		.icon-wrapper
+			img(src="/images/svgs/phone_icon.svg").phone-icon
+		.info (906) 231 - 0761
 	.form-wrapper
 		form(action="/contact" method="post")#contact-form
 			.name-div

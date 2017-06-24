@@ -1,5 +1,3 @@
-
-
 exports.cookieDivide = function(name, value, cookieString) {
 	var cookiesArray = cookieString.split(";");
 	for (c in cookiesArray) {

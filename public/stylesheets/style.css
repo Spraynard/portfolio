@@ -438,6 +438,17 @@ footer {
     border-radius: 10px;
     padding: 5px;
     color: #363636; }
+  #content #phone-number-wrapper {
+    text-align: center;
+    margin-bottom: 40px; }
+    #content #phone-number-wrapper .icon-wrapper {
+      display: inline-block; }
+      #content #phone-number-wrapper .icon-wrapper .phone-icon {
+        height: 25px;
+        width: 25px; }
+    #content #phone-number-wrapper .info {
+      display: inline-block;
+      font-size: 1em; }
 
 #home-content-wrapper {
   margin-left: 20%;
