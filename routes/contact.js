@@ -3,8 +3,6 @@ const app = express();
 const router = express.Router();
 const mySQL = require('../my_sql_setup.js');
 const nodemailer = require('nodemailer');
-const xoauth2 = require('xoauth2');
-const https = require('https');
 const request = require('request');
 const secret = require('../secret')
 
