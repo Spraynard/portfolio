@@ -6,31 +6,24 @@ const nodemailer = require('nodemailer');
 const xoauth2 = require('xoauth2');
 const https = require('https');
 const request = require('request');
+const secret = require('../secret')
 
 // Comment this out when in production
-
-var xoauth2gen = xoauth2.createXOAuth2Generator({
-	user: 'kellan.martin@gmail.com',
-	clientId: '290334206031-kkjtdkcb332613huo6brib90hn24c12b.apps.googleusercontent.com',
-	clientSecret: 'EGje7rbGlgt5hIe-7r4Jyrow',
-	refreshToken: '1/Kx2z3ouoO8WEjKWj7YB3pPiPfdXsuN918N4fAJ7a-FM',
-})
-
 var transporter = nodemailer.createTransport({
 	service: 'gmail',
 	auth: {
 		type: 'OAuth2',
 		user: 'kellan.martin@gmail.com',
-		clientId: '290334206031-kkjtdkcb332613huo6brib90hn24c12b.apps.googleusercontent.com',
-		clientSecret: 'EGje7rbGlgt5hIe-7r4Jyrow',
-		refreshToken: '1/64LVJe7fc_vnJz_xEOeIN4swIYceXLWfeSoy9LGD0uQ',
-		accessToken: 'ya29.Glt1BLqgOA1BS8NQSg1ZMD1b3n1UPPdF97blIyyR0LnavGMhsmtdDGCLCDvUtY85D_tK0Ky5YVJcgcst8g7u7pkSJAxjoDZtd_I2dFQ1NcMViwhILg1QPB6sp8hv'
+		clientId: secret.gmailID(),
+		clientSecret: secret.gmailSecret(),
+		refreshToken: '1/LzF8VaVjSbhRCnsZHF5ozZmjraSWWviIp2Q9bbLHY9E',
+		accessToken: 'ya29.Glt1BMJZz01Ca5maPJqctrnRmxKtAgt7KzI7cj-freR3GJ52U6kP8xJqpH3rvSldN0nES8gBo--H5NNpMfWL2EnaLVWtCkxfAfKIsh2kF134aAKwI9WG0SEkTaXo'
 	}
 })
 
 function verifyCaptcha(emailObj) {
 	return new Promise(function ( resolve, reject ) {
-		captchaSecret = '6LeRwiYUAAAAAGSraYezvJqtw4buEIPef1gzu4ur'
+		captchaSecret = secret.captchaSecret()
 		if (emailObj.recaptcha === '') {
 			reject('No Captcha Response')
 		} 
@@ -107,7 +100,7 @@ router.post('/', function(req, res, next) {
 	.then(sendEmail)
 	.then(saveEmail)
 	.then(console.log)
-	.then(null, console.error)
+	.catch(console.error)
 	.done()
 })
 
