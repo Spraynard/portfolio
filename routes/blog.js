@@ -54,8 +54,8 @@ function loadAllPosts(req, res, next) {
 }
 
 function singleCallback(req, res, post, comments) {
-	// Dynamic page title based on the blog post title
-	var pageTitle =  req.app.locals.websiteName + ' | ' + post.title
+	// Dynamic page title based on the blog post title. stripped the HTML out of the title.
+	var pageTitle =  req.app.locals.websiteName + ' | ' + post.title.replace(/<(?:.|\n)*?>/gm, '')
 	user = userCheck.validateCookie(req);
 	res.render('singlepost', {title: pageTitle, post: post, user: user, page: page, comments: comments});
 	res.end();

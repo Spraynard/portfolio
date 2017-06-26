@@ -1,5 +1,8 @@
 extends layout
 
+block captcha
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+
 block masthead
 	#basic-header-img.contact
 	#basic-masthead-text 
@@ -40,6 +43,8 @@ block content
 					|	Body <br>
 				textarea(name="body")#body
 				#body-error.alert
+			.captcha-div
+				|<div class="g-recaptcha" data-sitekey="6LeRwiYUAAAAAIN_xsoLElwY_iKfkLQNr8w001jh"></div>
 			#contact-submit
 				input(type="button" value="Send that beautiful e-mail!")#submit-button
 
