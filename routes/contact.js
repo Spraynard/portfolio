@@ -98,8 +98,8 @@ router.post('/', function(req, res, next) {
 	.then(sendEmail)
 	.then(saveEmail)
 	.then(console.log)
+	.then(res.redirect('/thanks'))
 	.catch(console.error)
-	.done()
 })
 
 module.exports = router;
