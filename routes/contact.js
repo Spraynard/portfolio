@@ -8,14 +8,16 @@ const secret = require('../secret')
 
 // Comment this out when in production
 var transporter = nodemailer.createTransport({
-	service: 'gmail',
+	host: 'smtp.gmail.com',
+	port: 465,
+	secure: true,
 	auth: {
 		type: 'OAuth2',
 		user: 'kellan.martin@gmail.com',
 		clientId: secret.gmailID(),
 		clientSecret: secret.gmailSecret(),
-		refreshToken: '1/LzF8VaVjSbhRCnsZHF5ozZmjraSWWviIp2Q9bbLHY9E',
-		accessToken: 'ya29.Glt1BMJZz01Ca5maPJqctrnRmxKtAgt7KzI7cj-freR3GJ52U6kP8xJqpH3rvSldN0nES8gBo--H5NNpMfWL2EnaLVWtCkxfAfKIsh2kF134aAKwI9WG0SEkTaXo'
+		refreshToken: '1/Vbu9SCGyxj2XELpvID1AdHPDFjHr_ASNhAJf-IEKeB8',
+		accessToken: 'ya29.Glt2BMSadOK2WV-hwv6CeCQoIyXQryhvXRR04obGd6DmS1e2rFLztJxW24ecX_oLWRyjcN-Fj97QctxQBY_6ntdwlGg7_LTAIvMHlhzFNO3B_pw4PHVthfV-4VzN'
 	}
 })
 
@@ -48,9 +50,19 @@ function sendEmail(emailObj) {
 		var mailOptions = {
 			from: emailObj.firstName + ' ' + emailObj.lastName + ' <' + emailObj.email + '>',
 			to: 'kellan.martin@gmail.com',
-			subject: emailObj.subject,
+			subject: "Email From: " + '<' + emailObj.email + '> | ' + emailObj.subject,
 			text: emailObj.body
 		}
+
+		transporter.verify( function( error, success ) {
+			if (error) {
+				console.log("Cannot Verify")
+				reject(error)
+			}
+			else {
+				console.log("This is a usable transporter")
+			}
+		})
 
 		transporter.sendMail(mailOptions, function (err, res) {
 			if (err) reject(err)
