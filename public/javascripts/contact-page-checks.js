@@ -25,6 +25,8 @@ $(function () {
 		return false
 	}
 
+	
+
 	function errorCheckAndSend() {
 		errorObj = {
 			'firstName': null,
