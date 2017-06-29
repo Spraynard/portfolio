@@ -66,3 +66,4 @@ uploads/
 *.sql
 secret.js
 my_sql_setup.js
+contact.js
