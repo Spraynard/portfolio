@@ -7,7 +7,7 @@ crypto = require('crypto');
 password = require('./secret');
 
 exports.encryptedString = function(encString) {
-	decrypt = crypto.createDecipher('BF', password())
+	decrypt = crypto.createDecipher('BF', password.userSecret())
 	let decrypted = '';
 
 	decrypt.on('readable', function() {
