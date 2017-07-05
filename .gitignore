@@ -67,3 +67,4 @@ uploads/
 secret.js
 my_sql_setup.js
 routes/contact.js
+views/contact.pug
