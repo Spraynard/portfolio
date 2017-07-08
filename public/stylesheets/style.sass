@@ -324,10 +324,6 @@ a
 				-moz-user-select: none
 				-ms-user-select: none
 				user-select: none
-				+crossBrowserTransition(0.2s)
-
-				&:hover
-					padding-left: 30%
 
 			@media screen and (max-width: $break-med)
 				min-height 12.5em
@@ -369,14 +365,18 @@ a
 				font-size: 40px
 
 	#main-nav
+		padding-top: 15px
+		position: relative
+
+		@media screen and (max-width: $break-med)
+			padding-top: 0
 
 		#mobile-nav-wrapper
 			display: none
 
-			.nav-button
-
 		#nav-wrapper
 			display: inline
+			overflow-y: hidden
 
 			#nav-list
 				padding: 0
@@ -394,9 +394,7 @@ a
 				font-size: 2em
 				padding-left: 4%
 				padding-right: 4%
-				padding-top: 2px
-				border-bottom-right-radius: 10px
-				border-bottom-left-radius: 10px
+				border-radius: 2px
 				text-align: center
 				opacity: 0.5
 				+crossBrowserTransition(1.0s)
@@ -436,10 +434,10 @@ a
 
 				#nav-button-mobile
 					position: absolute
-					z-index: 1
-					display: relative
-					margin-top: 7px
+					z-index: 5
+					margin-top: 5.5px
 					right: 0
+					top: 0
 					margin-right: 10px
 					margin-bottom: 10px
 					width: 50px
@@ -447,6 +445,14 @@ a
 					border-radius: 10px
 					border: 2px solid $mobile-main-color
 					background: $mobile-background-color
+					+crossBrowserTransition(0.2s)
+
+					&.active
+						top: -50px
+						border-color: black
+
+						.krabby-patty
+							background: black
 
 					.krabby-patty
 						width: 80%
@@ -461,13 +467,20 @@ a
 
 
 			#nav-wrapper
-				display: none
-
-				&.open
-					display: inline
 
 				#nav-list
 					width: 100%
+					overflow-y: hidden
+					+crossBrowserTransition(0.5s)
+
+					&.closed
+						height: 0px
+
+					&.open
+						height: 180px
+
+						&.admin
+							height: 223px
 
 					.nav-item
 						width: 100%
@@ -1397,27 +1410,22 @@ $anim-wrap-color: #A3A0AE
 		
 	.form-header
 
-		#new-project-title
+		#new-project-title,
+		#new-project-technologies,
+		#new-project-website,
+		#new-project-upload
 			width: 80%
 			margin: 0 auto
 			margin-bottom: 10px;
 
-			#project-input-title
+			#project-input-title,
+			#project-input-technologies,
+			#project-input-website
 				width: 100%
 
 		#new-project-upload
-			width: 80%
-			margin: 0 auto;
 			text-align: center;
 			margin-bottom: 20px
-
-		#new-project-technologies
-			width: 80%
-			margin: 0 auto;
-			margin-bottom: 10px
-
-			#project-input-technologies
-				width: 100%
 
 	.date-wrapper
 		width: 80%
@@ -1463,7 +1471,7 @@ $carousel-height: 350px
 $paddle-width: 50px
 $select-placement-y: 157.5px
 $select-placement-x: 5px
-$project-date-border-radius: 5px
+$project-date-border-radius: 3px
 #single-project-wrapper
 	padding-left: $main-content-padding
 	padding-right: $main-content-padding
@@ -1489,28 +1497,7 @@ $project-date-border-radius: 5px
 
 			#header-edit
 				width: 100%
-
-			#techwrapper
-				margin-bottom: 15px
-
-				#techheader
-					font-family: $masthead-font-stack
-					font-size: 20px
-					margin-bottom: 10px
-
-				#qualwrapper
-					display: flex
-					flex-wrap: wrap
-					position: relative
-
-					#techs
-						margin-top: 5px
-						margin-bottom: 5px
-
-						.qualitem
-							display: border-box
-							+qualitem
-
+			
 			#project-date-wrapper
 				margin-bottom: 5px
 
@@ -1540,6 +1527,55 @@ $project-date-border-radius: 5px
 						padding-right: 5px
 						padding-left: 5px
 						font-size: 20px
+			
+			#techwrapper
+				margin-bottom: 15px
+				display: inline-block
+
+				#techheader
+					font-family: $masthead-font-stack
+					font-size: 20px
+					margin-bottom: 10px
+
+				#qualwrapper
+					display: flex
+					flex-wrap: wrap
+					position: relative
+
+					#techs
+						margin-top: 5px
+						margin-bottom: 5px
+
+						.qualitem
+							display: border-box
+							+qualitem
+
+			#project-website-wrapper
+				display: inline-block
+				margin-left: 15px;
+				position: relative
+
+				#project-website
+					box-sizing: border-box
+					text-align: center
+					padding-left: 15px
+					padding-right: 15px
+					background: #00B7FF
+					// background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAYElEQVQoU22QQQ4AIQgD9UkezP7/uNmDT3JTkzEV4YJAC631/cYsIZ7eqlqa6a28GgQkhp430NkiOkj1cSKeQ8ICsglQ1EudnvZN6L7cRdB27SYyEJIuM27Iv+0wk4Ho/boid7mJS9cXAAAAAElFTkSuQmCC)
+					border: 1px solid rgb(0, 0, 0)
+					border: 1px solid rgba(0, 0, 0, 0.2)
+					padding-top: 7px
+					padding-bottom: 7px
+					border-radius: $project-date-border-radius
+					font-family: helvetica
+					color: white
+
+					&:hover
+						border: 1px solid rgba(0, 0, 0, 0.8)
+						color: $button-background
+
+					&:active
+						border: 2px solid rgba(0, 0, 0, 1)
 
 			#project-header
 				font-family: $masthead-font-stack
@@ -1671,13 +1707,40 @@ $project-date-border-radius: 5px
 					width: 100%
 					height: auto
 
+			#project-carousel
+
+				.carousel-main
+					width: 100%
+
+					.carousel-image-wrapper
+
+						.single-project-pic
+							width: 100%
+
 			#project-data
+
+				#project-website-wrapper
+					display: block
+					position: relative
+					margin-left: 0
+
+					#project-website
+						width: 40%
+						margin: 0 auto
+						letter-spacing: 2px
 
 				#project-date-wrapper
 					text-align: center
 
 					.project-date
 						width: 40%
+
+				#techwrapper
+					text-align: center
+					display: block
+
+					#qualwrapper
+						justify-content: center
 
 				#project-body-wrapper
 					line-height: 2

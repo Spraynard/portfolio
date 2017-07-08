@@ -7,21 +7,33 @@ mixin navBar(user, page = null)
 				.krabby-patty
 				.krabby-patty
 		#nav-wrapper
-			ul(id="nav-list")
-				li(class="nav-item")
-					a(href="/") Home
-				li(class="nav-item")
-					a(href="/projects") Projects
-				li(class="nav-item") 	
-					a(href="/blog") Blog
-				li(class="nav-item") 	
-					a(href="/contact") Contact
-				if page === 'blog' &&  user && user.type === 'admin'
-					li(class="nav-item")
-						a(href="/blog/newpost") Add New Post
-				if page === 'projects' && user && user.type === 'admin'
-					li(class="nav-item")
-						a(href="/projects/newproject") Add New Project
+			if (page === 'blog' || page === 'projects') && user
+				ul#nav-list.closed.admin
+					li.nav-item
+						a(href="/") Home
+					li.nav-item
+						a(href="/projects") Projects
+					li.nav-item 	
+						a(href="/blog") Blog
+					li.nav-item 	
+						a(href="/contact") Contact
+					if page === 'blog' &&  user && user.type === 'admin'
+						li.nav-item
+							a(href="/blog/newpost") Add New Post
+					if page === 'projects' && user && user.type === 'admin'
+						li.nav-item
+							a(href="/projects/newproject") Add New Project
+			else
+				ul#nav-list.closed
+					li.nav-item
+						a(href="/") Home
+					li.nav-item
+						a(href="/projects") Projects
+					li.nav-item 	
+						a(href="/blog") Blog
+					li.nav-item 	
+						a(href="/contact") Contact
+
 						
 //- Template for a social media bar
 mixin social-media-wrap(none)
@@ -148,13 +160,18 @@ mixin single-project-temp(project)
 					input#end-date-edit.edit
 			#techwrapper
 				#techheader
-					|	<u>Technologies Used</u>:
+					|	<u>Technologies Used</u>
 				#qualwrapper
 					#techs.front-end
 						each t in tech
 							.qualitem
 								|#{t}
 				input#tech-edit.edit
+			if project.website !== ''
+				#project-website-wrapper.front-end
+					a(href=project.website)#website-link
+						#project-website Site Link
+			input#website-edit.edit
 			#project-body-wrapper.front-end !{project.body}
 			#body-edit.edit
 				textarea(id="project-body-edit")

@@ -98,12 +98,13 @@ function getDate(dateObj) {
 }
 
 // Post requests of `update` to this route will update body,
-// 	title, startdate, enddate, and tech roles.
+// 	title, startdate, enddate, website, and tech roles.
 
 router.post('/newproject', upload.any(), function(req, res, next) {
 	var postInfo = {
 		'pics': null,
 		'body': null,
+		'website': null,
 		'title': null,
 		'startDate': null,
 		'endDate': null,
@@ -126,6 +127,7 @@ router.post('/newproject', upload.any(), function(req, res, next) {
 	postInfo['startDate'] = startDate;
 	postInfo['endDate'] = endDate;
 	postInfo['tech'] = req.body.tech;
+	postInfo['website'] = req.body.website;
 
 	mySQL.getConn(function(err, conn) {
 		if (err) {throw err};
@@ -143,26 +145,22 @@ router.post('/edit', function(req, res, next) {
 	var body = req.body.body
 	var startDate = req.body.startDate
 	var endDate = req.body.endDate
+	var website = req.body.website
 	var tech = req.body.tech
+	var link = req.body.link
 
 	mySQL.getConn(function(err, conn) {
 		if (err) throw err;
-		conn.query("UPDATE projects SET title = ?, tech = ?, start_date = ?, end_date = ?, body = ? WHERE id = ?", [title, tech, startDate, endDate, body, id], function(err, results, fields) {
+		conn.query("UPDATE projects SET title = ?, website = ?, tech = ?, start_date = ?, end_date = ?, body = ? WHERE id = ?", [title, link, tech, startDate, endDate, body, id], function(err, results, fields) {
 			if(err) throw err;
 			conn.query("SELECT * from projects WHERE id = ?", id, function(err, results, fields) {
 				conn.release();
 				if (err) throw err;
-				console.log(results);
 				res.send(results);
 				res.end();
 			})
-			// res.send("updated");
-			// res.end();
 		})
 	})
-	// console.log(req.app.locals.projectID)
-	// console.log("Getting a post!");
-	// console.log(req.body)
 })
 
 module.exports = router;

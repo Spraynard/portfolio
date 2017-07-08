@@ -8,12 +8,14 @@ $(function() {
 	var qualItems = $(".qualitem");
 	var body = $("#project-body-wrapper");
 	var techs = $("#techs");
+	var siteLink = $("#website-link");
 
 	var headerEdit = $("#header-edit");
 	var startDateEdit = $("#start-date-edit");
 	var endDateEdit = $("#end-date-edit");
 	var bodyEdit = $("#project-body-edit");
 	var techEdit = $("#tech-edit");
+	var siteLinkEdit = $('#website-edit')
 
 	function removeWhiteSpace(string) {
 		string = string.replace(/\s/g, '')
@@ -36,7 +38,6 @@ $(function() {
 		var editDoms = $(".edit")
 		$(editDoms).toggle()
 		var toggled = editDoms.is(':visible')
-		console.log(toggled)
 		$('#start-edit-button').text(toggled == true ? 'Cancel' : 'Edit Post')
 	}
 
@@ -55,7 +56,6 @@ $(function() {
 		var string
 
 		$(qualItems).each(function(item) {
-			console.log(item)
 			if ( item === $(".qualitem").length - 1 ) {
 				string = $(this).text();
 			}
@@ -73,7 +73,8 @@ $(function() {
 			endDateValue: endDate.text(),
 			headerValue: header.text(),
 			bodyValue: body.html(),
-			qualItemsValue: getQualItems()
+			qualItemsValue: getQualItems(),
+			linkValue: siteLink.attr('href')
 		}
 		return obj;
 	}
@@ -84,7 +85,8 @@ $(function() {
 			endDate: endDateEdit.val(),
 			title: headerEdit.val(),
 			body: bodyEdit.val(),
-			tech: techEdit.val()
+			tech: techEdit.val(),
+			link: siteLinkEdit.val()
 		}
 		return obj;
 	}
@@ -97,6 +99,7 @@ $(function() {
 		$headerValue = vals.headerValue
 		$bodyValue = vals.bodyValue
 		$qualItemsValue = vals.qualItemsValue
+		$linkValue = vals.linkValue
 	
 	// Extracting `qual items`
 
@@ -107,6 +110,7 @@ $(function() {
 		endDateEdit.val($endDateValue);
 		bodyEdit.val($bodyValue);
 		techEdit.val(removeWhiteSpace($qualItemsValue));
+		siteLinkEdit.val($linkValue);
 	}
 
 	function produceTechTemplate(text) {
@@ -136,7 +140,8 @@ $(function() {
 			body: vals.body,
 			startDate: vals.startDate,
 			endDate: vals.endDate,
-			tech: vals.tech
+			tech: vals.tech,
+			link: vals.link
 		}
 
 		// When editing is done, make a call to the back end 
@@ -144,21 +149,22 @@ $(function() {
 		// Back end sends a `successObj` response of the updated post object,
 		// 	The DOM is then updated through this AJAX call.
 		$.post("/projects/edit", data , function(successObj) {
-			console.log(successObj)
 			successObj = successObj[0]
 			var currentTitle = successObj.title;
 			var currentBody = successObj.body;
 			var currentStartDate = successObj['start_date'];
 			var currentEndDate = successObj['end_date'];
 			var currentTechs = successObj.tech;
+			var currentLink = successObj.website;
 
 			toggleEditMode();
 
 			header.text(currentTitle);
 			body.html(currentBody);
-			startDate.text(currentStartDate)
-			endDate.text(currentEndDate)
+			startDate.text(currentStartDate);
+			endDate.text(currentEndDate);
 			replaceTechs(currentTechs, techs);
+			siteLink.attr('href', currentLink);
 		})
 	}
 	
