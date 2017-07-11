@@ -23,7 +23,8 @@ var login = require('./routes/login');
 var logout = require('./routes/logout');
 //Routing for Blog Page
 var blog = require('./routes/blog');
-//Routing for a new post in a blog
+//Routing for dev_test app
+var dev_test = require('./routes/dev_test');
 
 var app = express();
 // APP LOCALS
@@ -84,6 +85,7 @@ app.use('/users', users);
 app.use('/projects', projects);
 app.use('/contact', contact);
 app.use('/blog', blog);
+app.use('/dev_test', dev_test);
 app.get('/thanks', function(req, res, next) {
   res.render('thankyou')
 });

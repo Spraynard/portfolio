@@ -1,0 +1,243 @@
+/*Stylesheet For dev-test node app*/
+html, body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+html {
+	font-family: arial, courier;
+}
+
+body {
+	background-color: #FEFEFA;
+	background-image: url('/images/dev-test-backgrounds/elastoplast.png');
+	background-attachment: fixed;
+}
+
+header {
+	font-size: 4em;
+}
+
+#main-content {
+	font-size: 2em;
+}
+/* `#picture-wrapper` div CSS */
+#main-content #main-wrapper #picture-wrapper {
+	display: flex;
+	align-content: center;
+	justify-content: left;
+	flex-wrap: wrap;
+	margin: 2%;
+}
+
+/* Start CSS FOR SINGULAR ITEMS OF PICTURES */
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper {
+	width: 33%;
+	position: relative;
+	box-sizing: border-box;
+	border-radius: 3px;
+	margin: 0.25% 0 0.25% 0;
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder {
+	position: relative;
+	width: 100%;
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm {
+	position: absolute;
+	opacity: 0.0;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	/* Transition */
+	-webkit-transition: opacity 0.5s;
+	   -moz-transition: opacity 0.5s;
+	    -ms-transition: opacity 0.5s;
+	     -o-transition: opacity 0.5s;
+			transition: opacity 0.5s;
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm.hovered {
+	opacity: 1.0;
+	z-index: 10;
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm.selected {
+	z-index: 13;
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm input {
+	position: absolute;
+	display: block;
+	width: 30%;
+	height: 20%;
+	max-height: 30px;
+	background: #37B9E4;
+	bottom: 10%;
+	left: 35%;
+	color: white;
+	border: none;
+	border-radius: 2px;
+	font-size: .5em;
+	font-style: bold;
+}
+
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm input:active {
+	box-shadow: 2px 2px 2px grey;
+}
+
+/* Picture CSS */
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder .picture.loader {
+	width: 16px;
+	margin-left: 150px;
+	margin-top: 150px;
+	position: relative;
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder .picture {
+	width: 100%;
+	position: relative;
+	z-index: 4;
+	/* Transition */
+	-webkit-transition: all 0.5s;
+	   -moz-transition: all 0.5s;
+	    -ms-transition: all 0.5s;
+	     -o-transition: all 0.5s;
+			transition: all 0.5s;
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder .picture.selected {
+	z-index: 12;
+}
+/*	If Image has the `hovered` class on it */
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder .picture.hovered {
+	/* Cross Browser Filter */
+	-webkit-filter: grayscale(1);
+	   -moz-filter: grayscale(1);
+	    -ms-filter: grayscale(1);
+	     -o-filter: grayscale(1);
+	        filter: grayscale(1);
+/* Cross Browser Transform */
+	-webkit-transform: scale(1.01);
+	   -moz-transform: scale(1.01);
+	    -ms-transform: scale(1.01);
+	     -o-transform: scale(1.01);
+	        transform: scale(1.01);
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information {
+	position: absolute;
+	height: 200px;
+	width: 100%;
+	max-width: 100%;
+	bottom: 0;
+	overflow-y: scroll;
+	z-index: 3;
+	display: none;
+	background: url('/img/backgrounds/photography.png');
+	font-size: 0.5em;
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information .text-info {
+	position: relative;
+	padding-left: 5%;
+	padding-right: 5%;
+	line-height: 1.25;
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information .title-div {
+	position: relative;
+	padding-bottom: 20px;
+	height: 25%;
+	width: 100%;
+	background: rgba(255, 196, 54, 0.7);
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information .title-div h4 {
+	margin-top: 0;
+	padding-top: 10px;
+	padding-left: 3%;
+}
+
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information.selected {
+	z-index: 11;
+	-webkit-box-shadow: 0 10px 6px -6px #777;
+	   -moz-box-shadow: 0 10px 6px -6px #777;
+	    -ms-box-shadow: 0 10px 6px -6px #777;
+	     -o-box-shadow: 0 10px 6px -6px #777;
+	        box-shadow: 0 10px 6px -6px #777;
+}
+
+/* Handling the gif that is loaded at start. */
+#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information.selected img {
+	position: absolute;
+	bottom: 20px;
+	width: 10%;
+	left: 45%;
+}
+
+/*	MEDIA QUERIES	*/
+/*	For screen sizes tablet size and beyond */
+@media screen and (min-width: 641px) {
+	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper:nth-child(3n + 2) {
+		margin-left: 0.5%;
+		margin-right: 0.5%;
+	}
+}
+/* For screen sizes tablet size */
+@media screen and (max-width: 640px) {
+	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper {
+		width: 49%
+	}
+
+	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm input {
+
+		font-size: .4em;
+	}
+
+	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper:nth-child(odd) {
+		margin-right: 0.5%;
+	}
+
+	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper:nth-child(even) {
+		margin-left: 0.5%;
+	}
+}
+/* For screen sizes phone size */
+@media screen and (max-width: 414px) {
+	#main-content #main-wrapper #picture-wrapper {
+		margin: 0;
+	}
+
+	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper {
+		width: 100%;
+		margin-top: 100px;
+	}
+
+	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper:nth-child(odd) {
+		margin-right: 0;
+	}
+
+	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper:nth-child(even) {
+		margin-left: 0;
+	}
+
+	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm input {
+		font-size: .5em;
+	}
+
+	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder .picture.hovered {
+	-webkit-transform: none;
+	   -moz-transform: none;
+	    -ms-transform: none;
+	     -o-transform: none;
+	        transform: none;
+	}
+}
+
