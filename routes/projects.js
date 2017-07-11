@@ -131,7 +131,7 @@ router.post('/newproject', upload.any(), function(req, res, next) {
 
 	mySQL.getConn(function(err, conn) {
 		if (err) {throw err};
-		conn.query("INSERT INTO projects VALUES (null, ?, ?, ?, ?, ?, ?)", [postInfo['title'], postInfo['tech'], postInfo['pics'], postInfo['startDate'], postInfo['endDate'], postInfo['body']], function(err, results, fields) {
+		conn.query("INSERT INTO projects VALUES (null, ?, ?, ?, ?, ?, ?)", [postInfo['title'], postInfo['website'], postInfo['tech'], postInfo['pics'], postInfo['startDate'], postInfo['endDate'], postInfo['body']], function(err, results, fields) {
 			conn.release();
 			if (err) {throw err};
 		})
