@@ -1,5 +1,6 @@
 const express = require('express');
-const router = express.Router()
+const router = express.Router();
+const request = require('request');
 
 
 router.get('/', (req, res, next) => {
@@ -15,26 +16,7 @@ router.post('/main-api-call', (req, res, next) => {
 			var lat = req.body.lat;
 			var lng = req.body.lng;
 			// Request call to API server is then piped back to the response
-			// locationRequest = request(url + '?lat=' + lat + '&lng=' + lng)
-			
-			// locationRequest.on('response', (res) => {
-			// 	console.log(res)
-			// })
-
-			// locationRequest.on('error', (err) => {
-			// 	console.error(err)
-			// })
-
-			// locationRequest.pipe(res)
-			request
-				.get(url + '?lat=' + lat + '&lng=' + lng)
-				.on('response', (res) => {
-					console.log(res)
-				})
-				.on('error', (err) => {
-					console.err(err)
-				})
-				.pipe(res)
+			request(url + '?lat=' + lat + '&lng=' + lng).pipe(res)
 		} else if (req.body.type === 'id') {
 			var id = req.body.id
 			// Request call to API server to get information about pic based on id #

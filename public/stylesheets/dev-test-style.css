@@ -140,7 +140,7 @@ header {
 	overflow-y: scroll;
 	z-index: 3;
 	display: none;
-	background: url('/img/backgrounds/photography.png');
+	background: url('/images/dev-test-backgrounds/photography.png');
 	font-size: 0.5em;
 }
 
@@ -180,6 +180,17 @@ header {
 	bottom: 20px;
 	width: 10%;
 	left: 45%;
+}
+
+#back-to-home div {
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+	width: 60%;
+	margin: 0 auto;
+	text-align: center;
 }
 
 /*	MEDIA QUERIES	*/
