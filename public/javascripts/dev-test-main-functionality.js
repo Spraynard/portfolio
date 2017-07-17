@@ -99,25 +99,17 @@ const view = {
 		}
 		view.addHoverEventListeners()
 	},
-	animateInfoDiv : function(elemObj, state) {
-		// Summary: This function controls all of the animations for the `.information` div that pops
-		// 			out from under each picture. Will provide comments on each `state` possiility to explain what's going on
+	applyInfoDivCSS : function(elemObj, state) {
+		// Summary: This function adds all of the necessary css classes to infoDivs (and some others) to simulate animations.
 		// Input: `elemObj` - An object containing all of the elements that will be required for all the functionality that I am trying to achieve within this function
 		//		  `state` - What state I want the div to be animated to. For example. `state === 'loading'` if I want to put `.information` in the
 		//					loading position that I have animated up
-		// Returns: Possible empty return if there is an animation currently going on or if for some reason I didn't input a `.single-pic-wrapper` element
-		// 			in my code.
-		if (view.getAnimState()) {
-			return
-		}
+		// Returns: N/A
 
 		var picture = elemObj.picture;
 		var infoDiv = elemObj.infoDiv;
 		var confirm = elemObj.confirm;
 		var confirmButton = elemObj.confirmButton;
-
-		var computedStyle = window.getComputedStyle(elemObj.infoDiv);
-		var position = computedStyle.getPropertyValue('bottom');
 
 		view.setAnimState(true);
 		if (state === 'loading') {
@@ -125,60 +117,26 @@ const view = {
 			// 	loading state; not fully coming out from behind div, and showing a preloader.
 			view.setButtonState(true)
 			confirmButton.value = (confirmButton.value === 'Information') ? 'Close' : 'Information';
-			infoDiv.style.display = 'block'
-			var a = infoDiv.animate([{
-				bottom : position
-			},
-			{
-				bottom : '-100px'
-			}], {
-				duration: 500,
-				easing: 'cubic-bezier(0.19, 1, 0.22, 1)'
-			})
-			a.onfinish = function () {
-				view.setAnimState(false)
-				infoDiv.style.bottom = '-100px';
-			}
+			infoDiv.classList.add('loading');
 		} else if (state === 'loaded') {
 			// On this state, `.information` will fully go out from under div.
 			if (!view.getButtonState()) {
 				confirmButton.value = (confirmButton.value === 'Information') ? 'Close' : 'Information';
 			}
-			if (infoDiv.style.display === 'none') {
-				infoDiv.style.display = 'block'
+
+			if (infoDiv.classList.contains('loading')) {
+				infoDiv.classList.remove('loading');
 			}
-			var b = infoDiv.animate([{
-				bottom : position
-			},
-			{
-				bottom : '-200px'
-			}], {
-				duration: 500,
-				easing: 'cubic-bezier(0.19, 1, 0.22, 1)'
-			})
-			b.onfinish = function() {
-				infoDiv.style.bottom = '-200px';
-				view.setAnimState(false);
-			}
+			infoDiv.classList.add('loaded');
 		} else if (state === 'hidden') {
 			// This state hides `.information`
 			confirmButton.value = (confirmButton.value === 'Information') ? 'Close' : 'Information';
 			view.setButtonState(false);
-			var c = infoDiv.animate([{
-				bottom : position
-			},
-			{
-				bottom: '10px'
-			}], {
-				duration: 500,
-				easing: 'cubic-bezier(0.19, 1, 0.22, 1)'
-			})
-			infoDiv.style.bottom = '10px';
-			c.onfinish = function() {
-				infoDiv.style.display = 'none'
-				view.putClassSelected(elemObj, 'remove');
-				view.setAnimState(false);
+			if (infoDiv.classList.contains('loading')) {
+				infoDiv.classList.remove('loading');
 			}
+			infoDiv.classList.remove('loaded')
+			view.putClassSelected(elemObj, 'remove')
 		} else {
 			console.log("I don't know what to do")
 		}
@@ -215,18 +173,18 @@ const view = {
 						// want a preloader injection while the information is loading.
 						var injection = '<img src="/images/dev-test-loaders/preloader_preloaders.net.gif">';
 						elemObj.infoDiv.innerHTML = injection;
-						view.animateInfoDiv(elemObj, 'loading');
+						view.applyInfoDivCSS(elemObj, 'loading');
 
 						controller.getInfo(elem);
 					} 
 					else {
 						if (elemObj.infoDiv.classList.contains('loaded')) {
-							view.animateInfoDiv(elemObj, 'hidden');
+							view.applyInfoDivCSS(elemObj, 'hidden');
 							elemObj.infoDiv.classList.remove('loaded');
 							elemObj.infoDiv.classList.add('closed');
 						} else if (elemObj.infoDiv.classList.contains('closed')) {
 							view.putClassSelected(elemObj, 'add');		
-							view.animateInfoDiv(elemObj, 'loaded');
+							view.applyInfoDivCSS(elemObj, 'loaded');
 							elemObj.infoDiv.classList.remove('closed');
 							elemObj.infoDiv.classList.add('loaded');
 						} else {
@@ -259,7 +217,7 @@ const view = {
 			confirm: responseObject.elem.getElementsByClassName('confirm')[0],
 			confirmButton: responseObject.elem.getElementsByClassName('confirm')[0].getElementsByClassName('pic-info-confirm')[0]
 		}
-		view.animateInfoDiv(elemObj, 'loaded');
+		view.applyInfoDivCSS(elemObj, 'loaded');
 		elemObj.infoDiv.classList.add('loaded');
 
 		var res = responseObject.res;
@@ -294,34 +252,54 @@ const controller = {
 		// Gets the information for the picture. Calls back to
 		// 	the server and gets text returned, which will be rendered.
 		// Example element id `pic-id-12345`
+		var id = element.id.split('-')[2];
+		var requestObject = {'type' : 'id', 'id' : id}
 		var responseObject = {'elem' : element, 'res' : null}
-		function makeRequest() {
-			return new Promise( function( resolve, reject ) {
-				var id = element.id.split('-')[2];
-				var requestObject = {'type' : 'id', 'id' : id}
-				req = new XMLHttpRequest();
+		var url = '/main-api-call'
+		// Promise stream
+		controller.ajaxCall('POST', url, JSON.stringify(requestObject), true, responseObject)
+		.then(view.renderTxtInfo)
+		.then(null, console.error)
+	},
+	ajaxCall : function(method, url, data, jsonRequest, responseObject) {
+		// `````fetch() is also an acceptable way to do these ajax calls, albeit a little less browser compatible.```
+		// Summary: Performs a call to the Node.js backend to receive data based on the url and method. Used to drastically reduce amount of code.
+		// Input: `method` - The method used to be called to the server (i.e. 'POST'/'GET')
+		//		  `url` - String containing the URL that I want to hit, whether it be my node server or a 3rd party url
+		// 		  `data` - Data that is to be sent ta server
+		// 		  `jsonRequest` - Flag to note if I am sending JSON as data to the request. This is needed for setting correct requestHeaders
+		// 		  `responseObject` - Object used internally by one of my functions in the code. Didn't want to waste more time refactoring that.
+		// Returns: A promise that is resolved with the responseText of a successful Node.js backend call.
+		return new Promise( function( resolve, reject ) {
+			req = new XMLHttpRequest();
 
-				req.onreadystatechange = digestResponse;
-				req.open('POST', '/dev_test/main-api-call', true)
+			req.onreadystatechange = digestResponse;
+			req.open(method, url, true);
+			if (jsonRequest) {
 				req.setRequestHeader('Content-Type', 'application/json')
-				req.send(JSON.stringify(requestObject));
-
-				function digestResponse() {
-					if (req.readyState === XMLHttpRequest.DONE) {	
-						if (req.status === 200) {
-							responseObject.res = JSON.parse(req.responseText);
-							resolve(responseObject);
+			}
+			if (data) {
+				req.send(data)
+			} else {
+				req.send()
+			}
+			function digestResponse() {
+				// When the request is fulfilled and is returned with a 200 `OK` status
+				//	send responseText down the promise stream.
+				if (req.readyState === XMLHttpRequest.DONE) {	
+					if (req.status === 200) {
+						if (responseObject) {
+							responseObject.res = JSON.parse(req.responseText)
+							resolve(responseObject)
 						} else {
-							reject("Problem with getting the information");
+							resolve(req.responseText)
 						}
+					} else {
+						reject('Problem with getting data from' + url);
 					}
 				}
-			})
-		}
-		// Promise stream
-		makeRequest()
-			.then(view.renderTxtInfo)
-			.then(null, console.error)
+			}
+		})
 	},
 	getLocation : function() {
 		// Summary: Makes call to an external server to get the location of the
@@ -331,31 +309,7 @@ const controller = {
 		if (model.location) {
 			return model.location
 		} else {
-			return new Promise( function( resolve, reject ) {
-				req = new XMLHttpRequest();
-
-				req.onreadystatechange = digestResponse;
-				req.open('GET', 'https://freegeoip.net/json/', true);
-				req.send();
-
-				function digestResponse() {
-					// When the request is fulfilled and is returned with a 200 `OK` status
-					//	send responseText down the promise stream.
-					if (req.readyState === XMLHttpRequest.DONE) {	
-						if (req.status === 200) {
-							var responseHeader = req.getResponseHeader('Content-Type');
-							if (responseHeader === 'application/json') {
-								resolve(req.responseText)
-							} else {
-								reject("We are getting " + responseHeader + " back from the server...");
-							}
-						} else {
-							alert('there was a problem');
-							reject('Problem with giving the location');
-						}
-					}
-				}
-			})
+			return controller.ajaxCall('GET', 'https://freegeoip.net/json/', null, false, false)
 		}
 	},
 	setLocation : function(locationObj) {
@@ -381,38 +335,13 @@ const controller = {
 		return {'type' : 'coords', 'lat' : model.lat, 'lng' : model.lng }
 	},
 	makeApiCall : function () {
-
-		function makeRequest() {
-		// Makes a request to the Node server. Server responds back with a
-		//		list of JSON objects that are then `promise-streamed` over
-		// 		to the model. After that is resolved, we will render the pictures.
-			return new Promise( function( resolve, reject ) {
-				// Coords object will be passed to the server
-				var coords = controller.getCoordinates();
-				var url = '/dev_test/main-api-call';
-				const req = new XMLHttpRequest();
-
-				req.onreadystatechange = grabResponse;
-				req.open('POST', url, true);
-				req.setRequestHeader('Content-Type', 'application/json');
-				req.send(JSON.stringify(coords));
-
-				function grabResponse (){
-					if (req.readyState === XMLHttpRequest.DONE) {
-						if (req.status === 200) {
-							resolve(req.responseText);
-						} else {
-							reject('Problem with API call')
-						}
-					}
-				}
-			})
-		}
-		makeRequest()
-			.then(model.cachePics)
-			.then(view.insertPicTemplates)
-			.then(view.renderImages)
-			.then(null, console.error)
+		coords = controller.getCoordinates();
+		url = '/main-api-call'
+		controller.ajaxCall('POST', url, JSON.stringify(coords), true, false)
+		.then(model.cachePics)
+		.then(view.insertPicTemplates)
+		.then(view.renderImages)
+		.then(null, console.error)
 	},
 	getPictures : function() {
 		return model.pictures;

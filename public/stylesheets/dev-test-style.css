@@ -12,7 +12,7 @@ html {
 
 body {
 	background-color: #FEFEFA;
-	background-image: url('/images/dev-test-backgrounds/elastoplast.png');
+	background-image: url('/img/backgrounds/elastoplast.png');
 	background-attachment: fixed;
 }
 
@@ -24,7 +24,7 @@ header {
 	font-size: 2em;
 }
 /* `#picture-wrapper` div CSS */
-#main-content #main-wrapper #picture-wrapper {
+#picture-wrapper {
 	display: flex;
 	align-content: center;
 	justify-content: left;
@@ -33,7 +33,7 @@ header {
 }
 
 /* Start CSS FOR SINGULAR ITEMS OF PICTURES */
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper {
+.single-pic-wrapper {
 	width: 33%;
 	position: relative;
 	box-sizing: border-box;
@@ -41,12 +41,12 @@ header {
 	margin: 0.25% 0 0.25% 0;
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder {
+.single-pic-wrapper .pic-holder {
 	position: relative;
 	width: 100%;
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm {
+.confirm {
 	position: absolute;
 	opacity: 0.0;
 	height: 100%;
@@ -62,19 +62,19 @@ header {
 			transition: opacity 0.5s;
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm.hovered {
+.confirm.hovered {
 	opacity: 1.0;
 	z-index: 10;
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm.selected {
+.confirm.selected {
 	z-index: 13;
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm input {
+.confirm input {
 	position: absolute;
 	display: block;
-	width: 30%;
+	width: 40%;
 	height: 20%;
 	max-height: 30px;
 	background: #37B9E4;
@@ -88,19 +88,12 @@ header {
 }
 
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm input:active {
+.confirm input:active {
 	box-shadow: 2px 2px 2px grey;
 }
 
 /* Picture CSS */
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder .picture.loader {
-	width: 16px;
-	margin-left: 150px;
-	margin-top: 150px;
-	position: relative;
-}
-
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder .picture {
+.picture {
 	width: 100%;
 	position: relative;
 	z-index: 4;
@@ -112,11 +105,19 @@ header {
 			transition: all 0.5s;
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder .picture.selected {
+.picture.loader {
+	width: 16px;
+	margin-left: 150px;
+	margin-top: 150px;
+	position: relative;
+}
+
+.picture.selected {
 	z-index: 12;
 }
 /*	If Image has the `hovered` class on it */
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder .picture.hovered {
+
+.picture.hovered {
 	/* Cross Browser Filter */
 	-webkit-filter: grayscale(1);
 	   -moz-filter: grayscale(1);
@@ -131,7 +132,7 @@ header {
 	        transform: scale(1.01);
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information {
+.information {
 	position: absolute;
 	height: 200px;
 	width: 100%;
@@ -139,19 +140,34 @@ header {
 	bottom: 0;
 	overflow-y: scroll;
 	z-index: 3;
-	display: none;
-	background: url('/images/dev-test-backgrounds/photography.png');
+	opacity: 0;
+	background: url('/img/backgrounds/photography.png');
 	font-size: 0.5em;
+	-webkit-transition: all 0.5s;
+	   -moz-transition: all 0.5s;
+		-ms-transition: all 0.5s;
+		 -o-transition: all 0.5s;
+			transition: all 0.5s;
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information .text-info {
+.information.loading {
+	bottom: -100px;
+	opacity: 0.5;
+}
+
+.information.loaded {
+	bottom: -200px;
+	opacity: 1;
+}
+
+.text-info {
 	position: relative;
 	padding-left: 5%;
 	padding-right: 5%;
 	line-height: 1.25;
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information .title-div {
+.title-div {
 	position: relative;
 	padding-bottom: 20px;
 	height: 25%;
@@ -159,13 +175,13 @@ header {
 	background: rgba(255, 196, 54, 0.7);
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information .title-div h4 {
+.title-div h4 {
 	margin-top: 0;
 	padding-top: 10px;
 	padding-left: 3%;
 }
 
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information.selected {
+.information.selected {
 	z-index: 11;
 	-webkit-box-shadow: 0 10px 6px -6px #777;
 	   -moz-box-shadow: 0 10px 6px -6px #777;
@@ -175,80 +191,75 @@ header {
 }
 
 /* Handling the gif that is loaded at start. */
-#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .information.selected img {
+.information.selected img {
 	position: absolute;
 	bottom: 20px;
 	width: 10%;
 	left: 45%;
 }
 
-#back-to-home div {
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-bottom: 20px;
-	width: 60%;
-	margin: 0 auto;
-	text-align: center;
-}
-
 /*	MEDIA QUERIES	*/
 /*	For screen sizes tablet size and beyond */
-@media screen and (min-width: 641px) {
-	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper:nth-child(3n + 2) {
+@media screen and (max-width: 1024px) {
+	.confirm input {
+		font-size: .4em;
+	}
+}
+
+@media screen and (min-width: 650px) {
+	.single-pic-wrapper:nth-child(3n + 2) {
 		margin-left: 0.5%;
 		margin-right: 0.5%;
 	}
 }
 /* For screen sizes tablet size */
-@media screen and (max-width: 640px) {
-	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper {
+@media screen and (max-width: 649px) {
+	.single-pic-wrapper {
 		width: 49%
 	}
 
-	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm input {
+	.confirm input {
 
 		font-size: .4em;
 	}
 
-	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper:nth-child(odd) {
+	.single-pic-wrapper:nth-child(odd) {
 		margin-right: 0.5%;
 	}
 
-	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper:nth-child(even) {
+	.single-pic-wrapper:nth-child(even) {
 		margin-left: 0.5%;
 	}
 }
 /* For screen sizes phone size */
 @media screen and (max-width: 414px) {
-	#main-content #main-wrapper #picture-wrapper {
+	#picture-wrapper {
 		margin: 0;
 	}
 
-	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper {
+	.single-pic-wrapper {
 		width: 100%;
 		margin-top: 100px;
 	}
 
-	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper:nth-child(odd) {
+	.single-pic-wrapper:nth-child(odd) {
 		margin-right: 0;
 	}
 
-	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper:nth-child(even) {
+	.single-pic-wrapper:nth-child(even) {
 		margin-left: 0;
 	}
 
-	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .confirm input {
-		font-size: .5em;
+	.confirm input {
+		font-size: .6em;
 	}
 
-	#main-content #main-wrapper #picture-wrapper .single-pic-wrapper .pic-holder .picture.hovered {
-	-webkit-transform: none;
-	   -moz-transform: none;
-	    -ms-transform: none;
-	     -o-transform: none;
-	        transform: none;
+	.picture.hovered {
+		-webkit-transform: none;
+		   -moz-transform: none;
+		    -ms-transform: none;
+		     -o-transform: none;
+		        transform: none;
 	}
 }
 
