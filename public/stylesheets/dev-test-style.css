@@ -12,7 +12,7 @@ html {
 
 body {
 	background-color: #FEFEFA;
-	background-image: url('/img/backgrounds/elastoplast.png');
+	background-image: url('/images/dev-test-backgrounds/elastoplast.png');
 	background-attachment: fixed;
 }
 
@@ -141,7 +141,7 @@ header {
 	overflow-y: scroll;
 	z-index: 3;
 	opacity: 0;
-	background: url('/img/backgrounds/photography.png');
+	background: url('/images/dev-test-backgrounds/photography.png');
 	font-size: 0.5em;
 	-webkit-transition: all 0.5s;
 	   -moz-transition: all 0.5s;

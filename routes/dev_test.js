@@ -8,8 +8,6 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/main-api-call', (req, res, next) => {
-	console.log(req.body)
-	console.log(req.headers['content-type'])
 	var url = 'https://sauron.api.influentialdev.com/stream'
 	if (req.headers['content-type'] === 'application/json') {
 		if (req.body.type === 'coords') {
