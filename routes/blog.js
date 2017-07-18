@@ -53,6 +53,10 @@ function loadAllPosts(req, res, next) {
 	})
 }
 
+router.get('/', function(req, res, next) {
+	loadAllPosts(req, res, next);
+});
+
 function singleCallback(req, res, post, comments) {
 	// Dynamic page title based on the blog post title. stripped the HTML out of the title.
 	var pageTitle =  req.app.locals.websiteName + ' | ' + post.title.replace(/<(?:.|\n)*?>/gm, '')
@@ -61,12 +65,13 @@ function singleCallback(req, res, post, comments) {
 	res.end();
 }
 
-function loadSinglePost(req, res, next) {
+router.get('/:id/post/:title', (req, res, next) => {
 	// Up Next: Implementation of a comments section for every single post.
 	// 	will probably include all of this in a module, to reduce the code in this 
 	var post = null
 	var com = null
-	var postID = req.query['post']
+	const params = req.params;
+	const postID = params.id
 	// Setting `postID` local variable so `/edit` knows what 
 	// 	post to update
 	req.app.locals.postID = postID;
@@ -80,22 +85,13 @@ function loadSinglePost(req, res, next) {
 					connection.release()
 					console.log("This is results2", results2);
 					com = results2;
-					console.log(com)
 					singleCallback(req, res, post, com);
 				})
 			}
 		})
-	})	
-}
+	})
+})
 
-router.get('/', function(req, res, next) {
-	if (req.query['singlepost']){
-		loadSinglePost(req, res, next);
-	}
-	else {
-		loadAllPosts(req, res, next);
-	}
-});
 // End Single and Main Page Blog Post Functionality
 
 // Comments AREA Post Request handling
@@ -149,6 +145,7 @@ router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 		'body': null,
 		'category': null,
 		'title' : null,
+		'url_title' : null,
 		'tags' : null,
 		'date' : null,
 	};
@@ -160,6 +157,7 @@ router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 	}
 
 	postInfo['title'] = req.body.title;
+	postInfo['url_title'] = req.body.title.replace(/[\-:?!@#$%^&*()_+=|\}\]\[{;"'\/><.,]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
 	postInfo['category'] = req.body.category;
 	postInfo['body'] = req.body.body;
 
@@ -169,7 +167,7 @@ router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 
 	mySQL.getConn(function(err, conn) {
 		if (err) {throw err};
-		conn.query("INSERT INTO post VALUES (null, ?, ?, ?, ?, ?, ?, null)", [postInfo['pic'], postInfo['title'], postInfo['category'], postInfo['body'], postInfo['tags'], postInfo['date']], function(error, results, fields) {
+		conn.query("INSERT INTO post VALUES (null, ?, ?, ?, ?, ?, ?, ?, null)", [postInfo['pic'], postInfo['title'], postInfo['url_title'], postInfo['category'], postInfo['body'], postInfo['tags'], postInfo['date']], function(error, results, fields) {
 				conn.release()
 				if (error) {throw error};
 				res.redirect('/blog');
@@ -183,12 +181,13 @@ router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 router.post('/edit', function(req, res, next) {
 	var id = req.app.locals.postID
 	var title = req.body.title
+	var url_title = req.body.title.replace(/[\-:?!@#$%^&*()_+=|\}\]\[{;"'\/><.,]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
 	var body = req.body.body
 	var tags = req.body.tags
 
 	mySQL.getConn(function(err, conn) {
 		if (err) throw err;
-		conn.query("UPDATE post set title = ?, body = ?, tags = ? WHERE id = ?", [title, body, tags, id], function(err, results, fields) {
+		conn.query("UPDATE post set title = ?, url_title = ?, body = ?, tags = ? WHERE id = ?", [title, url_title, body, tags, id], function(err, results, fields) {
 			if (err) throw err;
 			conn.query("SELECT * from post WHERE id = ?", id, function(err, results, fields) {
 				conn.release();

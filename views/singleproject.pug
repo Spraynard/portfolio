@@ -5,7 +5,7 @@ block masthead
 	#masthead-text
 		|#{project.title}
 	- pic = project.pics.split(',')[0]
-		img(src=`./uploads/projects/${pic}`).single-project
+		img(src=`/uploads/projects/${pic}`).single-project
 
 
 block content

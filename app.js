@@ -25,8 +25,11 @@ var logout = require('./routes/logout');
 var blog = require('./routes/blog');
 //Routing for dev_test app
 var dev_test = require('./routes/dev_test');
+//Routing for test-routes
+// var test_routes = require('./routes/test/test-routes');
 
 var app = express();
+
 // APP LOCALS
 // Setting the name of the actual website
 app.locals.websiteName = "Kellan Martin";
@@ -59,13 +62,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Set up of client side jQuery path
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
-// Function to `blurb` the body of a post if it needs it :3
-function blurber(body) {
-  if (body.length > 50) {
-    body = body.substring(0, 50) + '...';
-  }
-  return body;
-}
 // Set up application local cache of footerPosts
 // Set up of request-wide locals
 app.use((req, res, next) => {
@@ -80,6 +76,7 @@ app.use((req, res, next) => {
   })
 })
 
+// app.all('*', test_routes);
 app.use('/', index);
 app.use('/users', users);
 app.use('/projects', projects);

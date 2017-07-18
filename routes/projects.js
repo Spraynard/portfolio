@@ -39,23 +39,6 @@ router.get('/', function(req, res, next) {
 	// If the user clicks on a project, they should be taken
 	// 	to a single page containing all the project information.
 	// 	Maybe more. This occurs by adding a query string on to the URL
-	if (req.query['singleproject']) {
-		var project = null;
-		var projectID = req.query['project']
-		// Putting this project id in a local so it can be used by the edit page
-		req.app.locals.projectID = projectID;
-		mySQL.getConn(function(err, connection) {
-			if (err) {throw err};
-			connection.query('SELECT * FROM projects WHERE id = ?', projectID, function(err, results, fields) {
-				connection.release()
-				if (results) {
-					project = results[0];
-					singleCallback(req, res, project);
-				}
-			})
-		})
-	}
-	else {
 		// Will render the main projects page if url is without a 'singleproject' query
 		var projects = null;
 		mySQL.getConn(function(err, connection) {
@@ -67,8 +50,28 @@ router.get('/', function(req, res, next) {
 	  			callback(req, res, projects);
 	  		}
 	  	})
-	  })
-	}
+	})
+})
+
+// This will be the route for single-projects
+router.get('/:id/project/:title', (req, res, next) => {
+	const params = req.params
+	const id = params.id
+	let project = null;
+
+	// Putting this project id in a local so it can be used by the edit page
+	req.app.locals.projectID = id;
+
+	mySQL.getConn(function(err, connection) {
+		if (err) {throw err};
+		connection.query('SELECT * FROM projects WHERE id = ?', id, function(err, results, fields) {
+			connection.release()
+			if (results) {
+				project = results[0];
+				singleCallback(req, res, project);
+			}
+		})
+	})	
 })
 
 router.get('/newproject', function(req, res, next) {
@@ -102,6 +105,7 @@ function getDate(dateObj) {
 
 router.post('/newproject', upload.any(), function(req, res, next) {
 	var postInfo = {
+		'url_title': null,
 		'pics': null,
 		'body': null,
 		'website': null,
@@ -123,6 +127,7 @@ router.post('/newproject', upload.any(), function(req, res, next) {
 	var endDate = req.body['end-month'] + ' ' + req.body['end-day'] + ', ' + req.body['end-year'];
 
 	postInfo['title'] = req.body.title;
+	postInfo['url_title'] = req.body.title.replace(/[\-:?!@#$%^&*()_+=|\}\]\[{;"'\/><.,]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
 	postInfo['body'] = req.body.body;
 	postInfo['startDate'] = startDate;
 	postInfo['endDate'] = endDate;
@@ -131,7 +136,7 @@ router.post('/newproject', upload.any(), function(req, res, next) {
 
 	mySQL.getConn(function(err, conn) {
 		if (err) {throw err};
-		conn.query("INSERT INTO projects VALUES (null, ?, ?, ?, ?, ?, ?, ?)", [postInfo['title'], postInfo['website'], postInfo['tech'], postInfo['pics'], postInfo['startDate'], postInfo['endDate'], postInfo['body']], function(err, results, fields) {
+		conn.query("INSERT INTO projects VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)", [postInfo['title'], postInfo['url_title'], postInfo['website'], postInfo['tech'], postInfo['pics'], postInfo['startDate'], postInfo['endDate'], postInfo['body']], function(err, results, fields) {
 			conn.release();
 			if (err) {throw err};
 		})
@@ -142,6 +147,7 @@ router.post('/newproject', upload.any(), function(req, res, next) {
 router.post('/edit', function(req, res, next) {
 	var id = req.app.locals.projectID
 	var title = req.body.title
+	var url_title = req.body.title.replace(/[:]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
 	var body = req.body.body
 	var startDate = req.body.startDate
 	var endDate = req.body.endDate
@@ -151,7 +157,7 @@ router.post('/edit', function(req, res, next) {
 
 	mySQL.getConn(function(err, conn) {
 		if (err) throw err;
-		conn.query("UPDATE projects SET title = ?, website = ?, tech = ?, start_date = ?, end_date = ?, body = ? WHERE id = ?", [title, link, tech, startDate, endDate, body, id], function(err, results, fields) {
+		conn.query("UPDATE projects SET title = ?, url_title = ?, website = ?, tech = ?, start_date = ?, end_date = ?, body = ? WHERE id = ?", [title, url_title, link, tech, startDate, endDate, body, id], function(err, results, fields) {
 			if(err) throw err;
 			conn.query("SELECT * from projects WHERE id = ?", id, function(err, results, fields) {
 				conn.release();

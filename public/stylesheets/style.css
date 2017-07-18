@@ -50,7 +50,7 @@ pre {
       padding-bottom: 425px; } }
   @media screen and (max-width: 30em) {
     .body {
-      padding-bottom: 450px; } }
+      padding-bottom: 460px; } }
 
 a {
   color: #00B7FF; }
@@ -317,7 +317,7 @@ footer {
       height: 425px; } }
   @media screen and (max-width: 30em) {
     footer {
-      height: 450px; } }
+      height: 460px; } }
   footer #footer-wrapper {
     color: #363636;
     padding-left: 10%;

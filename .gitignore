@@ -62,6 +62,7 @@ typings/
 
 # Specialized Stuff
 public/images/
+routes/test
 uploads/
 *.sql
 secret.js
@@ -70,3 +71,4 @@ routes/contact.js
 views/contact.pug
 serverConnect.sh
 updateDevTest.sh
+db-changes-*.js
