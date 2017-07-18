@@ -183,6 +183,7 @@ mixin footerPost(posts)
 	if posts
 		each post in posts
 			- var id = post.ID.toString()
+			- var url_title = post.url_title
 			- var maxLen = 50
 			if post.title.length > maxLen
 				- title = post.title.substring(0,50) + '...'
@@ -194,7 +195,7 @@ mixin footerPost(posts)
 			else
 				- body = post.body
 			.fpwrap
-				a(href=`/blog?singlepost=true&post=${id}`)
+				a(href=`/blog/${id}/post/${url_title}`)
 					.footer-post-title
 						| !{title}
 				.footer-post-blurb !{body}

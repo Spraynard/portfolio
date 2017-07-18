@@ -68,7 +68,7 @@ app.use((req, res, next) => {
   // Want to have a variable footerPosts
   mySQL.getConn(function(err, connection) {
     if (err) throw err;
-    connection.query("SELECT ID, title, body FROM post ORDER BY ID DESC LIMIT 2", function(err, results, fields) {
+    connection.query("SELECT ID, title, url_title, body FROM post ORDER BY ID DESC LIMIT 2", function(err, results, fields) {
       connection.release();
       res.locals.footerPosts = results;
       next();
