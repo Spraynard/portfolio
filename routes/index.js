@@ -6,6 +6,9 @@ var userCheck = require('../userCheck');
 var user = null
 var errorMsg = null
 
+let desc = "Kellan Martin - Freelance Web Developer Currently Located in Kalamazoo, MI.\
+ Completely client oriented and capable of using the latest web technologies to the clients advantage!"
+ 
 router.get('/', function(req, res, next) {
 	user = userCheck.validateCookie(req);
 	errorMsg = userCheck.hasErrorMsg(req);
@@ -26,7 +29,7 @@ router.get('/', function(req, res, next) {
 		Runtimes: ['Node.js'],
 		CMSs: ['Wordpress', 'Squarespace']
 	}
-  	res.render('index', { title: pageTitle, model: model, user: user, error: errorMsg, page:'home'}) //pics: images});
+  	res.render('index', { title: pageTitle, model: model, user: user, error: errorMsg, page:'home', description: desc}) //pics: images});
 });
 
 module.exports = router;
