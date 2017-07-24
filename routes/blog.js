@@ -28,17 +28,18 @@ var page = 'blog'
 // Back End Functionality for Displaying Blog Posts (Main blog page, as well as single posts)
 
 function callback(req, res, posts) {
+	let desc = 'A Beggar\'s Blog - Kellan Martin - Freelance Web Developer Based in Kalamazoo, MI. Completely client oriented and capable of using the latest web technologies to the clients advantage!'
 	// Setting the title for the page
 	var pageTitle = req.app.locals.websiteName + ' | A Beggar\'s Blog'
 	user = userCheck.validateCookie(req);
 	for (p in posts) {
 		console.log(posts[p])
 	}
-	res.render('blog', {title: pageTitle, posts: posts, user: user, page: page});
+	res.render('blog', {title: pageTitle, posts: posts, user: user, page: page, description: desc});
 	res.end();
 }
 
-function loadAllPosts(req, res, next) {
+router.get('/', function(req, res, next) {
 	var posts = null;
 	mySQL.getConn(function(err, connection) {
 		if (err) {throw err};
@@ -51,13 +52,9 @@ function loadAllPosts(req, res, next) {
 			}
 		})
 	})
-}
-
-router.get('/', function(req, res, next) {
-	loadAllPosts(req, res, next);
 });
 
-function singleCallback(req, res, post, comments) {
+function singlePostCallback(req, res, post, comments) {
 	// Dynamic page title based on the blog post title. stripped the HTML out of the title.
 	var pageTitle =  req.app.locals.websiteName + ' | ' + post.title.replace(/<(?:.|\n)*?>/gm, '')
 	user = userCheck.validateCookie(req);
@@ -85,7 +82,7 @@ router.get('/:id/post/:title', (req, res, next) => {
 					connection.release()
 					console.log("This is results2", results2);
 					com = results2;
-					singleCallback(req, res, post, com);
+					singlePostCallback(req, res, post, com);
 				})
 			}
 		})

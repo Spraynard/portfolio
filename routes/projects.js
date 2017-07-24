@@ -28,10 +28,11 @@ function singleCallback(req, res, project) {
 
 // Callback for displaying `projects` page
 function callback(req, res, projects) {
+	desc = "Projects - Kellan Martin - List of personal and freelance client-hired projects that are completed and available to post online."
 	// Setting the page title
 	var pageTitle = req.app.locals.websiteName + " | Projects"
 	user = userCheck.validateCookie(req);
-	res.render('projects', {title: pageTitle, projects: projects, user: user, page: page})
+	res.render('projects', {title: pageTitle, projects: projects, user: user, page: page, description: desc})
 }
 
 //GET `Projects` Page

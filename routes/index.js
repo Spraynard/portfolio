@@ -6,8 +6,7 @@ var userCheck = require('../userCheck');
 var user = null
 var errorMsg = null
 
-let desc = "Kellan Martin - Freelance Web Developer Currently Located in Kalamazoo, MI.\
- Completely client oriented and capable of using the latest web technologies to the clients advantage!"
+let desc = "Kellan Martin - Freelance Web Developer Currently Located in Kalamazoo, MI. Completely client oriented and capable of using the latest web technologies to the clients advantage!"
  
 router.get('/', function(req, res, next) {
 	user = userCheck.validateCookie(req);

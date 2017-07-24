@@ -2,7 +2,8 @@ doctype html
 html
 	head
 		meta(name="viewport" content="width=device-width, initial-scale=1")
-		meta(name="description" content="Kellan Martin - Freelance Web Developer Currently Located in Kalamazoo, MI. Completely client oriented and capable of using the latest web technologies to the clients advantage!")
+		if description
+			meta(name="description" content=description)
 		title= title
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(href="https://fonts.googleapis.com/css?family=Permanent+Marker" 	rel="font stylesheet")
