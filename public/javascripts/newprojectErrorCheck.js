@@ -42,7 +42,6 @@ $(function() {
 		var endDate = new Date($endMonth.val() + ' ' + $endDay.val() + ', ' + $endYear.val());
 		var error = 0;
 
-		console.log(startDate === endDate);
 		if (pictures === '') {
 			errorObj['picture'] = "You must have at least one picture"
 			error = 1;
@@ -60,7 +59,6 @@ $(function() {
 			error = 1;
 		}
 		if (startDate.getTime() === endDate.getTime()) {
-			console.log("WTF");
 			errorObj['date'] = "The start date cannot be the same as the end date"
 			error = 1;
 		}

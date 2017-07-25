@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
 	user = userCheck.validateCookie(req);
 	errorMsg = userCheck.hasErrorMsg(req);
 	userCheck.clearError(res);
-	console.log(errorMsg);
 
 	var images = ['/images/large-screen/building_seeing.jpg',
 					'/images/large-screen/mounts.jpg',

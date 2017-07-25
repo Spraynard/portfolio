@@ -57,11 +57,9 @@ router.post('/', function(req, res, next) {
 			userObject = results[0]
 			
 			if (results[0].username === username) {
-				console.log("un good")
 				auth[0] = 1;
 			}
 			if (results[0].password === encryptedPassword) {
-				console.log("pw good")
 				auth[1] = 1;
 			}
 			resultsCheck(auth, req, res, userObject);

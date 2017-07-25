@@ -11,7 +11,6 @@ $(function() {
 		var passwordError = "";
 
 		$.post(path, params, function(data) {
-			console.log("Getting: ", data)
 			if (data[0] === 0 && data[1] === 0) {
 				usernameError = "That username is not recognized";
 				passwordError = "That Password is not recognized";

@@ -42,7 +42,6 @@ const view = {
 		// 		  `state` - only "remove" or "add" will cause this function to do either of those two operations
 		// Returns: An empty return if state is not input correctly.
 		if (state !== 'add' && state !== 'remove') {
-			console.log("putClassSelected `state`: " + state);
 			return
 		} else if (state === 'add' ) {
 			elemObj.picture.classList.add('selected');
@@ -137,8 +136,6 @@ const view = {
 			}
 			infoDiv.classList.remove('loaded')
 			view.putClassSelected(elemObj, 'remove')
-		} else {
-			console.log("I don't know what to do")
 		}
 		// Want to remove `.hovered` from confirm and picture after every time there is an animation going down.
 		// 		Improves usability for mobile devices
@@ -187,8 +184,6 @@ const view = {
 							view.applyInfoDivCSS(elemObj, 'loaded');
 							elemObj.infoDiv.classList.remove('closed');
 							elemObj.infoDiv.classList.add('loaded');
-						} else {
-							console.log("Whoa there!");
 						}
 					}
 				})
@@ -246,7 +241,7 @@ const controller = {
 			.then(controller.setLocation)
 			.then(view.init)
 			.then(controller.makeApiCall)
-			.then(null, console.log)
+			.then(null, console.error)
 	},
 	getInfo : function (element) {
 		// Gets the information for the picture. Calls back to

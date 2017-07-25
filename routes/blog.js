@@ -16,7 +16,6 @@ var storage = multer.diskStorage({
 		cb(null, 'uploads/blog/')
 	},
 	filename: function (req, file, cb) {
-		console.log(file)
 		cb(null, file.originalname)
 	}
 })
@@ -32,9 +31,6 @@ function callback(req, res, posts) {
 	// Setting the title for the page
 	var pageTitle = req.app.locals.websiteName + ' | A Beggar\'s Blog'
 	user = userCheck.validateCookie(req);
-	for (p in posts) {
-		console.log(posts[p])
-	}
 	res.render('blog', {title: pageTitle, posts: posts, user: user, page: page, description: desc});
 	res.end();
 }
@@ -44,7 +40,6 @@ router.get('/', function(req, res, next) {
 	mySQL.getConn(function(err, connection) {
 		if (err) {throw err};
 		connection.query("SELECT * FROM post ORDER BY ID DESC", function(err, results, fields) {
-			console.log("querying the database");
 			connection.release()
 			if (results) {
 				posts = results;
@@ -80,7 +75,6 @@ router.get('/:id/post/:title', (req, res, next) => {
 				post = results1[0];
 				connection.query("SELECT * FROM comments WHERE postID = ? ORDER BY created DESC", postID, function(err, results2, fields) {
 					connection.release()
-					console.log("This is results2", results2);
 					com = results2;
 					singlePostCallback(req, res, post, com);
 				})
@@ -106,7 +100,6 @@ function getTimestamp(dateObj) {
 }
 
 router.post('/comments', function(req, res, next) {
-	console.log(req.body)
 	var name = req.body.name
 	var date = new Date()
 	var body = req.body.body
