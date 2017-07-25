@@ -449,11 +449,17 @@ footer {
   margin-bottom: 50px;
   overflow-y: hidden; }
   #content button, #content input[type="submit"] {
-    background: #FDF5E6;
-    border: 3px solid #A3A0AE;
-    border-radius: 10px;
-    padding: 5px;
-    color: #363636; }
+    height: 30px;
+    background: #03AAE9;
+    border: none;
+    border-radius: 5px;
+    color: white; }
+    #content button:hover, #content input[type="submit"]:hover {
+      background: #00B7FF;
+      cursor: pointer; }
+    #content button:focus, #content input[type="submit"]:focus {
+      outline: none;
+      background: #035676; }
 
 #home-content-wrapper {
   margin-left: 20%;
@@ -675,7 +681,22 @@ footer {
         padding: 10px;
         line-spacing: 1.25; }
     #content .form-wrapper #contact-form #contact-submit input {
-      float: right; }
+      background: #03AAE9;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      float: left;
+      margin-top: 5px;
+      height: 50px;
+      width: 200px;
+      font-size: 1em;
+      font-weight: bold; }
+      #content .form-wrapper #contact-form #contact-submit input:hover {
+        background: #00B7FF;
+        cursor: pointer; }
+      #content .form-wrapper #contact-form #contact-submit input:focus {
+        outline: none;
+        background: #035676; }
     @media screen and (max-width: 48em) {
       #content .form-wrapper #contact-form .name-div {
         width: 100%; }

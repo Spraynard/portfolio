@@ -42,11 +42,10 @@ $blog-content-padding: 10%
 $project-content-padding: 5%
 
 // General Button Variables
-$gen-button-border: 3px solid #A3A0AE
-$gen-button-background: #FDF5E6
-$gen-button-border-radius: 10px
-$gen-button-padding: 5px
-$gen-button-text-color: $black-text-color
+$gen-button-border: none
+$gen-button-background: #03AAE9
+$gen-button-border-radius: 5px
+$gen-button-text-color: white
 
 // Sass variables for `keyboard keys` shown on home page
 $button-background: #FFB600
@@ -131,8 +130,16 @@ $social-bar-width: 200px
 	background: $gen-button-background
 	border: $gen-button-border
 	border-radius: $gen-button-border-radius
-	padding: $gen-button-padding
 	color: $gen-button-text-color
+
+=buttonHoverCSS()
+	background: #00B7FF
+	cursor: pointer
+
+=buttonFocusCSS()
+	outline: none
+	background: #035676
+ 
 
 =crossBrowserTransition($animationSpeed, $easing: ease-out)
 	-webkit-transition: all $animationSpeed $easing
@@ -684,7 +691,14 @@ footer
 	overflow-y: hidden
 
 	button, input[type="submit"]
+		height: 30px
 		+buttonCSS()
+
+		&:hover
+			+buttonHoverCSS()
+
+		&:focus
+			+buttonFocusCSS()
 
 // `HOME` PAGE CSS
 #home-content-wrapper
@@ -905,7 +919,19 @@ footer
 			#contact-submit
 
 				input
-					float: right
+					+buttonCSS()
+					float: left
+					margin-top: 5px
+					height: 50px
+					width: 200px
+					font-size: 1em
+					font-weight: bold
+
+					&:hover
+						+buttonHoverCSS()
+
+					&:focus
+						+buttonFocusCSS()
 
 			@media screen and (max-width: $break-med)
 				.name-div
