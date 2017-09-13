@@ -20,12 +20,14 @@ router.get('/', function(req, res, next) {
 	var pageTitle = req.app.locals.websiteName + " | Web Developer"
 
 	var model = {
-		Languages: ['Python', 'Ruby', 'JavaScript', 'Java', 'PHP', 'OCaml', 'Swift', 'Haskell','HTML', 'CSS'],
+		Languages: ['Python', 'JavaScript', 'PHP', 'C'],
 		Libraries: ['jQuery', 'Bootstrap'],
-		'Pre-Processors': ['SASS', 'Pug'],
-		Frameworks: ['Knockout.js', 'Express.js', 'Jinja2'],
-		Runtimes: ['Node.js'],
-		CMSs: ['Wordpress', 'Squarespace']
+		'CSS Pre-Processors': ['SASS'],
+		'Frameworks (Front-End)': ['Knockout', 'Express', 'React'],
+		'Frameworks (Back-End)' :['Node', 'Laravel'],
+		'Templating Engines' : ['Jinja2', 'Blade', 'Pug'],
+		CMSs: ['Wordpress', 'Squarespace'],
+		'Operating Systems': ['Windows', 'macOS', 'Ubuntu']
 	}
   	res.render('index', { title: pageTitle, model: model, user: user, error: errorMsg, page:'home', description: desc}) //pics: images});
 });

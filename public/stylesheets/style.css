@@ -80,6 +80,9 @@ a {
     z-index: 2; }
     #header-wrapper #masthead-wrapper p:first-child {
       margin-top: 0; }
+    #header-wrapper #masthead-wrapper #home-masthead-text {
+      margin-left: 5%;
+      margin-right: 5%; }
     #header-wrapper #masthead-wrapper:not(.home) {
       min-height: 250px;
       max-height: 350px;
@@ -504,7 +507,7 @@ footer {
             height: 25px; }
             #home-content-wrapper #profile-area #profile-social-media .soc-media-wrapper .soc-icon img.resize {
               width: 30px; }
-    #home-content-wrapper #profile-area #additionalinfo {
+    #home-content-wrapper #profile-area .additionalinfo {
       text-align: left;
       padding-top: 10px;
       line-height: 2; }
