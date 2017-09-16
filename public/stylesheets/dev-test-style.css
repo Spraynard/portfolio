@@ -247,6 +247,31 @@ header {
 	width: 100%;
 	height: 100%;
 }
+
+#back-to-home {
+        margin-bottom: 50px;
+}
+
+#back-to-home a {
+        color: white;
+        text-decoration: none;
+}
+
+#back-to-home a .button {
+        font-family: helvetica courier;
+        width: 30%;
+        display: block;
+        text-align: center;
+        background: #37B9E4;
+        margin: 0 auto;
+        padding: 10px 0;
+        border-radius: 5px;
+        border: 2px solid #FED571;
+}
+
+#back-to-home a .button:hover {
+        color: black;
+}
 /* Handling the gif that is loaded at start. */
 /*.information.selected img {
 	position: absolute;
