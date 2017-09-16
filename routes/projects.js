@@ -3,6 +3,9 @@ var router = express.Router();
 var mySQL = require('../my_sql_setup.js');
 var userCheck = require('../userCheck');
 
+//Routing for dev_test app
+var dev_test = require('./dev_test');
+
 //This is going to be a multipart/form-data enc type,
 //	So I need multer in order to look at the req.
 var multer = require('multer');
@@ -34,6 +37,9 @@ function callback(req, res, projects) {
 	user = userCheck.validateCookie(req);
 	res.render('projects', {title: pageTitle, projects: projects, user: user, page: page, description: desc})
 }
+
+// Dev Test Router Is located here
+router.use('/dev_test', dev_test)
 
 //GET `Projects` Page
 router.get('/', function(req, res, next) {

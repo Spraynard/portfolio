@@ -23,8 +23,6 @@ var login = require('./routes/login');
 var logout = require('./routes/logout');
 //Routing for Blog Page
 var blog = require('./routes/blog');
-//Routing for dev_test app
-var dev_test = require('./routes/dev_test');
 //Routing for test-routes
 // var test_routes = require('./routes/test/test-routes');
 
@@ -82,7 +80,6 @@ app.use('/users', users);
 app.use('/projects', projects);
 app.use('/contact', contact);
 app.use('/blog', blog);
-app.use('/dev_test', dev_test);
 app.get('/thanks', function(req, res, next) {
   res.render('thankyou')
 });

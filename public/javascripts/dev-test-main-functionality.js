@@ -250,7 +250,7 @@ const controller = {
 		var id = element.id.split('-')[2];
 		var requestObject = {'type' : 'id', 'id' : id}
 		var responseObject = {'elem' : element, 'res' : null}
-		var url = '/dev_test/main-api-call'
+		var url = '/projects/dev_test/main-api-call'
 		// Promise stream
 		controller.ajaxCall('POST', url, JSON.stringify(requestObject), true, responseObject)
 		.then(view.renderTxtInfo)
@@ -331,7 +331,7 @@ const controller = {
 	},
 	makeApiCall : function () {
 		coords = controller.getCoordinates();
-		url = '/dev_test/main-api-call'
+		url = '/projects/dev_test/main-api-call'
 		controller.ajaxCall('POST', url, JSON.stringify(coords), true, false)
 		.then(model.cachePics)
 		.then(view.insertPicTemplates)
