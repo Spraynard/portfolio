@@ -19,41 +19,50 @@ var model = {
 	}
 const view = {
 	init : function() {
-		view.animState = false;
-		// false if info div not opened, true if it is.
-		view.buttonState = false;
+		view.body = document.getElementsByTagName('body')[0];
+		view.modal = document.getElementById('main-modal')
+		view.modalWrap = document.getElementById('modal-wrap');
+		view.modalPictureWrap = view.modal.querySelector('#modal-picture-wrap')
+		view.modalInfoWrap = view.modal.querySelector('#modal-info-wrap')
+		view.modalInfoContent = view.modalInfoWrap.querySelector('#modal-info-content')
+
 	},
-	getButtonState : function () {
-		// Summary 
-		return view.buttonState;
+	openModal : function () {
+		view.modal.classList.add('active');
 	},
-	setButtonState : function (bool) {
-		view.buttonState = bool
+	closeModal : function () {
+		view.modal.classList.remove('active');
+		view.modalWrap.removeAttribute('style')
 	},
-	getAnimState : function () {
-		return view.animState;
-	},
-	setAnimState : function (bool) {
-		view.animstate = bool
-	},
-	putClassSelected : function (elemObj, state) {
-		// Summary: puts/removes `selected state` on `.picture`, '.infoDiv', and `.confirm`
-		// input: `elemObj` - An Object of Elements
-		// 		  `state` - only "remove" or "add" will cause this function to do either of those two operations
-		// Returns: An empty return if state is not input correctly.
-		if (state !== 'add' && state !== 'remove') {
-			return
-		} else if (state === 'add' ) {
-			elemObj.picture.classList.add('selected');
-			elemObj.confirm.classList.add('selected');
-			elemObj.infoDiv.classList.add('selected');
-		} else if (state === 'remove') {
-			elemObj.picture.classList.remove('selected');
-			elemObj.confirm.classList.remove('selected');
-			elemObj.infoDiv.classList.remove('selected');			
+	modalPlacementReset : function() {
+		let browserHeight = window.innerHeight;
+		let modalHeight = view.modalWrap.clientHeight;
+		console.log("Modal Height: ",modalHeight)
+		if (browserHeight > 500) {
+			let leftover = browserHeight - modalHeight;
+			console.log("Leftover", leftover)
+			let margins = leftover / 2;
+			console.log("Margins", margins)
+			view.modalWrap.style.marginTop = margins + 'px';
 		}
 	},
+	getRelevantElems : function(parentElem) {
+	/*	Summary: Returns only the relevant child elements that
+					I need for functionality
+		Input: `parentElem` - The Element that I am obtaining child elements off of
+	*/
+		var elemObj = {
+			picture: parentElem.getElementsByClassName('picture')[0],
+			confirm: parentElem.getElementsByClassName('confirm')[0],
+			confirmButton: parentElem.getElementsByClassName('confirm')[0].getElementsByClassName('pic-info-confirm')[0],
+		}
+		return elemObj
+	},
 	insertPicTemplates : function() {
+		// Summary: Injects `.single-pic-wrapper` <div> elements into the DOM. `.picture`, `.information`, and `.confirm` for each picture are children
+		// Input: None
+		// Returns: A Promise. Resolves with `pics`.
+
 		return new Promise ( function(resolve, reject)  {
 			var picWrapper = document.getElementById('picture-wrapper');
 			var pics = controller.getPictures();
@@ -68,180 +77,154 @@ const view = {
 		function picTemplateInsert(picObj) {
 		// Summary: 
 			return '<div id="pic-id-' + picObj.id + '" class="single-pic-wrapper">\
-						<div class="pic-holder">\
-							<div class="confirm">\
-								<input type="button" class="pic-info-confirm" value="Information">\
-							</div>\
-							<img id="' + picObj.id + '" class="picture loader" src="/images/dev-test-loaders/ajax-loader.gif"/>\
-							<div class="information"></div>\
-						</div>\
-					</div>';
+			<div class="confirm">\
+				<input type="button" class="pic-info-confirm" value="Information">\
+			</div>\
+			<div class="pic-holder">\
+				<img id="' + picObj.id + '" class="picture loader" src="/images/dev-test-loaders/ajax-loader.gif"/>\
+				<div class="img-backdrop"></div>\
+			</div>\
+			</div>';
 		}
 	},
-	renderImages : function (pics) {
+	renderAllImages : function(pics) {
 		// Summary: renders all images
 	    // Input: `pics` - A list of pictures gained from API call
 	    // Returns: N/A
 		for (var i = 0; i < pics.length; i++) {
-			(function(pic) {
-				var placeHolder = new Image();
-				var id = pic.id;
-				var imgElement = document.getElementById(id)
+			let pic = pics[i];
+			let id = pic.id;
+			let placeHolder = new Image();
+			let imgElement = document.getElementById(id)
+			let picHolder = imgElement.parentElement;
 
-				placeHolder.onload = function() {
-					imgElement.src = placeHolder.src;
-					imgElement.classList.remove('loader');
+			placeHolder.onload = function() {
+				imgElement.src = placeHolder.src;
+
+				// Re configuring margins so pictures are in the middle
+				// 	of the picHolders they are located in.
+				let parentHeight = picHolder.clientHeight;
+				let imgHeight = imgElement.clientHeight;
+
+				if (parentHeight > imgHeight) {
+					let diff = parentHeight - imgHeight;
+					imgElement.style.marginTop = (diff / 2) + 'px';
 				}
 
-				placeHolder.src = pic.image
-			})(pics[i])
+				imgElement.classList.remove('loader');
+			}
+
+			placeHolder.src = pic.image
 		}
-		view.addHoverEventListeners()
+		view.addEventListeners()
 	},
-	applyInfoDivCSS : function(elemObj, state) {
-		// Summary: This function adds all of the necessary css classes to infoDivs (and some others) to simulate animations.
-		// Input: `elemObj` - An object containing all of the elements that will be required for all the functionality that I am trying to achieve within this function
-		//		  `state` - What state I want the div to be animated to. For example. `state === 'loading'` if I want to put `.information` in the
-		//					loading position that I have animated up
-		// Returns: N/A
+	renderModalImage : function(pictureSrc) {
+	/*	Summary: Injects a selected image into the modal */
+		var pictureWrap = view.modalPictureWrap
+		var imageTemp = '<img src="' + pictureSrc + '">';
+		pictureWrap.innerHTML = imageTemp
+	},
+	renderInfoWrap : function() {
+	/*	Summary: Sets the height of the modal info wrapper
+	 *				to be the same height as the image wrapper.
+	*/
 
-		var picture = elemObj.picture;
-		var infoDiv = elemObj.infoDiv;
-		var confirm = elemObj.confirm;
-		var confirmButton = elemObj.confirmButton;
+		var loaderTemp = '<img class="loader" src="/images/dev-test-loaders/ajax-loader.gif">'
+		var picHeight = view.modalPictureWrap.clientHeight
 
-		view.setAnimState(true);
-		if (state === 'loading') {
-			// When I click on a picture who's information hasn't been loaded yet, `.information` will first go in
-			// 	loading state; not fully coming out from behind div, and showing a preloader.
-			view.setButtonState(true)
-			confirmButton.value = (confirmButton.value === 'Information') ? 'Close' : 'Information';
-			infoDiv.classList.add('loading');
-		} else if (state === 'loaded') {
-			// On this state, `.information` will fully go out from under div.
-			if (!view.getButtonState()) {
-				confirmButton.value = (confirmButton.value === 'Information') ? 'Close' : 'Information';
-			}
-
-			if (infoDiv.classList.contains('loading')) {
-				infoDiv.classList.remove('loading');
-			}
-			infoDiv.classList.add('loaded');
-		} else if (state === 'hidden') {
-			// This state hides `.information`
-			confirmButton.value = (confirmButton.value === 'Information') ? 'Close' : 'Information';
-			view.setButtonState(false);
-			if (infoDiv.classList.contains('loading')) {
-				infoDiv.classList.remove('loading');
-			}
-			infoDiv.classList.remove('loaded')
-			view.putClassSelected(elemObj, 'remove')
+		if (window.innerWidth > 992) {
+			var picHeight = view.modalPictureWrap.clientHeight
+			view.modalInfoWrap.style.height = picHeight + 'px'
+		} else if (window.innerWidth <= 992) {
+			var picWidth = view.modalPictureWrap.getElementsByTagName('img')[0].clientWidth
+			view.modalInfoWrap.style.width = picWidth + 'px'
 		}
-		// Want to remove `.hovered` from confirm and picture after every time there is an animation going down.
-		// 		Improves usability for mobile devices
-		if (confirm.classList.contains('hovered')) {
-			confirm.classList.remove('hovered');
-			picture.classList.remove('hovered');
+
+		view.modalInfoContent.innerHTML = loaderTemp
+
+	},
+	renderModalInfo : function(textSrc) {
+		var res = textSrc.res
+		var title = (res.title === "") ? 'none' : res.title
+		var description = (res.descriptionHtml === "") ? 'none' : res.descriptionHtml
+		var taken = (res.taken === "") ? 'none' : res.taken
+		var link = (res.url === "") ? 'none' : res.url
+
+		var template = '<div class="content-block">\
+							<div class="header-block">Title</div>\
+								<div class="block-content"><p>' + title + '</p>\
+						</div></div>\
+						<div class="content-block">\
+							<div class="header-block">Description</div>\
+								<div class="block-content"><p>' + description + '</p>\
+						</div></div>\
+						<div class="content-block">\
+							<div class="header-block">Taken</div>\
+								<div class="block-content"><p>' + taken + '</p>\
+						</div></div>\
+						<div class="content-block">\
+							<div class="header-block">Link</div>\
+								<div class="block-content"><a href="' + link + '">' + link + '</a>\
+						</div></div>'
+
+		view.modalInfoContent.innerHTML = template
+	},
+	addConfirmButtonClickListener : function(elem, elemObj) {
+		elemObj.confirmButton.addEventListener('click', function() {
+			// On a click of a confirm button,
+			// want to bring up the modal and then inject the picture/information.
+			view.openModal();
+			view.renderModalImage(elemObj.picture.src);
+			view.renderInfoWrap()
+			view.modalPlacementReset()
+			controller.getInfo(elem)
+		})
+	},
+	addHoverListeners : function(confirmElem, picElem, type) {
+		for (var i = 0; i < type.length; i++) {
+			if (type[i] === "mouseover") {
+				confirmElem.addEventListener('mouseover', function () {
+					this.classList.add("hovered")
+					picElem.classList.add("hovered")
+				})
+			} else if (type[i] === "mouseleave") {
+				confirmElem.addEventListener('mouseleave', function () {
+					this.classList.remove("hovered")
+					picElem.classList.remove("hovered")
+				})
+			}
 		}
 	},
-	addHoverEventListeners: function() {
+	addEventListeners : function() {
 		// Summary: Adds hover event listeners to `single-pic-wrapper` children.
 		// 				There will be more listeners added as user explores functionality
-		// Input: None
-		// Returns: None
 		var elements = document.getElementsByClassName('single-pic-wrapper');
-		var count = 0;
+		var modalClose = document.getElementById('modal-close');
 
+		/*	Going through all `single-pic-wrappers` and adding click listeners/hover listeners */
 		for (var i = 0; i < elements.length; i++) {
-			(function(elem) {
-				var elemObj = {
-					parent: elem,
-					picture: elem.getElementsByClassName('picture')[0],
-					confirm: elem.getElementsByClassName('confirm')[0],
-					confirmButton: elem.getElementsByClassName('confirm')[0].getElementsByClassName('pic-info-confirm')[0],
-					infoDiv: elem.getElementsByClassName('information')[0]
-				}
-				// All the information for how the confirm button
-				// 	controls the state of the information, and loads it.
-				elemObj.confirmButton.addEventListener('click', function() {
-					if (!elemObj.infoDiv.hasChildNodes()) {
-						// State manipulation for UI, info divs can go over any other picture
-						view.putClassSelected(elemObj, 'add');
-						// want a preloader injection while the information is loading.
-						var injection = '<img src="/images/dev-test-loaders/preloader_preloaders.net.gif">';
-						elemObj.infoDiv.innerHTML = injection;
-						view.applyInfoDivCSS(elemObj, 'loading');
+			let elem = elements[i];
+			let elemObj = view.getRelevantElems(elem)
 
-						controller.getInfo(elem);
-					} 
-					else {
-						if (elemObj.infoDiv.classList.contains('loaded')) {
-							view.applyInfoDivCSS(elemObj, 'hidden');
-							elemObj.infoDiv.classList.remove('loaded');
-							elemObj.infoDiv.classList.add('closed');
-						} else if (elemObj.infoDiv.classList.contains('closed')) {
-							view.putClassSelected(elemObj, 'add');		
-							view.applyInfoDivCSS(elemObj, 'loaded');
-							elemObj.infoDiv.classList.remove('closed');
-							elemObj.infoDiv.classList.add('loaded');
-						}
-					}
-				})
-
-				elemObj.confirm.addEventListener("mouseover", function () {
-					elemObj.confirm.classList.add("hovered");
-					elemObj.picture.classList.add("hovered");
-				})
-
-				elemObj.confirm.addEventListener("mouseleave", function (e) {
-					elemObj.confirm.classList.remove("hovered");
-					elemObj.picture.classList.remove("hovered");
-				})
-			})(elements[i]);
+			view.addHoverListeners(elemObj.confirm, elemObj.picture, ['mouseover', 'mouseleave']);
+			view.addConfirmButtonClickListener(elem, elemObj)
 		}
-	},
-	renderTxtInfo : function(responseObject) {
-		// Summary: Renders information text in `.information`.
-		// Input: `responseObject` - An object in the form '{'elem': HTML_Element, 'res': Object}, with `res` being the response from
-		// 			api call that is above the promise stream for this call.
-		// Response: None
-		var elemObj = {
-			parent: responseObject.elem,
-			infoDiv: responseObject.elem.getElementsByClassName('information')[0],
-			picture: responseObject.elem.getElementsByClassName('picture')[0],
-			confirm: responseObject.elem.getElementsByClassName('confirm')[0],
-			confirmButton: responseObject.elem.getElementsByClassName('confirm')[0].getElementsByClassName('pic-info-confirm')[0]
-		}
-		view.applyInfoDivCSS(elemObj, 'loaded');
-		elemObj.infoDiv.classList.add('loaded');
 
-		var res = responseObject.res;
-		var description = res.descriptionHtml;
-		var title = res.title;
-		var views = res.views;
-		var taken = res.taken;
-
-		var injection = '';
-		injection += '<div class="title-div"><h4>' + title + '</h4></div>';
-		injection += '<p class="text-info">';
-		if (description.split('').length > 10) {
-			injection += '<span class="pic-description">' + description + '</span>'
-		}
-		injection += '<br><br>'
-		injection += '<span class="pic-taken">Taken: ' + taken + '</span>'
-		injection += '</p>'
-
-		elemObj.infoDiv.innerHTML = injection;
+		modalClose.addEventListener('click', function() {
+			view.body.classList.remove('noScroll')
+			view.closeModal()
+		})
 	}
 }
 const controller = {
 	init : function() {
+		// This function initializes the the program. Very important.
 		Promise.resolve(model.init())
 			.then(controller.getLocation)
-			.then(controller.setLocation)
-			.then(view.init)
-			.then(controller.makeApiCall)
-			.then(null, console.error)
+				.then(controller.setLocation)
+					.then(view.init)
+						.then(controller.makeApiCall)
+							.then(null, console.log)
 	},
 	getInfo : function (element) {
 		// Gets the information for the picture. Calls back to
@@ -253,8 +236,8 @@ const controller = {
 		var url = '/projects/dev_test/main-api-call'
 		// Promise stream
 		controller.ajaxCall('POST', url, JSON.stringify(requestObject), true, responseObject)
-		.then(view.renderTxtInfo)
-		.then(null, console.error)
+			.then(view.renderModalInfo)
+				.then(null, console.error);
 	},
 	ajaxCall : function(method, url, data, jsonRequest, responseObject) {
 		// `````fetch() is also an acceptable way to do these ajax calls, albeit a little less browser compatible.```
@@ -330,13 +313,15 @@ const controller = {
 		return {'type' : 'coords', 'lat' : model.lat, 'lng' : model.lng }
 	},
 	makeApiCall : function () {
-		coords = controller.getCoordinates();
-		url = '/projects/dev_test/main-api-call'
+		// 
+		const coords = controller.getCoordinates();
+		const url = '/projects/dev_test/main-api-call';
+
 		controller.ajaxCall('POST', url, JSON.stringify(coords), true, false)
-		.then(model.cachePics)
-		.then(view.insertPicTemplates)
-		.then(view.renderImages)
-		.then(null, console.error)
+			.then(model.cachePics)
+				.then(view.insertPicTemplates)
+					.then(view.renderAllImages)
+						.then(null, console.error)
 	},
 	getPictures : function() {
 		return model.pictures;

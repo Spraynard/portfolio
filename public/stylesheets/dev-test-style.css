@@ -14,15 +14,22 @@ body {
 	background-color: #FEFEFA;
 	background-image: url('/images/dev-test-backgrounds/elastoplast.png');
 	background-attachment: fixed;
+	position: relative;
 }
 
 header {
 	font-size: 4em;
 }
 
+.clear {
+	width: 100%;
+	clear: both;
+}
+
 #main-content {
 	font-size: 2em;
 }
+
 /* `#picture-wrapper` div CSS */
 #picture-wrapper {
 	display: flex;
@@ -32,8 +39,117 @@ header {
 	margin: 2%;
 }
 
+/* Area for Modal Styling */
+#main-modal {
+	display: none;
+	text-align: center;
+}
+
+#main-modal.active {
+	display: block;
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(255,255,255, 0.5);
+	z-index: 500;
+}
+
+#modal-wrap {
+	display: inline-block;
+	position: relative;
+	max-height: 500px;
+	max-width: 90%;
+	margin: 2% auto;
+	padding: 5px;
+	background: rgba(55, 185, 228, 0.5);
+	/*background: rgba(111,111,111, 0.5);*/
+	border-radius: 5px;
+}
+
+#modal-close {
+	position: relative;
+	text-align: center;
+	display: block;
+	height: 20px;
+	margin: 0px auto 5px auto;
+	background: #F7FDFF;
+	color: #4499B1;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+#modal-picture-wrap, #modal-info-wrap {
+	display: inline-block;
+	vertical-align: top;
+}
+
+#modal-picture-wrap {
+	position: relative;
+	z-index: 20;
+	max-width: 74%;
+	box-shadow: 3px 0px 3px rgba(111, 111, 111, 0.5);
+}
+
+#modal-picture-wrap img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	max-height: 465px;
+}
+
+#modal-info-wrap {
+	max-width: 300px;
+	background: url('/images/dev-test-backgrounds/photography.png');
+	overflow-y: scroll;
+	text-align: center;
+}
+
+#modal-info-wrap::-webkit-scrollbar {
+	background-color: #F7FDFF;
+}
+
+#modal-info-wrap::-webkit-scrollbar-thumb {
+	background-color: #4499B1;
+	border-radius: 10px;
+}
+
+#modal-info-content {
+	width: 100%;
+	text-align: center;
+}
+
+#modal-info-content img {
+	margin-top: 45%;
+}
+
+#modal-info-content .content-block:last-child {
+	padding-bottom: 50px;
+}
+
+#modal-info-content .header-block {
+	background: rgba(255, 196, 54, 0.7);
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+
+#modal-info-content .block-content {
+	padding-left: 10px;
+	padding-right: 5px;
+	text-align: left;
+	overflow-wrap: break-word;
+}
+
+#modal-info-content .block-content a {
+	font-size: 0.5em;
+}
+
 /* Start CSS FOR SINGULAR ITEMS OF PICTURES */
 .single-pic-wrapper {
+	display: inline-block;
+	max-height: 200px;
 	width: 33%;
 	position: relative;
 	box-sizing: border-box;
@@ -42,19 +158,20 @@ header {
 }
 
 .single-pic-wrapper .pic-holder {
-	position: relative;
+	text-align: center;
+	height: 200px;
 	width: 100%;
 }
 
 .confirm {
 	position: absolute;
 	opacity: 0.0;
-	height: 100%;
-	width: 100%;
 	top: 0;
 	left: 0;
 	z-index: 10;
-	/* Transition */
+	display: block;
+	height: 100%;
+	width: 100%;
 	-webkit-transition: opacity 0.5s;
 	   -moz-transition: opacity 0.5s;
 	    -ms-transition: opacity 0.5s;
@@ -67,10 +184,6 @@ header {
 	z-index: 10;
 }
 
-.confirm.selected {
-	z-index: 13;
-}
-
 .confirm input {
 	position: absolute;
 	display: block;
@@ -79,7 +192,7 @@ header {
 	max-height: 30px;
 	background: #37B9E4;
 	bottom: 10%;
-	left: 35%;
+	left: 30%;
 	color: white;
 	border: none;
 	border-radius: 2px;
@@ -87,15 +200,11 @@ header {
 	font-style: bold;
 }
 
-
-.confirm input:active {
-	box-shadow: 2px 2px 2px grey;
-}
-
 /* Picture CSS */
 .picture {
-	width: 100%;
 	position: relative;
+	max-height: 200px;
+	max-width: 100%;
 	z-index: 4;
 	/* Transition */
 	-webkit-transition: all 0.5s;
@@ -105,16 +214,12 @@ header {
 			transition: all 0.5s;
 }
 
-.picture.loader {
+/*.picture.loader {
 	width: 16px;
 	margin-left: 150px;
 	margin-top: 150px;
 	position: relative;
-}
-
-.picture.selected {
-	z-index: 12;
-}
+}*/
 /*	If Image has the `hovered` class on it */
 
 .picture.hovered {
@@ -132,96 +237,24 @@ header {
 	        transform: scale(1.01);
 }
 
-.information {
+.img-backdrop {
+	z-index: 0;
+	background: rgba(210, 208, 191, 0.5);
 	position: absolute;
-	height: 200px;
+	display: block;
+	top: 0;
+	left: 0;
 	width: 100%;
-	max-width: 100%;
-	bottom: 0;
-	overflow-y: scroll;
-	z-index: 3;
-	opacity: 0;
-	background: url('/images/dev-test-backgrounds/photography.png');
-	font-size: 0.5em;
-	-webkit-transition: all 0.5s;
-	   -moz-transition: all 0.5s;
-		-ms-transition: all 0.5s;
-		 -o-transition: all 0.5s;
-			transition: all 0.5s;
+	height: 100%;
 }
-
-.information.loading {
-	bottom: -100px;
-	opacity: 0.5;
-}
-
-.information.loaded {
-	bottom: -200px;
-	opacity: 1;
-}
-
-.text-info {
-	position: relative;
-	padding-left: 5%;
-	padding-right: 5%;
-	line-height: 1.25;
-}
-
-.title-div {
-	position: relative;
-	padding-bottom: 20px;
-	height: 25%;
-	width: 100%;
-	background: rgba(255, 196, 54, 0.7);
-}
-
-.title-div h4 {
-	margin-top: 0;
-	padding-top: 10px;
-	padding-left: 3%;
-}
-
-.information.selected {
-	z-index: 11;
-	-webkit-box-shadow: 0 10px 6px -6px #777;
-	   -moz-box-shadow: 0 10px 6px -6px #777;
-	    -ms-box-shadow: 0 10px 6px -6px #777;
-	     -o-box-shadow: 0 10px 6px -6px #777;
-	        box-shadow: 0 10px 6px -6px #777;
-}
-
 /* Handling the gif that is loaded at start. */
-.information.selected img {
+/*.information.selected img {
 	position: absolute;
 	bottom: 20px;
 	width: 10%;
 	left: 45%;
-}
+}*/
 
-#back-to-home {
-	margin-bottom: 50px;
-}
-
-#back-to-home a {
-	color: white;
-	text-decoration: none;
-}
-
-#back-to-home a .button {
-	font-family: helvetica courier;
-	width: 30%;
-	display: block;
-	text-align: center;
-	background: #37B9E4;
-	margin: 0 auto;
-	padding: 10px 0;
-	border-radius: 5px;
-	border: 2px solid #FED571;
-}
-
-#back-to-home a .button:hover {
-	color: black;
-}
 /*	MEDIA QUERIES	*/
 /*	For screen sizes tablet size and beyond */
 @media screen and (max-width: 1024px) {
@@ -230,10 +263,48 @@ header {
 	}
 }
 
+/* Modal configuration at it's natural breakpoint */
+@media screen and (max-width: 992px) {
+
+	#modal-wrap {
+		max-width: 50%;
+	}
+	#modal-picture-wrap, #modal-info-wrap {
+		display: block;
+		max-width: 100%;
+	}
+
+	#modal-picture-wrap {
+		max-height: 300px;
+		box-shadow: 0px 3px 3px rgba(111, 111, 111, 0.5);
+	}
+
+	#modal-picture-wrap img {
+		width: auto;
+		max-height: 300px;
+		max-width: 100%;
+	}
+
+	#modal-info-wrap {
+		height: 175px;
+	}
+
+	#modal-info-wrap #modal-info-content #content-block {
+		overflow-wrap: word-wrap;
+	}
+	#modal-info-content img {
+		margin-top: 25%;
+	}
+}
+
 @media screen and (min-width: 650px) {
 	.single-pic-wrapper:nth-child(3n + 2) {
 		margin-left: 0.5%;
 		margin-right: 0.5%;
+	}
+
+	#modal-wrap {
+		max-width: 70%;
 	}
 }
 /* For screen sizes tablet size */
@@ -253,6 +324,9 @@ header {
 
 	.single-pic-wrapper:nth-child(even) {
 		margin-left: 0.5%;
+	}
+	#modal-wrap {
+		max-width: 90%;
 	}
 }
 /* For screen sizes phone size */
@@ -284,6 +358,10 @@ header {
 		    -ms-transform: none;
 		     -o-transform: none;
 		        transform: none;
+	}
+
+	#modal-wrap {
+		max-width: 95%;
 	}
 }
 
