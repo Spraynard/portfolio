@@ -108,8 +108,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8000).on('error', function(err) {
-	console.error(err)
-})
+// app.listen(8000).on('error', function(err) {
+// 	console.error(err)
+// })
 
-// module.exports = app;
+module.exports = app;
