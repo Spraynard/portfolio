@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var decrypt = require('../userDecrypt');
 var userCheck = require('../userCheck');
+var debug = require('debug')('portfolio:index.js');
+
 /* GET home page. */
 var user = null
 var errorMsg = null
@@ -29,7 +31,9 @@ router.get('/', function(req, res, next) {
 		CMSs: ['Wordpress', 'Squarespace'],
 		'Operating Systems': ['Windows', 'macOS', 'Ubuntu']
 	}
-  	res.render('index', { title: pageTitle, model: model, user: user, error: errorMsg, page:'home', description: desc}) //pics: images});
+  	res.render('index', { title: pageTitle, model: model, user: user, error: errorMsg, page:'home', description: desc}, (err, html) => {
+  		res.send(html);
+  	})
 });
 
 module.exports = router;

@@ -1,4 +1,5 @@
 var express = require('express');
+var minifyHTML = require('express-minify-html');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -12,8 +13,6 @@ var cookieDivide = require('./cookieDivider');
 var mySQL = require('./my_sql_setup.js');
 //Routing for index page
 var index = require('./routes/index');
-//Routing for users page
-var users = require('./routes/users');
 //Routing for projects page
 var projects = require('./routes/projects');
 //Routing for Contact Page
@@ -24,8 +23,7 @@ var login = require('./routes/login');
 var logout = require('./routes/logout');
 //Routing for Blog Page
 var blog = require('./routes/blog');
-//Routing for test-routes
-// var test_routes = require('./routes/test/test-routes');
+
 var app = express();
 
 // APP LOCALS
@@ -42,6 +40,20 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(helmet());
+
+app.use(minifyHTML({
+  override: true,
+  exception_url: false,
+  htmlMinifier: {
+    removeComments: true,
+    collapseWhitespace: true,
+    collapseBooleanAttributes: true,
+    removeAttributeQuotes: true,
+    removeEmptyAttributes: true,
+    minifyJS: true
+  }
+}));
+
 // upload folder setup?
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // uncomment after placing your favicon in /public
@@ -51,10 +63,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(sassMiddleware({
-  src: path.join(__dirname, 'public'),
+  src: path.join(__dirname, 'private'),
   dest: path.join(__dirname, 'public'),
   indentedSyntax: true, // true = .sass and false = .scss
-  sourceMap: true
+  sourceMap: true,
+  outputStyle: 'compressed'
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -75,9 +88,7 @@ app.use((req, res, next) => {
   })
 })
 
-// app.all('*', test_routes);
 app.use('/', index);
-app.use('/users', users);
 app.use('/projects', projects);
 app.use('/contact', contact);
 app.use('/blog', blog);
@@ -107,9 +118,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// app.listen(8000).on('error', function(err) {
-// 	console.error(err)
-// })
 
 module.exports = app;

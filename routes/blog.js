@@ -31,7 +31,9 @@ function callback(req, res, posts) {
 	// Setting the title for the page
 	var pageTitle = req.app.locals.websiteName + ' | A Beggar\'s Blog'
 	user = userCheck.validateCookie(req);
-	res.render('blog', {title: pageTitle, posts: posts, user: user, page: page, description: desc});
+	res.render('blog', {title: pageTitle, posts: posts, user: user, page: page, description: desc}, (err, html) => {
+		res.send(html);
+	});
 	res.end();
 }
 
@@ -53,7 +55,9 @@ function singlePostCallback(req, res, post, comments) {
 	// Dynamic page title based on the blog post title. stripped the HTML out of the title.
 	var pageTitle =  req.app.locals.websiteName + ' | ' + post.title.replace(/<(?:.|\n)*?>/gm, '')
 	user = userCheck.validateCookie(req);
-	res.render('singlepost', {title: pageTitle, post: post, user: user, page: page, comments: comments});
+	res.render('singlepost', {title: pageTitle, post: post, user: user, page: page, comments: comments}, (err, html) => {
+		res.send(html);
+	});
 	res.end();
 }
 

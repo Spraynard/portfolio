@@ -5,7 +5,9 @@ var mySQL = require('../my_sql_setup.js')
 var encrypt = require('../userEncrypt');
 
 router.get('/', function(req, res, next) {
-	res.render('login')
+	res.render('login', (err, html) => {
+		res.send(html);
+	})
 })
 
 function resultsCheck (authArray, req, res, userObject) {

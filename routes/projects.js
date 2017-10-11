@@ -22,7 +22,9 @@ function singleCallback(req, res, project) {
 	// Dynamic page title of the project title
 	var pageTitle = req.app.locals.websiteName + " | " + project.title
 	user = userCheck.validateCookie(req);
-	res.render('singleproject', {title: pageTitle, project: project, user: user, page: page})
+	res.render('singleproject', {title: pageTitle, project: project, user: user, page: page}, (err, html) => {
+		res.send(html);
+	})
 	res.end();
 }
 
@@ -32,7 +34,9 @@ function callback(req, res, projects) {
 	// Setting the page title
 	var pageTitle = req.app.locals.websiteName + " | Projects"
 	user = userCheck.validateCookie(req);
-	res.render('projects', {title: pageTitle, projects: projects, user: user, page: page, description: desc})
+	res.render('projects', {title: pageTitle, projects: projects, user: user, page: page, description: desc}, (err, html) => {
+		res.send(html);
+	})
 }
 
 //GET `Projects` Page
