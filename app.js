@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
+var helmet = require('helmet');
 //Custom Cookie Divider Module
 var cookieDivide = require('./cookieDivider');
 // mySQL custom export
@@ -25,7 +26,6 @@ var logout = require('./routes/logout');
 var blog = require('./routes/blog');
 //Routing for test-routes
 // var test_routes = require('./routes/test/test-routes');
-
 var app = express();
 
 // APP LOCALS
@@ -41,6 +41,7 @@ app.locals.postID = null;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(helmet());
 // upload folder setup?
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // uncomment after placing your favicon in /public
