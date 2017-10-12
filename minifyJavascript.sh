@@ -3,7 +3,7 @@
 PRIVATE_BASE=src/
 PUBLIC_BASE=javascripts/
 
-for f in ${PRIVATE_BASE}/*.js
+for f in ${PRIVATE_BASE}*.js
 do
 	# filename='/ ' read -r -a array <<< "$string"
 	# echo "${filename[0]}"

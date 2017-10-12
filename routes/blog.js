@@ -7,6 +7,7 @@ var decrypt = require('../userDecrypt');
 var mysql = require('mysql');
 var mySQL = require('../my_sql_setup.js');
 var userCheck = require('../userCheck');
+var debug = require('debug')('portfolio:blog');
 var router = express.Router();
 var app = express();
 // var relativePath = '../public/images/uploads'
@@ -34,7 +35,6 @@ function callback(req, res, posts) {
 	res.render('blog', {title: pageTitle, posts: posts, user: user, page: page, description: desc}, (err, html) => {
 		res.send(html);
 	});
-	res.end();
 }
 
 router.get('/', function(req, res, next) {
@@ -57,8 +57,7 @@ function singlePostCallback(req, res, post, comments) {
 	user = userCheck.validateCookie(req);
 	res.render('singlepost', {title: pageTitle, post: post, user: user, page: page, comments: comments}, (err, html) => {
 		res.send(html);
-	});
-	res.end();
+	})
 }
 
 router.get('/:id/post/:title', (req, res, next) => {
