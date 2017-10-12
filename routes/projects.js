@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mySQL = require('../my_sql_setup.js');
 var userCheck = require('../userCheck');
+var debug = require('debug')('portfolio:projects');
 
 //This is going to be a multipart/form-data enc type,
 //	So I need multer in order to look at the req.
@@ -22,10 +23,8 @@ function singleCallback(req, res, project) {
 	// Dynamic page title of the project title
 	var pageTitle = req.app.locals.websiteName + " | " + project.title
 	user = userCheck.validateCookie(req);
-	res.render('singleproject', {title: pageTitle, project: project, user: user, page: page}, (err, html) => {
-		res.send(html);
-	})
-	res.end();
+	debug("singleCallback: ", project);
+	res.render('singleproject', {title: pageTitle, project: project, user: user, page: page});
 }
 
 // Callback for displaying `projects` page
@@ -73,6 +72,7 @@ router.get('/:id/project/:title', (req, res, next) => {
 			connection.release()
 			if (results) {
 				project = results[0];
+				debug(project);
 				singleCallback(req, res, project);
 			}
 		})
