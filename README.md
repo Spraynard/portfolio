@@ -1,5 +1,4 @@
 # portfolio
-This has all of the files that I have currently made for my portfolio site.
 
 How it works:
 1. Node.js Runtime
