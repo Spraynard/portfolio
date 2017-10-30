@@ -1,0 +1,82 @@
+// `Single Post` Page CSS
+#single-post-wrapper
+	padding-left: $main-content-padding
+	padding-right: $main-content-padding
+	overflow-wrap: break-word
+	margin-bottom: 20px
+
+	#post-edit-button, #post-edit-confirm-button
+		display: inline-block
+		width: 50%
+
+	.single-back-button
+		margin-top: 20px
+
+	.blog-post
+
+		.edit
+			display: none
+
+			&.show
+				display: block
+
+		#single-post-header
+			font-family: $masthead-font-stack
+			margin-left: 2em
+
+		#single-post-header-edit
+			margin-bottom: 10px
+			width: 100%
+		
+		#single-post-body-wrap
+			line-height: 2
+			font-size: 16px
+
+		#single-post-body-wrap, #single-post-body-edit
+			margin-bottom: 50px
+
+		#single-post-body-edit
+			width: 100%
+			height: 300px
+			padding: 10px
+
+		#post-tags, #single-post-date, #tags
+			display: inline-block
+			width: 50%
+
+		#single-post-date
+			text-align: right
+
+		#single-post-pic-wrapper
+			text-align: center
+
+			img 
+				width: 100%
+				max-width: 375px
+				margin: 0 auto
+
+		hr
+			margin-bottom: 30px
+			width: 90%
+			height: 0.5px
+
+	// Uncomment when editing is first implemented
+	#confirm-edit-button
+		display: none
+
+	@media screen and (max-width: $break-med)
+		padding-left: $main-break-content-padding
+		padding-right: $main-break-content-padding
+
+	@media screen and (max-width: $break-small)
+
+		.blog-post
+
+			#single-post-header
+				margin-left: 0em
+				text-align: center
+
+			#single-post-body-wrap
+				font-size: 20px
+
+// End `Single Post` CSS

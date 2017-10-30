@@ -1,0 +1,190 @@
+footer
+	background: $masthead-background
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAYElEQVQoU22QQQ4AIQgD9UkezP7/uNmDT3JTkzEV4YJAC631/cYsIZ7eqlqa6a28GgQkhp430NkiOkj1cSKeQ8ICsglQ1EudnvZN6L7cRdB27SYyEJIuM27Iv+0wk4Ho/boid7mJS9cXAAAAAElFTkSuQmCC)
+	// +footergradient
+	position: absolute
+	height: $footer-height-large-screen
+	bottom: 0
+	width: 100%
+
+	@media screen and (max-width: $break-med)
+		height: $footer-height-mid-screen
+	@media screen and (max-width: $break-small)
+		height: $footer-height-small-screen
+
+	$footer-content-padding: 10%
+	$footer-background-color: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAaUlEQVQoU2P8+/XZfwY0cObaS7CIiZY4A4gNohlPnj4PVwgSAAGYJDINV4isG10xiA9WCFOEbh3MCWCFIDciuwndvTA+VquRTYK5G8VqZCdg+BpmNS5FMA0YnkE2CeY+cDgiewabIpgYAJTdbRIwVt8BAAAAAElFTkSuQmCC)
+	$secondary-footer-background-color: #9B9FA9
+	$footer-nav-non-hover-color: #A3A0AE
+	$footer-nav-hover-color: black
+	#footer-wrapper
+		color: #363636
+		padding-left: $footer-content-padding
+		padding-right: $footer-content-padding
+		margin-top: 20px
+
+		#footer-left
+			display: inline-block
+			width: 25%
+			text-align: left
+			vertical-align: top
+
+			#footer-nav
+				font-family: $masthead-font-stack
+
+				.header
+					margin-bottom: 5px;
+
+					@media screen and (max-width: $break-small)
+						display: none
+				
+				.nav-item
+					padding-left: 5px
+
+					a
+						text-decoration: none
+						color: $footer-nav-non-hover-color
+
+						&:hover
+							color: $footer-nav-hover-color
+							text-decoration: underline
+
+					+ .nav-item
+						margin-top: 7px
+
+		#footer-mid
+			position: relative
+			display: inline-block
+			width: 50%
+			vertical-align: bottom
+
+			#footer-social-media
+				border-radius: $social-border-radius
+				width: $social-bar-width
+				margin: 0 auto 10px auto
+
+				.soc-media-wrapper
+					// width: 200px
+					padding-left: 20px
+					padding-right: 20px
+					height: 40px
+					text-align: center
+					background: $social-background-1
+					border-radius: $social-border-radius
+					border: $social-border
+
+
+					.soc-icon
+						display: inline-block
+						padding-top: 7.5px
+						+crossBrowserTransition(0.2s)
+
+						&:hover
+							transform: scale(1.2)
+						
+						+ .soc-icon
+							margin-left: 10px
+
+						img
+							width: 25px
+							height: 25px
+
+						&:last-child img
+							width: 30px
+
+			#footer-post-wrapper
+				background: $footer-background-color
+				border: 5px solid #A3A0AE
+				padding: 5px
+				padding-left: 10px
+				padding-right: 10px
+				border-radius: 10px
+				margin: 0 auto
+
+				#check-out
+					text-align: center
+					font-family: $masthead-font-stack
+					margin-bottom: 10px
+
+				.fpwrap
+					padding: 5px
+					background: $secondary-footer-background-color
+					overflow-wrap: break-word
+
+					p
+						margin: 0
+
+					a
+						color: #FDF0E6
+						letter-spacing: 3px
+						font-family: $masthead-font-stack
+
+						&:visited
+							color: #FDF0E6
+
+						.footer-post-title
+							margin-bottom: 5px
+
+					+ .fpwrap
+						margin-top: 10px
+
+					&:last-child
+						margin-bottom: 5px
+		
+		#footer-right
+			display: inline-block
+			vertical-align: top
+			width: 25%
+			text-align: right
+
+			#contact-wrapper
+
+				.phone
+					font-size: 10px
+
+					img
+						height: 15px
+
+		@media screen and (max-width: $break-med)
+			#footer-left
+				width: 100%
+				margin-bottom: 20px
+				text-align: center
+
+				#footer-nav
+
+					.nav-item
+						display: inline-block
+
+						a
+							color: $black-text-color
+
+						+ .nav-item
+							margin-left: 10px
+
+			#footer-mid
+				width: 100%
+
+				#footer-social-media
+					width: 250px
+
+					.soc-media-wrapper
+						// margin: 0 auto
+						text-align: center
+
+						.soc-icon
+
+							+ .soc-icon
+								margin-left: 30px
+
+
+			#footer-right
+				width: 100%
+				margin-top: 2px
+				text-align: center
+
+				#contact-wrapper
+
+					.phone
+						margin-top: 10px
+						margin-bottom: 10px

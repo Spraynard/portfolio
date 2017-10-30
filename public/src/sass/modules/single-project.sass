@@ -1,0 +1,359 @@
+// `Single Project` CSS
+$carousel-width: 550px
+$carousel-height: 350px
+$paddle-width: 50px
+$select-placement-y: 157.5px
+$select-placement-x: 5px
+$project-date-border-radius: 3px
+#single-project-wrapper
+	padding-left: $main-content-padding
+	padding-right: $main-content-padding
+
+	// Css for edit buttons, only shown if there is a user
+	#project-edit-button, #project-edit-confirm-button
+		display: inline-block
+		width: 50%
+		margin-bottom: 20px
+
+		#confirm-edit-button
+			display: none
+
+	.edit
+		display: none
+
+	.single-project
+
+		#project-data
+
+			h1, #header-edit
+				margin-bottom: 10px
+
+			#header-edit
+				width: 100%
+			
+			#project-date-wrapper
+				margin-bottom: 5px
+
+				.project-date + .project-date
+					margin-left: 10px
+
+				.project-date
+					margin-top: 10px
+					text-align: center
+					border: 1px solid black
+					border-radius: $project-date-border-radius
+					width: 20%
+					display: inline-block
+
+					.embellished
+						font-family: $masthead-font-stack
+						font-size: 18px
+						background: $button-background
+						border-bottom: 1px solid black
+						border-top-left-radius: $project-date-border-radius
+						border-top-right-radius: $project-date-border-radius
+						padding:
+							left: 5px
+							right: 5px
+
+					.data
+						padding-right: 5px
+						padding-left: 5px
+						font-size: 20px
+			
+			#techwrapper
+				margin-bottom: 15px
+				display: inline-block
+
+				#techheader
+					font-family: $masthead-font-stack
+					font-size: 20px
+					margin-bottom: 10px
+
+				#qualwrapper
+					display: flex
+					flex-wrap: wrap
+					position: relative
+
+					#techs
+						margin-top: 5px
+						margin-bottom: 5px
+
+						.qualitem
+							display: border-box
+							+qualitem
+
+			#project-website-wrapper
+				display: inline-block
+				margin-left: 15px;
+				position: relative
+
+				#project-website
+					box-sizing: border-box
+					text-align: center
+					padding-left: 15px
+					padding-right: 15px
+					background: #00B7FF
+					// background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAYElEQVQoU22QQQ4AIQgD9UkezP7/uNmDT3JTkzEV4YJAC631/cYsIZ7eqlqa6a28GgQkhp430NkiOkj1cSKeQ8ICsglQ1EudnvZN6L7cRdB27SYyEJIuM27Iv+0wk4Ho/boid7mJS9cXAAAAAElFTkSuQmCC)
+					border: 1px solid rgb(0, 0, 0)
+					border: 1px solid rgba(0, 0, 0, 0.2)
+					padding-top: 7px
+					padding-bottom: 7px
+					border-radius: $project-date-border-radius
+					font-family: helvetica
+					color: white
+
+					&:hover
+						border: 1px solid rgba(0, 0, 0, 0.8)
+						color: $button-background
+
+					&:active
+						border: 2px solid rgba(0, 0, 0, 1)
+
+			#project-header
+				font-family: $masthead-font-stack
+
+			#project-body-wrapper, #body-edit
+				margin-bottom: 20px
+
+			#project-body-wrapper
+				line-height: 2
+				font-size: 16px
+				font-family: $content-font-stack
+
+				.img-caption
+					font-style: italic
+					font-size: 10px
+
+				#before-after
+					display: flex
+					justify-content: center
+
+					.body-image
+						max-width: 45%
+						max-height: 200px
+
+						&+.body-image
+							margin-left: 10px
+
+			#body-edit
+
+				#project-body-edit
+					width: 100%
+					height: 300px
+
+		#single-pic-wrapper 
+			width: $carousel-width
+			margin: 0 auto
+
+			img
+				width: $carousel-width
+				height: $carousel-height
+
+		#project-carousel
+
+			.chevron-select
+				height: 35px
+				width: 35px
+				top: $select-placement-y
+				position: absolute
+
+			.select-left
+				left: $select-placement-x
+				opacity: 0
+				+crossBrowserTransition(0.4s)
+
+			.select-right
+				right: $select-placement-x
+				opacity: 0
+				+crossBrowserTransition(0.4s)
+
+
+			.carousel-main
+				width: $carousel-width
+				// height: $carousel-height
+				margin: 0 auto
+				margin-bottom: 15px
+				position: relative
+				overflow: hidden
+				// border: 1px solid #A3A0AE
+
+				&:hover
+
+					.select-left
+						display: block
+						opacity: 1.0
+
+
+					.select-right
+						display: block
+						opacity: 1.0
+
+					@keyframes sel-display
+						0%
+							opacity: 0
+						25%
+							opacity: 25%
+						50%
+							opacity: 50%
+						75%
+							opacity: 75%
+						100%
+							opacity: 100%
+
+
+			.carousel-left
+				position: absolute
+				height: 100% //$carousel-height
+				width: $paddle-width
+				background: transparent
+				left: 0
+				bottom: 0
+
+			.carousel-image-wrapper
+				
+				.single-project-pic
+					width: $carousel-width
+					// height: $carousel-height
+
+				.single-project-pic:not(.current)
+					display: none
+
+
+			.carousel-right
+				position: absolute
+				height: 100% //$carousel-height
+				width: $paddle-width
+				right: 0
+				bottom: 0
+
+	@media screen and (max-width: $break-med)
+		padding-left: 10%
+		padding-right: 10%
+
+		.single-project
+
+			#single-pic-wrapper
+				width: 100%
+
+				img
+					width: 100%
+					height: auto
+
+			#project-carousel
+
+				.carousel-main
+					width: 100%
+
+					.carousel-image-wrapper
+
+						.single-project-pic
+							width: 100%
+
+			#project-data
+
+				#project-website-wrapper
+					display: block
+					position: relative
+					margin-left: 0
+
+					#project-website
+						width: 40%
+						margin: 0 auto
+						letter-spacing: 2px
+
+				#project-date-wrapper
+					text-align: center
+
+					.project-date
+						width: 40%
+
+				#techwrapper
+					text-align: center
+					display: block
+
+					#qualwrapper
+						justify-content: center
+
+				#project-body-wrapper
+					line-height: 2
+
+					#before-after
+						flex-wrap: wrap
+						
+						.body-image
+							max-width: 100%
+							max-height: 250px
+
+							&+.body-image
+								margin-top: 10px
+
+	$small-media-select-placement-y: 210px
+	$small-media-select-placement-x: 5px
+	$small-carousel-height: 250px
+	$carousel-full-screen-margins: -30%
+	@media screen and (max-width: $break-small)
+		padding-left: 0
+		padding-right: 0
+
+		.single-project
+			
+			#project-carousel
+
+				.carousel-main
+					width: 100%
+
+					.carousel-image-wrapper
+
+						.single-project-pic
+							width: 100%
+							height: $small-carousel-height
+
+					.select-left
+						opacity: 0.7
+						left: $small-media-select-placement-x
+
+					.select-right
+						opacity: 0.7
+						right: $small-media-select-placement-x
+				.chevron-select
+					top: $small-media-select-placement-y
+			
+			#project-data
+				padding-left: $main-break-content-padding
+				padding-right: $main-break-content-padding
+
+				#project-header
+					text-align: center
+
+				#project-date-wrapper
+					margin-bottom: 10px
+
+					.project-date
+						width: 40%
+
+						+ .project-date
+							margin-left: 10%
+
+				#techheader
+					text-align: center
+
+				#qualwrapper
+					justify-content: center
+
+				#project-body-wrapper
+					line-height: 2
+					margin-left: 10%
+					margin-right: 5%
+					font-size: 20px
+
+					#before-after
+
+						.body-image
+							max-width: 100%
+							max-height: 175px
+
+		.single-back-button
+			margin-left: -5%
+
+// End `Single Project` CSS

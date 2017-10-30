@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=portfolio:* node ./bin/www",
+    "start": "DEBUG=portfolio:* nodemon ./bin/www",
     "start-prod" : "NODE_ENV=production PORT=8000 DEBUG=portfolio:* npm run start",
     "start-prod-no-debug" : "NODE_ENV=production PORT=8000 npm start"
   },

@@ -1,0 +1,100 @@
+// `Comments` CSS
+$comment-entry-height: 350px
+$comment-entry-border: 2px solid #A3A0AE
+#comments-wrapper
+	padding-left: $main-content-padding
+	padding-right: $main-content-padding
+
+	.hidden
+		display: none
+
+	h3
+		font-family: $masthead-font-stack
+		text-align: center
+
+	#comment-toggle-wrap
+		text-align: center
+
+		#comment-toggle
+			margin-bottom: 20px
+
+	#comment-entry-wrapper
+		display: none
+		height: $comment-entry-height
+		position: relative
+		overflow-y: hidden
+
+		#comment-entry-anim-wrap
+			position: absolute
+			width: 100%
+			bottom: $comment-entry-height
+
+			label
+				font-family: $masthead-font-stack
+
+			#save-button-wrapper
+				text-align: right
+
+			#name-wrapper
+				margin-bottom: 10px
+
+			#body-wrapper
+				margin-bottom: 10px
+
+			#name-wrapper, #body-wrapper, #save-button-wrapper
+				width: 80%
+				margin-left: auto
+				margin-right: auto
+
+				#comment-input-name, #comment-input-body
+					width: 100%
+
+				#comment-input-body
+					height: 200px
+
+	#comment-entries-wrapper
+		background: #FDF5E6
+		border: $comment-entry-border
+		border-radius: 10px
+
+		hr
+			background: #C9B793
+			height: 1px
+			width: 90%
+			margin: 0 auto
+
+		.background-wrapper
+			padding-top: 10px
+			padding-bottom: 10px
+			// &:not(:first-child)
+			// 	padding-top: 10px
+
+			// &:not(:last-child)
+			// 	padding-bottom: 10px
+
+			.comment-entry
+				width: 90%
+				margin: 0 auto
+
+				.comment-author
+					font-family: $masthead-font-stack
+					display: inline-block
+				
+				.comment-date::before
+					content: '-'
+					font-size: 16px
+					padding-left: 5px
+					padding-right: 5px
+
+				.comment-date
+					font-size: 10px
+					display: inline-block
+
+				.comment-body
+					padding-left: 20px
+
+	@media screen and (max-width: $break-med)
+		padding-left: $main-break-content-padding
+		padding-right: $main-break-content-padding
+
+// End `Comments` CSS

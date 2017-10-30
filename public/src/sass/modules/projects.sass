@@ -1,0 +1,97 @@
+// `Projects` page CSS
+$anim-wrap-color: #A3A0AE
+.project-wrapper
+	padding-left: $project-content-padding
+	padding-right: $project-content-padding
+	display: flex
+	justify-content: center
+	flex-wrap: wrap
+	
+	.project
+		display: inline-block;
+		position: relative
+		background: white
+		vertical-align: top
+		z-index: 0
+		border-radius: 10px
+		margin: 20px
+		+crossBrowserTransition(0.2s)
+
+		.project-img-wrap
+			width: 180px
+			height: 180px
+			margin: 0 auto
+
+			.project-pic
+				width: 100%
+				height: 100%
+				border-radius: 10px
+
+		.project-anim-wrap
+			position: absolute
+			width: 180px
+			height: 60px
+			bottom: 0
+			z-index: 1
+			border-bottom-right-radius: 10px
+			border-bottom-left-radius: 10px
+
+		.project-title-wrap
+			position: absolute
+			width: 180px
+			height: 60px
+			bottom: 0
+			z-index: 2
+			display: none
+			text-align: center
+			color: white
+
+		@media screen and (min-width: $break-small)
+
+			&:hover
+				transform: scale(1.2)
+
+				.project-title-wrap
+					display: inline
+					animation-name: textinsert
+					animation-duration: 1.0s
+					animation-timing-function: ease-out
+
+				@keyframes textinsert
+					0%
+						opacity: 0
+					25%
+						opacity: 0.25
+					50%
+						opacity: 0.5
+					75%
+						opacity: 0.75
+					100%
+						opacity: 1.0
+
+
+				.project-anim-wrap
+					background-color: $anim-wrap-color
+					animation-name: wide
+					animation-duration: 0.5s
+					animation-timing-function: ease-out
+					opacity: 0.7
+					animation-delay: 0
+
+				@keyframes wide
+					0%
+						transform: scaleX(0)
+					50%
+						border-radius: 10%
+					100%
+						transform: scaleX(1)
+
+	@media screen and (max-width: $break-small)
+		.project
+
+			.project-title-wrap
+				display: inline
+
+			.project-anim-wrap
+				background-color: $anim-wrap-color
+				opacity: 0.7

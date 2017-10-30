@@ -1,0 +1,293 @@
+// `HEADER` CSS
+#header-wrapper
+	width: 100%
+	margin-bottom: 5em
+
+	#masthead-wrapper
+		font-family: $masthead-font-stack
+		background: $masthead-background
+		// background-image: url('/images/mounts-right.jpg')
+		font-size: 5em
+		text-align: center
+		position: relative
+		z-index: 2
+		//This stuff would be cool when I figure out the animations to 
+		//	drop down to the nav tabs
+		// border-bottom-left-radius: 50%
+		// border-bottom-right-radius: 50%
+		p:first-child
+			margin-top: 0
+		
+		#home-masthead-text
+			margin-left: 5%
+			margin-right: 5%
+			
+		&:not(.home)
+			min-height: 250px
+			max-height: 350px
+			position: relative
+
+			img
+				position: relative
+				height: 350px
+
+				&.single-project
+					z-index: 3
+
+			#basic-header-img
+				height: 100%
+				width: 100%
+				left: 0
+				// position: 
+				position: absolute
+				z-index: 1
+
+				&.blog
+					+pageHeaderBackground('/images/large-screen/blog-background-1500x250.jpg')
+					// background: url('/images/large-screen/blog-background-1500x250.jpg')
+					// background-attachment: fixed
+
+				&.projects
+					+pageHeaderBackground('/images/large-screen/projects-background-1500x250.jpg')
+					// background: url('/images/large-screen/projects-background-1500x250.jpg')
+				
+				&.contact
+					+pageHeaderBackground('/images/large-screen/contact-background-1500x310.jpg')
+
+				&.single-project
+					+pageHeaderBackground('/images/header-floral-pattern.jpg')
+
+				&.single-post
+					+pageHeaderBackground('/images/large-screen/blog-background-1500x250.jpg')
+
+			#basic-masthead-text
+				position: relative
+				color: #FDF5E6//white//#0E6049
+				// left: 25%
+				z-index: 2
+				background: url('/images/header-floral-pattern.jpg')//rgba(255, 255, 255, .20)
+				background-attachment: fixed
+
+				.text
+					background: rgba(133, 18, 47, 0.5)
+					padding-left: 20px
+					padding-right: 20px
+					font-size: 60px
+
+				@media screen and (max-width: $break-med)
+					min-height: 83px
+
+					&.single-post
+						min-height: 150px
+
+					.text
+						position: absolute
+						left: 0
+						padding-bottom: 0
+						font-size: 50px
+
+						&.single-post
+							font-size: 25px
+
+				@media screen and (max-width: $break-small)
+					min-height: 61px
+
+					.text
+						font-size: 35px
+
+						&.single-post
+							font-size: 15px
+
+			#masthead-text
+				position: absolute
+				z-index: 4
+				background: rgba(255, 255, 255, .95)
+				padding-left: 10%
+				padding-right: 10%
+				border-bottom-right-radius: 10px
+				border-right: 1px solid $black-text-color
+				border-bottom: 1px solid $black-text-color
+				color: $black-text-color
+				max-width: 75%
+				-webkit-touch-callout: none
+				-webkit-user-select: none
+				-khtml-user-select: none
+				-moz-user-select: none
+				-ms-user-select: none
+				user-select: none
+
+			@media screen and (max-width: $break-med)
+				min-height 12.5em
+				max-height: 250px
+
+				img
+					height: 250px
+
+				#masthead-text
+					font-size: 45px
+					margin-top: 5%
+					padding-top: 2.5%
+					padding-bottom: 1.5%
+					border-top-right-radius: 10px
+
+			@media screen and (max-width: $break-small)
+				min-height: 
+
+				img
+					height: 250px
+					min-width: 180px
+
+				#masthead-text
+					padding-top: 5%
+					padding-bottom: 5%
+					font-size: 30px
+
+		&.home
+			background: url('/images/header-floral-pattern.jpg')
+			background-attachment: fixed
+
+			#masthead-text
+				position: absolute
+				padding-left: 10%
+				padding-right: 10%
+				padding-top: 30%
+
+			@media screen and (max-width: $break-med)
+				font-size: 40px
+
+	#main-nav
+		padding-top: 15px
+		position: relative
+
+		@media screen and (max-width: $break-med)
+			padding-top: 0
+
+		#mobile-nav-wrapper
+			display: none
+
+		#nav-wrapper
+			display: inline
+			overflow-y: hidden
+
+			#nav-list
+				padding: 0
+				margin: 0 auto
+				width: 90%
+				display: flex
+				justify-content: center
+				flex-wrap: wrap
+
+			.nav-item
+				z-index: 0
+				list-style-type: none
+				display: inline
+				font-family: $masthead-font-stack
+				font-size: 2em
+				padding-left: 4%
+				padding-right: 4%
+				border-radius: 2px
+				text-align: center
+				opacity: 0.5
+				+crossBrowserTransition(1.0s)
+
+				a
+					opacity: 0.7
+					+crossBrowserTransition(0.2s)
+
+					&.current
+						opacity: 1.0
+
+				+ .nav-item
+					margin-left: 0.5%
+
+				&.current
+					opacity: 1.0
+					background: $masthead-background
+					background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAaUlEQVQoU2P8+/XZfwY0cObaS7CIiZY4A4gNohlPnj4PVwgSAAGYJDINV4isG10xiA9WCFOEbh3MCWCFIDciuwndvTA+VquRTYK5G8VqZCdg+BpmNS5FMA0YnkE2CeY+cDgiewabIpgYAJTdbRIwVt8BAAAAAElFTkSuQmCC)
+
+					a
+						opacity: 1.0
+						letter-spacing: 1px
+
+			#nav-list a
+				text-decoration: none
+				color: black
+
+		// Media query for navbar
+		$mobile-background-color: white
+		$mobile-main-color: grey
+		$mobile-nav-border: 5px solid black
+		$mobile-inner-nav-border: 1px solid black
+		@media screen and (max-width: $break-med)
+
+			#mobile-nav-wrapper
+				display: inline
+
+				#nav-button-mobile
+					position: absolute
+					z-index: 5
+					margin-top: 5.5px
+					right: 0
+					top: 0
+					margin-right: 10px
+					margin-bottom: 10px
+					width: 50px
+					height: 40px
+					border-radius: 10px
+					border: 2px solid $mobile-main-color
+					background: $mobile-background-color
+					+crossBrowserTransition(0.2s)
+
+					&.active
+						top: -50px
+						border-color: black
+
+						.krabby-patty
+							background: black
+
+					.krabby-patty
+						width: 80%
+						height: 7%
+						border-radius: 10%
+						margin: 0 auto
+						background: $mobile-main-color
+						// border: 2px solid #
+
+						+ .krabby-patty
+							margin-top: 20%
+
+
+			#nav-wrapper
+
+				#nav-list
+					width: 100%
+					overflow-y: hidden
+					+crossBrowserTransition(0.5s)
+
+					&.closed
+						height: 0px
+
+					&.open
+						height: 180px
+
+						&.admin
+							height: 223px
+
+					.nav-item
+						width: 100%
+						border-radius: 0
+						padding-left: 0
+						padding-right: 0
+						margin-left: 0
+						border-top: $mobile-inner-nav-border
+						border-bottom: $mobile-inner-nav-border
+
+						a
+							opacity: 1.0
+
+						&:first-child
+							border-top: $mobile-nav-border
+
+						&:last-child
+							border-bottom: $mobile-nav-border
+

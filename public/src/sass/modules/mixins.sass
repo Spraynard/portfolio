@@ -1,0 +1,87 @@
+// MIXINS AREA
+// 	This mixin provides a nice bounce effect on an element
+// 		rotate. Right now only seen on the front page
+=bounceyRotate()
+	0%
+		transform: rotateZ(10deg)
+	40%
+		transform: rotateZ(10deg)
+	42.5%
+		transform: rotateZ(-10deg)
+	43.75%
+		transform: rotateZ(-14deg)
+	45%
+		transform: rotateZ(-16deg)
+	46.25%
+		transform: rotateZ(-14deg)
+	47.5%
+		transform: rotateZ(-10deg)
+	48.75%
+		transform: rotateZ(-8deg)
+	50%
+		transform: rotateZ(-10deg)
+	90%
+		transform: rotateZ(-10deg)
+	92.5%
+		transform: rotateZ(10deg)
+	93.75%
+		transform: rotateZ(14deg)
+	95%
+		transform: rotateZ(16deg)
+	96.25%
+		transform: rotateZ(14deg)
+	97.5%
+		transform: rotateZ(10deg)
+	98.75%
+		transform: rotateZ(8deg)
+	100%
+		transform: rotateZ(10deg)
+
+// This mixin provides a background with a fixed-attachment
+// 	effect at the specified url.
+=pageHeaderBackground($url)
+	background: url($url)
+	background-attachment: fixed
+
+=qualitem()
+	display: inline
+	margin: 5px
+	padding: 5px
+	font-family: $font-stack
+	border: $button-top-border
+	border-bottom: $button-bottom-border
+	border-left: $button-side-border
+	border-right: $button-side-border
+	border-radius: 5px
+	color: $button-text-color
+	background: $button-background
+	-webkit-touch-callout: none
+	-webkit-user-select: none
+	-khtml-user-select: none
+	-moz-user-select: none
+	-ms-user-select: none
+	user-select: none
+
+=buttonCSS()
+	background: $gen-button-background
+	border: $gen-button-border
+	border-radius: $gen-button-border-radius
+	color: $gen-button-text-color
+
+=buttonHoverCSS()
+	background: #00B7FF
+	cursor: pointer
+
+=buttonFocusCSS()
+	outline: none
+	background: #035676
+ 
+
+=crossBrowserTransition($animationSpeed, $easing: ease-out)
+	-webkit-transition: all $animationSpeed $easing
+	-moz-transition: all $animationSpeed $easing
+	-ms-transition: all $animationSpeed $easing
+	-o-transition: all $animationSpeed $easing
+	transition: all $animationSpeed $easing
+
+// End MIXINS

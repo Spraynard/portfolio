@@ -1,0 +1,71 @@
+
+html, body
+	margin: 0px
+	padding: 0px
+	height: 100%
+	width: 100%
+	overflow-x: hidden
+
+hr 
+	width: 40%
+	border: none
+	height: 5px
+	background: black
+	margin-top: 0
+	margin-bottom: 0
+	
+// HTML designated body
+body
+  font: 14px $font-stack
+  background: $background
+
+pre
+	white-space: pre-wrap
+
+// My designated body
+.body
+	padding-bottom: $footer-height-large-screen
+	color: $black-text-color
+
+	@media screen and (max-width: $break-med)
+		padding-bottom: $footer-height-mid-screen
+	@media screen and (max-width: $break-small)
+		padding-bottom: $footer-height-small-screen
+	
+a
+  color: #00B7FF
+
+.alert-text
+	font-size: 40px;
+	color: red;
+	font-family: arial;
+
+.alert
+	color: red;
+	
+.container 
+	min-height: 100%
+	width: 100%
+	position: relative
+
+// Controls main content wrapper.
+// 	Page specific content wrappers
+//  will be used instead of one basic
+// 	content wrapper.
+#content
+	margin-bottom: 50px;
+	overflow-y: hidden
+
+	button, input[type="submit"]
+		height: 30px
+		+buttonCSS()
+
+		&:hover
+			+buttonHoverCSS()
+
+		&:focus
+			+buttonFocusCSS()
+
+#thank-you-message
+	font-family: $masthead-font-stack
+	font-size: 5em

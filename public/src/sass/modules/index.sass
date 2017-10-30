@@ -1,0 +1,131 @@
+// `HOME` PAGE CSS
+#home-content-wrapper
+
+	margin-left: $main-content-padding
+	margin-right: $main-content-padding
+
+	#profile-area
+		display: inline-block
+		vertical-align: top
+		min-width: 39%
+		max-width: 40%
+
+		img
+			width: 100%
+
+		#profile-name
+			margin-top: 0px
+			margin-bottom: 0px
+			font-family: $masthead-font-stack
+
+		#profile-social-media
+			border-radius: $social-border-radius
+			width: $social-bar-width
+			margin-bottom: 10px
+
+			.soc-media-wrapper
+				padding-left: 20px
+				padding-right: 20px
+				height: 40px
+				text-align: center
+				background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAYElEQVQoU22QQQ4AIQgD9UkezP7/uNmDT3JTkzEV4YJAC631/cYsIZ7eqlqa6a28GgQkhp430NkiOkj1cSKeQ8ICsglQ1EudnvZN6L7cRdB27SYyEJIuM27Iv+0wk4Ho/boid7mJS9cXAAAAAElFTkSuQmCC)
+				border-radius: $social-border-radius
+				border: $social-border
+
+				.soc-icon
+					display: inline-block
+					padding-top: 7.5px
+					+crossBrowserTransition(0.2s)
+
+					&:hover
+						transform: scale(1.2)
+
+					+ .soc-icon
+						margin-left: 10px
+
+					img
+						width: 25px
+						height: 25px
+
+						&.resize
+							width: 30px
+
+		.additionalinfo
+			text-align: left
+			padding-top: 10px
+			line-height: 2
+		
+	#quality-cont
+		display: inline-block
+		width: 60%
+
+		h1
+			margin-top: 0
+			text-align: center
+			font-family: $masthead-font-stack
+
+		#qualwrapper
+			padding: 10px
+			padding-left: 5em
+			padding-top: 0
+
+
+			h3:first-child
+				
+				margin-top: 0
+
+			h3
+				font-family: $masthead-font-stack
+
+			ul
+				display: flex
+				flex-wrap: wrap
+
+				.qualitem
+					+qualitem
+					animation-name: tilts
+					animation-duration: 5s
+					animation-iteration-count: infinite
+					animation-timing-function: linear
+
+				@keyframes tilts
+					+bounceyRotate()
+
+
+	@media screen and (max-width: $break-med)
+		margin-left: $main-break-content-padding
+		margin-right: $main-break-content-padding
+
+		#profile-area, #quality-cont
+			width: 100%
+			text-align: center
+
+		#profile-area
+			max-width: 100%
+
+			#additionalinfo
+				margin-left: 30px
+
+			img 
+				width: 60%
+
+			#profile-social-media
+				margin: 0 auto
+				margin-bottom: 10px
+
+			#additionalinfo
+				margin-left: 30px
+
+		#quality-cont
+			padding-top: 1em
+
+			#qualwrapper
+				padding-left: 0
+				padding-right: 0
+
+				.qualheader
+					font-size: 20px
+
+				ul 
+					justify-content: center
+					padding: 0

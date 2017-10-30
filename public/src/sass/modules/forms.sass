@@ -1,0 +1,109 @@
+//Global CSS for Forms - Literally all form CSS is here, for all pages
+#content
+
+	#phone-number-wrapper
+		text-align: center
+		margin-bottom: 40px
+
+		.icon-wrapper
+			display: inline-block
+
+			.phone-icon
+				height: 25px
+				width: 25px
+
+		.info
+			display: inline-block
+			font-size: 1em;
+
+		#content-social-media
+			border-radius: $social-border-radius
+			width: $social-bar-width
+			margin: 0 auto 10px auto
+				
+			.soc-media-wrapper
+				padding-left: 20px
+				padding-right: 20px
+				height: 40px
+				text-align: center
+				background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAYElEQVQoU22QQQ4AIQgD9UkezP7/uNmDT3JTkzEV4YJAC631/cYsIZ7eqlqa6a28GgQkhp430NkiOkj1cSKeQ8ICsglQ1EudnvZN6L7cRdB27SYyEJIuM27Iv+0wk4Ho/boid7mJS9cXAAAAAElFTkSuQmCC)
+				border-radius: $social-border-radius
+				border: $social-border
+
+				.soc-icon
+					display: inline-block
+					padding-top: 7.5px
+					+crossBrowserTransition(0.2s)
+
+					&:hover
+						transform: scale(1.2)
+
+					+ .soc-icon
+						margin-left: 10px
+
+					img
+						width: 25px
+						height: 25px
+
+						&.resize
+							width: 30px
+	.form-wrapper
+		position: relative
+		font-family: $masthead-font-stack
+		padding-left: $main-content-padding
+		padding-right: $main-content-padding
+
+		@media screen and (max-width: $break-med)
+			padding-left: $main-break-content-padding
+			padding-right: $main-break-content-padding
+
+		// Contact Page CSS
+
+		#contact-form
+			width: 90%
+			margin: 0 auto
+
+			.name-div
+				display: inline-block
+				width: 50%
+
+				#firstName, #lastName
+					width: 75%
+
+			.input-div
+				width: 100%
+
+				#email, #subject
+					width: 100%
+
+				#body
+					width: 100%
+					height: 300px
+					padding: 10px
+					line-spacing: 1.25
+
+			#contact-submit
+
+				input
+					+buttonCSS()
+					float: left
+					margin-top: 5px
+					height: 50px
+					width: 200px
+					font-size: 1em
+					font-weight: bold
+
+					&:hover
+						+buttonHoverCSS()
+
+					&:focus
+						+buttonFocusCSS()
+
+			@media screen and (max-width: $break-med)
+				.name-div
+					width: 100%
+
+					#firstName, #lastName
+						width: 100%
+
+	// End Contact Page CSS

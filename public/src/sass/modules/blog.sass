@@ -1,0 +1,144 @@
+//	Start `Blog` CSS
+$blog-post-background: white
+
+// Styling for code boxes (if I were to put any code samples in a post)
+.blog-post
+
+	pre
+		margin-bottom: 0
+		word-break: normal !important
+		word-wrap: normal !important
+		white-space: pre !important
+
+		code
+			margin: 0 auto
+			display: block
+			padding: 10px
+			background: #B69B9B
+			color: black
+			overflow-x: auto
+
+			@media screen and (max-width: $break-med)
+				width: 95%
+				padding: 5px
+				padding-left: 10px
+
+			@media screen and (max-width: $break-small)
+				width: 98%
+				font-size: 14px
+
+	.code-caption
+		font-size: 12px
+		margin-left: 5%
+		font-style: italic
+
+	.inline-code
+		display: inline
+		background: #B69B9B
+		color: black
+		padding: 2px 5px 2px 5px
+		font-family: courier
+
+#blog-content-wrapper
+	margin-left: $blog-content-padding
+	margin-right: $blog-content-padding
+
+	.blog-post
+		background: $blog-post-background
+		border: 1px solid black
+		border-radius: 5px
+		padding: 1em
+		// min-height: 225px
+		padding-left: 2em
+		padding-right: 2em
+		position: relative
+		box-shadow: 5px 5px 2px black
+		font-family: $content-font-stack
+
+		&:first-child
+			margin-bottom: 2em
+
+		+ .blog-post
+			margin-bottom: 2em
+
+		// Used so image doesn't overflow past parent div (`post` object) no
+		// 	matter the size of the content of the post.
+		&::after
+			content: " "
+			display: block
+			height: 0
+			clear: both;
+
+		.post-image-wrapper
+			width: 20%
+			min-width: 200px
+			float: left
+			margin-right: 15px
+
+			.post-header-pic
+				width: 100%
+				height: 100%
+
+		.post-display
+			overflow-wrap: break-word
+			line-height: 2
+			font-size: 16px
+
+			a
+				text-decoration: none
+
+				.post-header
+					margin-top: 0
+					font-family: $masthead-font-stack
+
+		.post-meta
+			margin-top: 20px
+			clear: both
+
+			.post-tags, .post-date
+				display: inline-block
+				width: 50%
+
+			.post-date
+				display: inline-block
+				text-align: right
+				font-size: 0.7em
+
+	@media screen and (max-width: $break-med)
+		margin-left: $main-break-content-padding
+		margin-right: $main-break-content-padding
+
+		.blog-post
+
+			.post-image-wrapper
+				float: none
+				margin: 10px auto 0 auto
+				width: 80%
+				height: auto
+
+			.post-display
+
+				a
+
+					.post-header
+						display: block
+						text-align: center
+
+	@media screen and (max-width: $break-small)
+		margin-left: $main-break-content-padding
+		margin-right: $main-break-content-padding
+
+		.blog-post
+			padding-left: 1em
+			padding-right: 1em
+
+			.post-display
+				font-size: 1.0em
+
+				a
+
+					.post-header
+						font-size: 1.5em
+
+
+// End `Blog` CSS

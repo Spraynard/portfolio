@@ -63,11 +63,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(sassMiddleware({
-  src: path.join(__dirname, 'public/src/'),
-  dest: path.join(__dirname, 'public'),
+  src: path.join(__dirname, 'public/src/sass/'),
+  dest: path.join(__dirname, 'public/src/stylesheets/'),
   indentedSyntax: true, // true = .sass and false = .scss
   sourceMap: true,
-  outputStyle: 'compressed'
+  prefix: '/src/stylesheets',
+  outputStyle: 'compressed',
+  // log: function (severity, key, value) { debug(severity, 'node-sass-middleware   %s : %s', key, value); },
+  // debug: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
