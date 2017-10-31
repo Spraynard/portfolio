@@ -132,7 +132,7 @@ router.get('/newpost', function(req, res, next) {
 })
 
 router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
-	
+	// Used to save a new post to the database
 	var postInfo = {
 		'pic': null,
 		'body': null,
@@ -143,6 +143,8 @@ router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 		'date' : null,
 	};
 
+	debug("You are posting this as a new-post: ", req.body)
+	// This doesn't do anything right now
 	postInfo['date'] = res.app.locals.moment().format('MM/DD/YYYY')
 
 	if (req.file !== undefined) {
@@ -150,6 +152,7 @@ router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 	}
 
 	postInfo['title'] = req.body.title;
+	postInfo['sub_title'] = req.body['sub-title'];
 	postInfo['url_title'] = req.body.title.replace(/[\-:?!@#$%^&*()_+=|\}\]\[{;"'\/><.,]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
 	postInfo['category'] = req.body.category;
 	postInfo['body'] = req.body.body;
@@ -160,7 +163,7 @@ router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 
 	mySQL.getConn(function(err, conn) {
 		if (err) {throw err};
-		conn.query("INSERT INTO post VALUES (null, ?, ?, ?, ?, ?, ?, ?, null)", [postInfo['pic'], postInfo['title'], postInfo['url_title'], postInfo['category'], postInfo['body'], postInfo['tags'], postInfo['date']], function(error, results, fields) {
+		conn.query("INSERT INTO post VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, null)", [postInfo['pic'], postInfo['title'], postInfo['sub_title'], postInfo['url_title'], postInfo['category'], postInfo['body'], postInfo['tags'], postInfo['date']], function(error, results, fields) {
 				conn.release()
 				if (error) {throw error};
 				res.redirect('/blog');
@@ -174,13 +177,14 @@ router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 router.post('/edit', function(req, res, next) {
 	var id = req.app.locals.postID
 	var title = req.body.title
+	var sub_title = req.body.subTitle;
 	var url_title = req.body.title.replace(/[\-:?!@#$%^&*()_+=|\}\]\[{;"'\/><.,]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
 	var body = req.body.body
 	var tags = req.body.tags
 
 	mySQL.getConn(function(err, conn) {
 		if (err) throw err;
-		conn.query("UPDATE post set title = ?, url_title = ?, body = ?, tags = ? WHERE id = ?", [title, url_title, body, tags, id], function(err, results, fields) {
+		conn.query("UPDATE post set title = ?, sub_title = ?, url_title = ?, body = ?, tags = ? WHERE id = ?", [title, sub_title, url_title, body, tags, id], function(err, results, fields) {
 			if (err) throw err;
 			conn.query("SELECT * from post WHERE id = ?", id, function(err, results, fields) {
 				conn.release();

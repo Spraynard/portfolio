@@ -56,13 +56,17 @@ mixin post-temp(post)
 	- var id = post.ID.toString()
 	- var url_title = post.url_title
 	- var headerPic = post.header_pic
-	div(id=`post-${id}` class="blog-post")
-		if headerPic !== null
+	- var sub_title = post['sub_title']
+	div(id=`post-${id}`).blog-post
+		if headerPic
 			.post-image-wrapper
 				img(src=`./uploads/blog/${headerPic}`).post-header-pic
 		.post-display
-			a(href=`/blog/${id}/post/${url_title}`)
-				h1(class="post-header") !{post.title}
+			.front-title-wrapper
+				a(href=`/blog/${id}/post/${url_title}`)
+					h1.post-header !{post.title}
+					if sub_title
+						h3.sub-post-header !{post['sub_title']}
 			.post-body !{post.body}
 		.post-meta
 			if post.tags !== null
@@ -77,13 +81,19 @@ mixin post-temp(post)
 mixin single-post-temp(post)
 	- var id = post.ID.toString()
 	- var headerPic = post.header_pic
-	div(id=`post-${id}` class="blog-post")
-		if headerPic !== null
+	- var sub_title = post.sub_title
+	div(id=`post-${id}`).blog-post
+		if headerPic
 			#single-post-pic-wrapper
 				img(src=`/uploads/blog/${headerPic}`).single-post-header-pic
-		h1#single-post-header.front-end !{post.title}
+		#single-title-wrapper
+			h1#single-post-header.front-end !{post.title}
+			if sub_title
+				h3#single-post-sub-header.front-end !{post['sub_title']}
 		label#edit-title-label.edit Title
 		input#single-post-header-edit.edit
+		label#edit-sub-title-label.edit Sub-Title
+		input#single-post-sub-header-edit.edit
 		#single-post-body-wrap.front-end !{post.body}		
 		label#edit-body-label.edit Body
 		textarea#single-post-body-edit.edit
@@ -113,9 +123,9 @@ mixin project-temp(project)
 	- var url_title = project.url_title
 	- var pics = project.pics.split(',')[0]
 	a(href=`/projects/${id}/project/${url_title}/`)
-		div(id=`post-${id}` class="project")
+		div(id=`post-${id}`).project
 			.project-img-wrap
-				img(src=`./uploads/projects/${pics}` class="project-pic")
+				img(src=`./uploads/projects/${pics}`).project-pic
 			.project-anim-wrap
 			.project-title-wrap
 				h3.project-header #{project.title}
@@ -125,11 +135,11 @@ mixin single-project-temp(project)
 	- var id = project.ID.toString()
 	- var pics = project.pics.split(',')
 	- var tech = project.tech.split(',')
-	div(id=`post-${id}` class="single-project")
+	div(id=`post-${id}`).single-project
 		if pics.length === 1
 			#single-pic-wrapper
 				each p in pics 
-					img(src=`/uploads/projects/${p}` class="single-project-pic")
+					img(src=`/uploads/projects/${p}`).single-project-pic
 		else
 			#project-carousel
 				.carousel-main
@@ -138,9 +148,9 @@ mixin single-project-temp(project)
 					.carousel-image-wrapper
 						each p in pics
 							if pics.indexOf(p) === 0
-								img(src=`/uploads/projects/${p}` class="single-project-pic current")
+								img(src=`/uploads/projects/${p}`).single-project-pic.current
 							else
-								img(src=`/uploads/projects/${p}` class="single-project-pic")
+								img(src=`/uploads/projects/${p}`).single-project-pic
 					.carousel-right
 						img(src="/images/svgs/chevron-right.svg").chevron-select.select-right
 		#project-data

@@ -84,12 +84,20 @@ $blog-post-background: white
 			line-height: 2
 			font-size: 16px
 
-			a
-				text-decoration: none
+			.front-title-wrapper
+				text-align: left
+				margin-left: 5%
+				margin-right: 5%
 
-				.post-header
-					margin-top: 0
-					font-family: $masthead-font-stack
+				a
+					text-decoration: none
+
+					h1, h3
+						margin: 0 auto
+
+					.post-header, .sub-post-header
+						margin-top: 0
+						font-family: $masthead-font-stack
 
 		.post-meta
 			margin-top: 20px
@@ -118,11 +126,13 @@ $blog-post-background: white
 
 			.post-display
 
-				a
+				.front-title-wrapper
+					text-align: center
 
-					.post-header
-						display: block
-						text-align: center
+					a
+
+						.post-header
+							display: block
 
 	@media screen and (max-width: $break-small)
 		margin-left: $main-break-content-padding

@@ -57,7 +57,7 @@ app.use(minifyHTML({
 // upload folder setup?
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -69,8 +69,8 @@ app.use(sassMiddleware({
   sourceMap: true,
   prefix: '/src/stylesheets',
   outputStyle: 'compressed',
-  // log: function (severity, key, value) { debug(severity, 'node-sass-middleware   %s : %s', key, value); },
-  // debug: true
+  log: function (severity, key, value) { debug(severity, 'node-sass-middleware   %s : %s', key, value); },
+  debug: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
