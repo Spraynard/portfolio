@@ -52,7 +52,7 @@ mixin social-media-wrap(none)
 				img(src="/images/logos/li_logo.png").resize
 
 //- Template for posts on the front `Blog` page
-mixin post-temp(post)
+mixin post-temp(user, post)
 	- var id = post.ID.toString()
 	- var url_title = post.url_title
 	- var headerPic = post.header_pic
@@ -62,6 +62,10 @@ mixin post-temp(post)
 			.post-image-wrapper
 				img(src=`./uploads/blog/${headerPic}`).post-header-pic
 		.post-display
+			if user
+				.post-delete
+					a(href=`/blog/delete/${id}`)
+						button DELETE
 			.front-title-wrapper
 				a(href=`/blog/${id}/post/${url_title}`)
 					h1.post-header !{post.title}

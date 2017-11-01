@@ -196,4 +196,21 @@ router.post('/edit', function(req, res, next) {
 	})
 })
 
+router.get('/delete/:id/', function(req, res) {
+	user = userCheck.validateCookie(req);
+	if (!user) {
+		res.sendStatus(401);
+	} else {
+		params = req.params;
+		mySQL.getConn(function(err, conn) {
+			if (err) throw err;
+			conn.query("DELETE FROM post WHERE id = ? LIMIT 1", params.id, function(err, results, fields) {
+				conn.release();
+				if (err) throw err;
+				res.redirect('/blog');
+			})
+		})
+	}
+})
+
 module.exports = router;
