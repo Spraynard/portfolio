@@ -60,6 +60,9 @@ typings/
 # Mac Stuff
 .DS_Store
 
+# Sass Stuff
+.sass-cache
+
 # Specialized Stuff
 public/images/
 routes/test
