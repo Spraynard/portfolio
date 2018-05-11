@@ -6,14 +6,14 @@ html, body
 	width: 100%
 	overflow-x: hidden
 
-hr 
+hr
 	width: 40%
 	border: none
 	height: 5px
 	background: black
 	margin-top: 0
 	margin-bottom: 0
-	
+
 // HTML designated body
 body
   font: 14px $font-stack
@@ -31,7 +31,7 @@ pre
 		padding-bottom: $footer-height-mid-screen
 	@media screen and (max-width: $break-small)
 		padding-bottom: $footer-height-small-screen
-	
+
 a
   color: #00B7FF
 
@@ -42,8 +42,8 @@ a
 
 .alert
 	color: red;
-	
-.container 
+
+.container
 	min-height: 100%
 	width: 100%
 	position: relative
@@ -56,7 +56,7 @@ a
 	margin-bottom: 50px;
 	overflow-y: hidden
 
-	button, input[type="submit"]
+	button:not(.fr-btn), input[type="submit"]
 		height: 30px
 		+buttonCSS()
 

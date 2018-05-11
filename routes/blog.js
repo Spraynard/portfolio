@@ -62,12 +62,12 @@ function singlePostCallback(req, res, post, comments) {
 
 router.get('/:id/post/:title', (req, res, next) => {
 	// Up Next: Implementation of a comments section for every single post.
-	// 	will probably include all of this in a module, to reduce the code in this 
+	// 	will probably include all of this in a module, to reduce the code in this
 	var post = null
 	var com = null
 	const params = req.params;
 	const postID = params.id
-	// Setting `postID` local variable so `/edit` knows what 
+	// Setting `postID` local variable so `/edit` knows what
 	// 	post to update
 	req.app.locals.postID = postID;
 	mySQL.getConn(function(err, connection) {
@@ -143,33 +143,37 @@ router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 		'date' : null,
 	};
 
-	debug("You are posting this as a new-post: ", req.body)
+	debug("You are posting this as a new-post: ", req.body);
 	// This doesn't do anything right now
-	postInfo['date'] = res.app.locals.moment().format('MM/DD/YYYY')
+	postInfo.date = res.app.locals.moment().format('MM/DD/YYYY');
 
 	if (req.file !== undefined) {
-		postInfo['pic'] = req.file.filename
+		postInfo.pic = req.file.filename;
 	}
 
-	postInfo['title'] = req.body.title;
-	postInfo['sub_title'] = req.body['sub-title'];
-	postInfo['url_title'] = req.body.title.replace(/[\-:?!@#$%^&*()_+=|\}\]\[{;"'\/><.,]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
-	postInfo['category'] = req.body.category;
-	postInfo['body'] = req.body.body;
+	postInfo.title = req.body.title;
+	postInfo.sub_title = req.body['sub-title'];
+	postInfo.url_title = req.body.title.replace(/[\-:?!@#$%^&*()_+=|\}\]\[{;"'\/><.,]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
+	postInfo.category = req.body.category;
+	postInfo.body = req.body.body;
 
 	if (req.body.tags !== '') {
-		postInfo['tags'] = req.body.tags;
+		postInfo.tags = req.body.tags;
 	}
 
 	mySQL.getConn(function(err, conn) {
-		if (err) {throw err};
-		conn.query("INSERT INTO post VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, null)", [postInfo['pic'], postInfo['title'], postInfo['sub_title'], postInfo['url_title'], postInfo['category'], postInfo['body'], postInfo['tags'], postInfo['date']], function(error, results, fields) {
-				conn.release()
-				if (error) {throw error};
+		if (err) {
+			console.error( error );
+		}
+		conn.query("INSERT INTO post VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, null)", [postInfo.pic, postInfo.title, postInfo.sub_title, postInfo.url_title, postInfo.category, postInfo.body, postInfo.tags, postInfo.date], function(error, results, fields) {
+				conn.release();
+				if (error) {
+					console.error( error );
+				};
 				res.redirect('/blog');
 		})
 	})
-	
+
 })
 
 // End New Post Back End

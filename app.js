@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 var express = require('express');
 var minifyHTML = require('express-minify-html');
 var path = require('path');
@@ -77,6 +78,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Set up of client side jQuery path
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
+// Set up of client side tinyMCE path
+app.use('/tinymce', express.static(__dirname + '/node_modules/tinymce'));
+
+// Set up of client side Froala path
+app.use('/froala', express.static(__dirname + '/node_modules/froala-editor/'));
+
 // Set up application local cache of footerPosts
 // Set up of request-wide locals
 app.use((req, res, next) => {
@@ -87,16 +94,16 @@ app.use((req, res, next) => {
       connection.release();
       res.locals.footerPosts = results;
       next();
-    })
-  })
-})
+    });
+  });
+});
 
 app.use('/', index);
 app.use('/projects', projects);
 app.use('/contact', contact);
 app.use('/blog', blog);
 app.get('/thanks', function(req, res, next) {
-  res.render('thankyou')
+  res.render('thankyou');
 });
 
 //Login page for admin mode

@@ -6,7 +6,8 @@ html
 			meta(name="description" content=description)
 		title= title
 		link(rel='stylesheet', href='/src/stylesheets/style.css')
-		link(href="https://fonts.googleapis.com/css?family=Permanent+Marker" 	rel="font stylesheet")
+		link(href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="font stylesheet")
+		block stylesheets
 		block highlight
 		block captcha
 	body
@@ -16,7 +17,7 @@ html
 				#masthead-wrapper.home
 					block home-masthead
 			else
-				#masthead-wrapper 
+				#masthead-wrapper
 					block masthead
 			include mixins/utils
 			+navBar(user, page)
@@ -55,6 +56,6 @@ html
 					#copyright-wrapper
 						| &copy; <span id="cr-year"></span> Kellan Martin
 	block javascripts
-		script(src="/jquery/jquery.js")
-		script(src="/javascripts/navmenu.min.js")
-		script(src="/javascripts/footers.min.js")
+		script(type="text/javascript" src="/jquery/jquery.js")
+		script(type="text/javascript" src="/javascripts/navmenu.min.js")
+		script(type="text/javascript" src="/javascripts/footers.min.js")

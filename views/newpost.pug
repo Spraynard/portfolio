@@ -1,5 +1,10 @@
 extends layout
 
+block append stylesheets
+	link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css")
+	link(rel="stylesheet" type="text/css" href="/froala/css/froala_editor.min.css")
+	link(rel="stylesheet" type="text/css" href="/froala/css/froala_style.min.css")
+
 block masthead
 	| New Post
 
@@ -35,11 +40,21 @@ block content
 					#tag-alert.alert
 			.form-body
 				#newpost-body
-					textarea(autofocus="true" spellcheck="true" rows="20" cols="50" name="body")#input-body
+					//textarea(autofocus="true" spellcheck="true" rows="20" cols="50" name="body")#input-body
+					textarea#input-body
 					#body-alert.alert
 			.form-submit
 				#newpost-submit
 					input(type="button" value="Post Blog Entry")#ajaxSubmit
 
 block append javascripts
-	script(src="/javascripts/newpostErrorCheck.min.js")
+	//- Froala & Plugins
+	script(type="text/javascript" src="/froala/js/froala_editor.min.js")
+	script(type="text/javascript" src="/froala/js/plugins/char_counter.min.js")
+	script(type="text/javascript" src="/froala/js/plugins/emoticons.min.js")
+	script(type="text/javascript" src="/froala/js/plugins/font_family.min.js")
+	script(type="text/javascript" src="/froala/js/plugins/font_size.min.js")
+	script(type="text/javascript" src="/froala/js/plugins/.min.js")
+
+	script(type="text/javascript" src="/javascripts/newpostErrorCheck.min.js")
+	script(type="text/javascript" src="/src/js/tinymce_init.js")
