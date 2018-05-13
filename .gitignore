@@ -75,3 +75,5 @@ views/contact.pug
 serverConnect.sh
 updateDevTest.sh
 db-changes-*.js
+
+sitemap.xml

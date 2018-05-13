@@ -8,8 +8,8 @@
     "start-prod-no-debug": "NODE_ENV=production PORT=8000 npm start",
     "start-dev": "NODE_ENV=development DEBUG=portfolio:* nodemon ./bin/www"
   },
-  "jshintConfig" : {
-    "esversion" : 6
+  "jshintConfig": {
+    "esversion": 6
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -31,7 +31,6 @@
     "promise": "^8.0.0",
     "pug": "~2.0.0-beta11",
     "serve-favicon": "~2.4.2",
-    "tinymce": "^4.7.12",
     "truncate-html": "^1.0.0",
     "xoauth2": "~1.2.0"
   }
