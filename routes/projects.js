@@ -10,18 +10,18 @@ var multer = require('multer');
 // `storage` is the storage function used for multer
 var storage = multer.diskStorage({
 	destination: function(req, file, cb) {
-		cb(null, 'uploads/projects/')
+		cb(null, 'uploads/projects/');
 	}
-})
+});
 var upload = multer({storage: storage});
 
-var user = null
-var page = 'projects'
+var user = null;
+var page = 'projects';
 
 // Callback for displaying a `single project` page
 function singleCallback(req, res, project) {
 	// Dynamic page title of the project title
-	var pageTitle = req.app.locals.websiteName + " | " + project.title
+	var pageTitle = req.app.locals.websiteName + " | " + project.title;
 	user = userCheck.validateCookie(req);
 	debug("singleCallback: ", project);
 	res.render('singleproject', {title: pageTitle, project: project, user: user, page: page});
@@ -31,11 +31,11 @@ function singleCallback(req, res, project) {
 function callback(req, res, projects) {
 	desc = "Projects - Kellan Martin - List of personal and freelance client-hired projects that are completed and available to post online."
 	// Setting the page title
-	var pageTitle = req.app.locals.websiteName + " | Projects"
+	var pageTitle = req.app.locals.websiteName + " | Projects";
 	user = userCheck.validateCookie(req);
 	res.render('projects', {title: pageTitle, projects: projects, user: user, page: page, description: desc}, (err, html) => {
 		res.send(html);
-	})
+	});
 }
 
 //GET `Projects` Page
@@ -46,44 +46,44 @@ router.get('/', function(req, res, next) {
 		// Will render the main projects page if url is without a 'singleproject' query
 		var projects = null;
 		mySQL.getConn(function(err, connection) {
-	  	if (err) {throw err};
+	  	if (err) throw err;
 	  	connection.query("SELECT * FROM projects ORDER BY id DESC", function(err, results, fields) {
-	  		connection.release()
+	  		connection.release();
 	  		if(results) {
 	  			projects = results;
 	  			callback(req, res, projects);
 	  		}
-	  	})
-	})
-})
+	  	});
+	});
+});
 
 // This will be the route for single-projects
 router.get('/:id/project/:title', (req, res, next) => {
-	const params = req.params
-	const id = params.id
+	const params = req.params;
+	const id = params.id;
 	let project = null;
 
 	// Putting this project id in a local so it can be used by the edit page
 	req.app.locals.projectID = id;
 
 	mySQL.getConn(function(err, connection) {
-		if (err) {throw err};
+		if (err) throw err;
 		connection.query('SELECT * FROM projects WHERE id = ?', id, function(err, results, fields) {
-			connection.release()
+			connection.release();
 			if (results) {
 				project = results[0];
 				debug(project);
 				singleCallback(req, res, project);
 			}
-		})
-	})	
-})
+		});
+	});
+});
 
 router.get('/newproject', function(req, res, next) {
-	user = userCheck.validateCookie(req)
+	var user = userCheck.validateCookie(req);
 
 	if (user) {
-		res.render('newproject', {user: user})
+		res.render('newproject', {user: user});
 	}
 	else {
 		res.cookie('error', 'Permission Error: Not Logged In as Admin');

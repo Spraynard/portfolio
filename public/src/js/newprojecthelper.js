@@ -41,7 +41,7 @@ $(function() {
 				'days': 31
 			}
 		}
-	}
+	};
 
 	var view = {
 		init: function() {
@@ -49,10 +49,12 @@ $(function() {
 			view.renderStartDays();
 			view.renderEnd();
 			view.renderEndDays();
+			// Initialize froala in the view
+			froalaEditorSitePackage("#project-input-body");
 		},
 		renderStart: function() {
 			// Function for rendering the options on the `start`
-			// 	select tags. 
+			// 	select tags.
 			var projectStartMonth = $('#project-input-start-month');
 			var htmlMonths = '';
 			var projectStartYear = $('#project-input-start-year');
@@ -92,14 +94,18 @@ $(function() {
 			var htmlMonths = '';
 			var projectEndYear = $('#project-input-end-year');
 			var htmlYears ='';
+
 			controller.getMonths().forEach(function(month) {
 				var monthOption = controller.makeOption(controller.capFirst(month));
 				htmlMonths += monthOption;
-			})
+			});
+
 			projectEndMonth.html(htmlMonths);
+
 			for (var i = controller.getCurrentYear(); i < controller.getCurrentYear() + 10; i++) {
 				htmlYears += controller.makeOption(i);
 			}
+
 			projectEndYear.html(htmlYears);
 
 			view.renderEndDays();
@@ -116,7 +122,7 @@ $(function() {
 			projectEndDay.html(htmlDays);
 			controller.addChangeListener('end');
 		}
-	}
+	};
 
 	var controller = {
 		init: function() {
@@ -140,11 +146,11 @@ $(function() {
 		},
 		// Returns the total amount of days for the input month
 		getMonths: function() {
-			return Object.keys(model['months']);
+			return Object.keys(model.months);
 		},
 		getDays: function(month) {
 			month = month.toLowerCase();
-			return model['months'][month]['days']
+			return model.months[month].days;
 		},
 		// Capitalizes the first letter of a string
 		capFirst: function(string) {
@@ -153,21 +159,21 @@ $(function() {
 		// Returns an 'OPTION' HTML element with
 		//	text and value the inputted value
 		makeOption: function(value) {
-			var template = '<option value=%data%>%data%</option>'
+			var template = '<option value=%data%>%data%</option>';
 			return template.replace(/%data%/g, value);
 		},
 		addChangeListener: function(area) {
 			if (area === 'start') {
 				$('#project-input-start-month').on('change', function() {
 					view.renderStartDays();
-				})
+				});
 			}
 			else {
 				$('#project-input-end-month').on('change', function() {
 					view.renderEndDays();
-				})
+				});
 			}
 		}
-	}
+	};
 	controller.init();
-})
+});

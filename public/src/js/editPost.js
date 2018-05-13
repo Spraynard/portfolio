@@ -11,9 +11,6 @@ $(function() {
 	var $bodyEdit = $('#single-post-body-edit');
 	var $tagsEdit = $('#post-tags-edit');
 
-	// Global Froala editor variable
-	var froalaEditor;
-
 	// Global Edit mode variable
 	var editMode = false;
 
@@ -89,12 +86,12 @@ $(function() {
 	$("#start-edit-button").on('click', function() {
 		togglePostEdit();
 
+		// This is how i'm initializing and destroying the WYSIWYG editor.
 		if ( editMode ) {
 			froalaEditorSitePackage('#single-post-body-edit');
 		} else {
 			froalaEditorSitePackage('#single-post-body-edit', 'destroy');
 		}
-		// I want to add WYSIWYG to this
 	});
 
 	$("#confirm-edit-button").on('click', function() {

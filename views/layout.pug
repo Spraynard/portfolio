@@ -8,6 +8,8 @@ html
 		title= title
 		link(rel='stylesheet', href='/src/stylesheets/style.css')
 		link(href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="font stylesheet")
+		if ( user )
+			+froalaCSS
 		block stylesheets
 		block highlight
 		block captcha
@@ -58,3 +60,5 @@ html
 		script(type="text/javascript" src="/src/js/froalaEditorSitePackage.js")
 		script(type="text/javascript" src="/javascripts/navmenu.min.js")
 		script(type="text/javascript" src="/javascripts/footers.min.js")
+		if ( user )
+			+froalaJS
