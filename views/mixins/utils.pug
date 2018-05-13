@@ -13,9 +13,9 @@ mixin navBar(user, page = null)
 						a(href="/") Home
 					li.nav-item
 						a(href="/projects") Projects
-					li.nav-item 	
+					li.nav-item
 						a(href="/blog") Blog
-					li.nav-item 	
+					li.nav-item
 						a(href="/contact") Contact
 					if page === 'blog' &&  user && user.type === 'admin'
 						li.nav-item
@@ -29,12 +29,12 @@ mixin navBar(user, page = null)
 						a(href="/") Home
 					li.nav-item
 						a(href="/projects") Projects
-					li.nav-item 	
+					li.nav-item
 						a(href="/blog") Blog
-					li.nav-item 	
+					li.nav-item
 						a(href="/contact") Contact
 
-						
+
 //- Template for a social media bar
 mixin social-media-wrap(none)
 	.soc-media-wrapper
@@ -98,7 +98,7 @@ mixin single-post-temp(post)
 		input#single-post-header-edit.edit
 		label#edit-sub-title-label.edit Sub-Title
 		input#single-post-sub-header-edit.edit
-		#single-post-body-wrap.front-end !{post.body}		
+		#single-post-body-wrap.front-end !{post.body}
 		label#edit-body-label.edit Body
 		textarea#single-post-body-edit.edit
 		hr
@@ -142,7 +142,7 @@ mixin single-project-temp(project)
 	div(id=`post-${id}`).single-project
 		if pics.length === 1
 			#single-pic-wrapper
-				each p in pics 
+				each p in pics
 					img(src=`/uploads/projects/${p}`).single-project-pic
 		else
 			#project-carousel
@@ -192,22 +192,14 @@ mixin single-project-temp(project)
 			#body-edit.edit
 				textarea(id="project-body-edit")
 
-//- Template for blog posts shown on the footer 
+//- Template for blog posts shown on the footer
 mixin footerPost(posts)
 	if posts
 		each post in posts
 			- var id = post.ID.toString()
 			- var url_title = post.url_title
-			- var maxLen = 50
-			if post.title.length > maxLen
-				- title = post.title.substring(0,50) + '...'
-			else
-				- title = post.title
-
-			if post.body.length > maxLen
-				- body = post.body.substring(0,maxLen) + '...'
-			else
-				- body = post.body
+			- var body = post.body;
+			- var title = post.title;
 			.fpwrap
 				a(href=`/blog/${id}/post/${url_title}`)
 					.footer-post-title

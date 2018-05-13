@@ -8,6 +8,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
 var helmet = require('helmet');
+
+// HTML Truncator
+var html_truncator = require('truncate-html');
+
 //Custom Cookie Divider Module
 var cookieDivide = require('./cookieDivider');
 // mySQL custom export
@@ -24,6 +28,8 @@ var login = require('./routes/login');
 var logout = require('./routes/logout');
 //Routing for Blog Page
 var blog = require('./routes/blog');
+
+var debug = require('debug')('portfolio:app.js');
 
 var app = express();
 
@@ -92,6 +98,18 @@ app.use((req, res, next) => {
     if (err) throw err;
     connection.query("SELECT ID, title, url_title, body FROM post ORDER BY ID DESC LIMIT 2", function(err, results, fields) {
       connection.release();
+      /**
+       * My current string truncation method within the template isn't really smart, so now since I
+       * have the ability to include a lot of links and shit, I should include a smart way to
+       * truncate strings and what not.
+       */
+      var result = null;
+      var resultBody = null;
+      for ( var i = 0; i < results.length; i++ )
+      {
+        resultBody = results[i].body;
+        results[i].body = html_truncator( results[i].body, {length : 20} );
+      }
       res.locals.footerPosts = results;
       next();
     });

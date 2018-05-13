@@ -66,5 +66,12 @@ $(document).ready(function() {
 		  {code: '1f636', desc: 'Face without mouth'},
 		  {code: '1f637', desc: 'Face with medical mask'}
 		],
+
+		//* heigh Min
+		heightMin : 500,
+
+		codeMirrorOptions: {
+			lineNumbers: true,
+		}
 	});
 });
