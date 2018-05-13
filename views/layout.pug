@@ -1,5 +1,6 @@
 doctype html
 html
+	include mixins/utils
 	head
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		if description
@@ -19,7 +20,6 @@ html
 			else
 				#masthead-wrapper
 					block masthead
-			include mixins/utils
 			+navBar(user, page)
 		.body
 			#content
@@ -40,12 +40,10 @@ html
 
 				#footer-mid
 					#footer-social-media
-						include mixins/utils
 						+social-media-wrap
 					#footer-post-wrapper
 						#check-out
 							| Check Out My Latest Blog Posts! <br> (Click on the title to be taken to it)
-						include mixins/utils
 						+footerPost(footerPosts)
 				#footer-right
 					#contact-wrapper
@@ -57,5 +55,6 @@ html
 						| &copy; <span id="cr-year"></span> Kellan Martin
 	block javascripts
 		script(type="text/javascript" src="/jquery/jquery.js")
+		script(type="text/javascript" src="/src/js/froalaEditorSitePackage.js")
 		script(type="text/javascript" src="/javascripts/navmenu.min.js")
 		script(type="text/javascript" src="/javascripts/footers.min.js")

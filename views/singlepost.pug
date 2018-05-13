@@ -4,16 +4,21 @@ block highlight
 	link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css")
 	script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js")
 	script hljs.initHighlightingOnLoad();
+
+block append stylesheets
+	+froalaCSS
+
 block masthead
 	#basic-header-img.single-post
 	#basic-masthead-text.single-post
 		span.text.single-post !{post.title}
 
+
 block content
 	#single-post-wrapper
 		include mixins/utils
 		+single-post-temp(post)
-		if user
+		if ( user )
 			#post-edit-button
 				button(value="start-edit" id="start-edit-button")
 					|	Edit Post
@@ -52,5 +57,7 @@ block content
 
 
 block append javascripts
-	script(src="/javascripts/editPost.min.js")
+	//- script(src="/javascripts/editPost.min.js")
+	+froalaJS
+	script(src="/src/js/editPost.js")
 	script(src="/javascripts/singlePostComments.min.js")

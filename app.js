@@ -108,7 +108,7 @@ app.use((req, res, next) => {
       for ( var i = 0; i < results.length; i++ )
       {
         resultBody = results[i].body;
-        results[i].body = html_truncator( results[i].body, {length : 20} );
+        results[i].body = html_truncator( results[i].body, {length : 50, excludes: 'img' } );
       }
       res.locals.footerPosts = results;
       next();

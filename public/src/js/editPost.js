@@ -2,8 +2,8 @@ $(function() {
 
 	var $title = $('#single-post-header');
 	var $subTitle = $('#single-post-sub-header');
-	var $body = $('#single-post-body-wrap')//$('#single-post-body');
-	
+	var $body = $('#single-post-body-wrap');//$('#single-post-body');
+
 	var $tags = $('#tags');
 
 	var $titleEdit = $('#single-post-header-edit');
@@ -11,9 +11,15 @@ $(function() {
 	var $bodyEdit = $('#single-post-body-edit');
 	var $tagsEdit = $('#post-tags-edit');
 
+	// Global Froala editor variable
+	var froalaEditor;
+
+	// Global Edit mode variable
+	var editMode = false;
+
 	function removeWhiteSpace(string) {
-			string = string.replace(/\s/g, '')
-			return string
+			string = string.replace(/\s/g, '');
+			return string;
 	}
 
 	// Functions used to toggle between edit mode
@@ -21,29 +27,31 @@ $(function() {
 	function toggleFrontEnd() {
 		// Toggles visibility of all `.front-end` classed html
 		var frontEndDoms = $(".front-end");
-		$(frontEndDoms).toggle()
+		$(frontEndDoms).toggle();
 	}
 
 	function toggleEdit(editDoms) {
 		// Toggles visibility of all `.edit` classed html
-		var editDoms = $(".edit")
-		$(editDoms).toggleClass('show')
-		var toggled = editDoms.is(':visible')
-		$('#start-edit-button').text(toggled == true ? 'Cancel' : 'Edit Post')
+		editDoms = $(".edit").not("#single-post-body-edit");
+		console.log( editDoms );
+		$(editDoms).toggleClass('show');
+		var toggled = editDoms.is(':visible');
+		$('#start-edit-button').text(toggled == true ? 'Cancel' : 'Edit Post');
 	}
 
 	function toggleConfirm() {
-		$('button#confirm-edit-button').toggle()
+		$('button#confirm-edit-button').toggle();
 	}
 
 	function toggleEditMode() {
+		editMode = ( ! editMode );
 		toggleFrontEnd();
 		toggleEdit();
 		toggleConfirm();
 	}
 
 	function togglePostEdit() {
-		toggleEditMode()
+		toggleEditMode();
 		$titleEdit.val($title.html());
 		$subTitleEdit.val($subTitle.html());
 		// Using HTML to be able to correctly see what HTML is being put in this area
@@ -52,19 +60,19 @@ $(function() {
 	}
 
 	function savePost() {
-		var title, subTitle, body, tags
+		var title, subTitle, body, tags;
 
 		var data = {
 			title: $titleEdit.val(),
 			subTitle : $subTitleEdit.val(),
 			body: $bodyEdit.val(),
 			tags: $tagsEdit.val(),
-		}
+		};
 
 		$.post("/blog/edit", data, function(successObj) {
 			var obj = successObj[0];
 			var newTitle = obj.title;
-			var newSubTitle = obj['sub_title'];
+			var newSubTitle = obj.sub_title;
 			var newBody = obj.body;
 			var newTags = obj.tags;
 
@@ -75,19 +83,27 @@ $(function() {
 			// On update, puts the HTML content from the text box into the body, not just the text
 			$body.html(newBody);
 			$tags.text(newTags);
-		})
+		});
 	}
 
 	$("#start-edit-button").on('click', function() {
 		togglePostEdit();
-	})
+
+		if ( editMode ) {
+			froalaEditorSitePackage('#single-post-body-edit');
+		} else {
+			froalaEditorSitePackage('#single-post-body-edit', 'destroy');
+		}
+		// I want to add WYSIWYG to this
+	});
 
 	$("#confirm-edit-button").on('click', function() {
 		if (confirm('Change this blog post?')) {
 			savePost();
+			froalaEditorSitePackage('#single-post-body-edit', 'destroy');
 		}
 		else {
-			return
+			return;
 		}
-	})
-})
+	});
+});
