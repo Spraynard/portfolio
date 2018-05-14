@@ -12,6 +12,7 @@ var router = express.Router();
 var app = express();
 // var relativePath = '../public/images/uploads'
 // var uploadFolder = path.join(__dirname, relativePath);
+
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		cb(null, 'uploads/blog/');
@@ -30,7 +31,7 @@ var page = 'blog';
 function callback(req, res, posts) {
 	let desc = 'A Beggar\'s Blog - Kellan Martin - Freelance Web Developer Based in Kalamazoo, MI. Completely client oriented and capable of using the latest web technologies to the clients advantage!'
 	// Setting the title for the page
-	var pageTitle = req.app.locals.websiteName + ' | A Beggar\'s Blog'
+	var pageTitle = req.app.locals.websiteName + ' | A Beggar\'s Blog';
 	user = userCheck.validateCookie(req);
 	res.render('blog', {title: pageTitle, posts: posts, user: user, page: page, description: desc}, (err, html) => {
 		res.send(html);
@@ -103,10 +104,10 @@ function getTimestamp(dateObj) {
 }
 
 router.post('/comments', function(req, res, next) {
-	var name = req.body.name
-	var date = new Date()
-	var body = req.body.body
-	var postID = req.app.locals.postID
+	var name = req.body.name;
+	var date = new Date();
+	var body = req.body.body;
+	var postID = req.app.locals.postID;
 	mySQL.getConn(function(err, conn) {
 		if (err) throw err;
 		conn.query('INSERT INTO comments VALUES (null, ?, ?, CURRENT_TIMESTAMP, ?, ?)', [postID, name, getTimestamp(date), body], function(err, results, fields) {
