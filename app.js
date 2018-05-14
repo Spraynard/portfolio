@@ -85,7 +85,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
 // Set up of client side tinyMCE path
-app.use('/tinymce', express.static(__dirname + '/node_modules/tinymce'));
+app.use('/tinymce', express.static(__dirname + '/node_modules/tinymce/'));
 
 // Set up of client side Froala path
 app.use('/froala', express.static(__dirname + '/node_modules/froala-editor/'));

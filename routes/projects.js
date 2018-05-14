@@ -29,7 +29,7 @@ function singleCallback(req, res, project) {
 
 // Callback for displaying `projects` page
 function callback(req, res, projects) {
-	desc = "Projects - Kellan Martin - List of personal and freelance client-hired projects that are completed and available to post online."
+	desc = "Projects - Kellan Martin - List of personal and freelance client-hired projects that are completed and available to post online.";
 	// Setting the page title
 	var pageTitle = req.app.locals.websiteName + " | Projects";
 	user = userCheck.validateCookie(req);
@@ -90,12 +90,12 @@ router.get('/newproject', function(req, res, next) {
 		res.redirect('/');
 		res.end();
 	}
-})
+});
 
 function getDate(dateObj) {
 	var monthNames = ['January', 'February', 'March', 'April',
 						'May', 'June', 'July', 'August', 'September',
-						'October', 'November', 'December']
+						'October', 'November', 'December'];
 
 	var day = dateObj.getDate();
 	var month = dateObj.getMonth();
@@ -124,41 +124,41 @@ router.post('/newproject', upload.any(), function(req, res, next) {
 		var filenameArray = [];
 		req.files.forEach(function(file) {
 			filenameArray.push(file.filename);
-		})
-		postInfo['pics'] = filenameArray.join(",");
+		});
+		postInfo.pics = filenameArray.join(",");
 	}
 
 	var startDate = req.body['start-month'] + ' ' + req.body['start-day'] + ', ' + req.body['start-year'];
 	var endDate = req.body['end-month'] + ' ' + req.body['end-day'] + ', ' + req.body['end-year'];
 
-	postInfo['title'] = req.body.title;
-	postInfo['url_title'] = req.body.title.replace(/[\-:?!@#$%^&*()_+=|\}\]\[{;"'\/><.,]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
-	postInfo['body'] = req.body.body;
-	postInfo['startDate'] = startDate;
-	postInfo['endDate'] = endDate;
-	postInfo['tech'] = req.body.tech;
-	postInfo['website'] = req.body.website;
+	postInfo.title = req.body.title;
+	postInfo.url_title = req.body.title.replace(/[\-:?!@#$%^&*()_+=|\}\]\[{;"'\/><.,]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
+	postInfo.body = req.body.body;
+	postInfo.startDate = startDate;
+	postInfo.endDate = endDate;
+	postInfo.tech = req.body.tech;
+	postInfo.website = req.body.website;
 
 	mySQL.getConn(function(err, conn) {
-		if (err) {throw err};
+		if (err) throw err;
 		conn.query("INSERT INTO projects VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)", [postInfo['title'], postInfo['url_title'], postInfo['website'], postInfo['tech'], postInfo['pics'], postInfo['startDate'], postInfo['endDate'], postInfo['body']], function(err, results, fields) {
 			conn.release();
-			if (err) {throw err};
-		})
-	})
+			if (err) throw err;
+		});
+	});
 	res.redirect('/projects');
-})
+});
 
 router.post('/edit', function(req, res, next) {
-	var id = req.app.locals.projectID
-	var title = req.body.title
+	var id = req.app.locals.projectID;
+	var title = req.body.title;
 	var url_title = req.body.title.replace(/[:]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
-	var body = req.body.body
-	var startDate = req.body.startDate
-	var endDate = req.body.endDate
-	var website = req.body.website
-	var tech = req.body.tech
-	var link = req.body.link
+	var body = req.body.body;
+	var startDate = req.body.startDate;
+	var endDate = req.body.endDate;
+	var website = req.body.website;
+	var tech = req.body.tech;
+	var link = req.body.link;
 
 	mySQL.getConn(function(err, conn) {
 		if (err) throw err;
@@ -169,9 +169,9 @@ router.post('/edit', function(req, res, next) {
 				if (err) throw err;
 				res.send(results);
 				res.end();
-			})
-		})
-	})
-})
+			});
+		});
+	});
+});
 
 module.exports = router;

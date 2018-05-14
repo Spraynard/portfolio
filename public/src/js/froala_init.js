@@ -1,3 +1,3 @@
-$(document).ready(function() {
-	froalaEditorSitePackage( "#input-body" );
-});
+// $(document).ready(function() {
+	froalaEditorSitePackage( "#input-body", "#newpost-body" );
+// });

@@ -14,16 +14,16 @@ var app = express();
 // var uploadFolder = path.join(__dirname, relativePath);
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		cb(null, 'uploads/blog/')
+		cb(null, 'uploads/blog/');
 	},
 	filename: function (req, file, cb) {
-		cb(null, file.originalname)
+		cb(null, file.originalname);
 	}
-})
-var upload = multer({ storage: storage })
+});
+var upload = multer({ storage: storage });
 
-var user = null
-var page = 'blog'
+var user = null;
+var page = 'blog';
 
 // Back End Functionality for Displaying Blog Posts (Main blog page, as well as single posts)
 
@@ -40,15 +40,15 @@ function callback(req, res, posts) {
 router.get('/', function(req, res, next) {
 	var posts = null;
 	mySQL.getConn(function(err, connection) {
-		if (err) {throw err};
+		if (err) throw err;
 		connection.query("SELECT * FROM post ORDER BY ID DESC", function(err, results, fields) {
-			connection.release()
+			connection.release();
 			if (results) {
 				posts = results;
 				callback(req, res, posts);
 			}
-		})
-	})
+		});
+	});
 });
 
 function singlePostCallback(req, res, post, comments) {
@@ -63,28 +63,28 @@ function singlePostCallback(req, res, post, comments) {
 router.get('/:id/post/:title', (req, res, next) => {
 	// Up Next: Implementation of a comments section for every single post.
 	// 	will probably include all of this in a module, to reduce the code in this
-	var post = null
-	var com = null
+	var post = null;
+	var com = null;
 	const params = req.params;
-	const postID = params.id
+	const postID = params.id;
 	// Setting `postID` local variable so `/edit` knows what
 	// 	post to update
 	req.app.locals.postID = postID;
 	mySQL.getConn(function(err, connection) {
-		if (err) {throw err}
+		if (err) throw err;
 		connection.query('SELECT * FROM post WHERE id = ?', postID, function(err, results1, fields) {
 			if (err) throw err;
 			else if (results1) {
 				post = results1[0];
 				connection.query("SELECT * FROM comments WHERE postID = ? ORDER BY created DESC", postID, function(err, results2, fields) {
-					connection.release()
+					connection.release();
 					com = results2;
 					singlePostCallback(req, res, post, com);
-				})
+				});
 			}
-		})
-	})
-})
+		});
+	});
+});
 
 // End Single and Main Page Blog Post Functionality
 
@@ -92,7 +92,7 @@ router.get('/:id/post/:title', (req, res, next) => {
 function getTimestamp(dateObj) {
 	var monthNames = ['January', 'February', 'March', 'April',
 						'May', 'June', 'July', 'August', 'September',
-						'October', 'November', 'December']
+						'October', 'November', 'December'];
 
 	var day = dateObj.getDate();
 	var month = dateObj.getMonth();
@@ -112,9 +112,9 @@ router.post('/comments', function(req, res, next) {
 		conn.query('INSERT INTO comments VALUES (null, ?, ?, CURRENT_TIMESTAMP, ?, ?)', [postID, name, getTimestamp(date), body], function(err, results, fields) {
 			if (err) throw err;
 			res.send(true);
-		})
-	})
-})
+		});
+	});
+});
 // End Comments area request handling
 
 // Back End Functionality for New Posts
@@ -127,9 +127,9 @@ router.get('/newpost', function(req, res, next) {
 	else {
 		res.cookie('error', 'Permission Error: Not Logged In as Admin');
 		res.redirect('/');
-		res.end()
+		res.end();
 	}
-})
+});
 
 router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 	// Used to save a new post to the database
@@ -169,22 +169,21 @@ router.post('/newpost', upload.single('header-pic'), function(req, res, next) {
 				conn.release();
 				if (error) {
 					console.error( error );
-				};
+				}
 				res.redirect('/blog');
-		})
-	})
-
-})
+		});
+	});
+});
 
 // End New Post Back End
 
 router.post('/edit', function(req, res, next) {
-	var id = req.app.locals.postID
-	var title = req.body.title
+	var id = req.app.locals.postID;
+	var title = req.body.title;
 	var sub_title = req.body.subTitle;
 	var url_title = req.body.title.replace(/[\-:?!@#$%^&*()_+=|\}\]\[{;"'\/><.,]/g, '').replace(/<(?:.|\n)*?>/gm, '').toLowerCase().split(' ').join('-')
-	var body = req.body.body
-	var tags = req.body.tags
+	var body = req.body.body;
+	var tags = req.body.tags;
 
 	mySQL.getConn(function(err, conn) {
 		if (err) throw err;
@@ -195,10 +194,10 @@ router.post('/edit', function(req, res, next) {
 				if (err) throw err;
 				res.send(results);
 				res.end();
-			})
-		})
-	})
-})
+			});
+		});
+	});
+});
 
 router.get('/delete/:id/', function(req, res) {
 	user = userCheck.validateCookie(req);
@@ -212,9 +211,9 @@ router.get('/delete/:id/', function(req, res) {
 				conn.release();
 				if (err) throw err;
 				res.redirect('/blog');
-			})
-		})
+			});
+		});
 	}
-})
+});
 
 module.exports = router;

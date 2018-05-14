@@ -27,23 +27,23 @@ $(function() {
 		var $title = $('#input-title').val();
 		var $category = $('#input-category').val();
 		var $tags = $('#input-tags').val();
-		var $body = $('#input-body').val();
+		// var $body = $('#input-body').val();
 
 
 		var error = 0;
 
 		if ($title.length === 0) {
 			errorObj['title'] = "You must put something in the title space";
-			error = 1;		
+			error = 1;
 		}
 		if ($category.length === 0) {
 			errorObj['category'] = "You must put something in the category space";
 			error = 1;
 		}
-		if ($body.length === 0) {
-			errorObj['body'] = "You must have something in the body";
-			error = 1;
-		}
+		// if ($body.length === 0) {
+		// 	errorObj['body'] = "You must have something in the body";
+		// 	error = 1;
+		// }
 		if ($tags.split(',').length > 3) {
 			errorObj['tags'] = "There can be no more than 3 tags per post";
 			error = 1;

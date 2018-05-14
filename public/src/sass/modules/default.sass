@@ -56,7 +56,7 @@ a
 	margin-bottom: 50px;
 	overflow-y: hidden
 
-	button:not(.fr-btn), input[type="submit"]
+	button:not(.fr-btn):not(button[id="mceu_*"]), input[type="submit"]
 		height: 30px
 		+buttonCSS()
 
@@ -69,3 +69,12 @@ a
 #thank-you-message
 	font-family: $masthead-font-stack
 	font-size: 5em
+
+// .mce-tooltip
+// 	position: fixed !important
+
+// .mce-panel.mce-floatpanel.mce-menu
+// 	position: fixed !important
+
+#tinymceresets
+	position: relative
