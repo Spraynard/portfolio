@@ -160,6 +160,7 @@ router.post('/edit', function(req, res, next) {
 	var tech = req.body.tech;
 	var link = req.body.link;
 
+	debug(body);
 	mySQL.getConn(function(err, conn) {
 		if (err) throw err;
 		conn.query("UPDATE projects SET title = ?, url_title = ?, website = ?, tech = ?, start_date = ?, end_date = ?, body = ? WHERE id = ?", [title, url_title, link, tech, startDate, endDate, body, id], function(err, results, fields) {

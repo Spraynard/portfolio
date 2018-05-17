@@ -14,6 +14,8 @@ $(function() {
 	// Global Edit mode variable
 	var editMode = false;
 
+	var tinymceID = null;
+
 	function removeWhiteSpace(string) {
 			string = string.replace(/\s/g, '');
 			return string;
@@ -62,7 +64,7 @@ $(function() {
 		var data = {
 			title: $titleEdit.val(),
 			subTitle : $subTitleEdit.val(),
-			body: $bodyEdit.val(),
+			body: tinymce.get('single-post-body-edit').getContent(),
 			tags: $tagsEdit.val(),
 		};
 
@@ -88,17 +90,17 @@ $(function() {
 
 		// This is how i'm initializing and destroying the WYSIWYG editor.
 		if ( editMode ) {
-			froalaEditorSitePackage('#single-post-body-edit');
+		 	tinyMCEPackage('#single-post-body-edit', '#edit-body-container');
 		} else {
-			froalaEditorSitePackage('#single-post-body-edit', 'destroy');
+		 	tinyMCEPackage('#single-post-body-edit', null, true);
 		}
 	});
 
 	$("#confirm-edit-button").on('click', function() {
 		if (confirm('Change this blog post?')) {
 			savePost();
-			froalaEditorSitePackage('#single-post-body-edit', 'destroy');
-		}
+		 	tinyMCEPackage('#single-post-body-edit', null, true);
+			}
 		else {
 			return;
 		}

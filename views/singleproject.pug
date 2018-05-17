@@ -11,7 +11,6 @@ block masthead
 block content
 	- id = project.ID
 	#single-project-wrapper
-		include mixins/utils
 		+single-project-temp(project)
 		//- Only show edit button on user
 		if ( user )

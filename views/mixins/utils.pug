@@ -1,39 +1,11 @@
 //- Template for nav-bar shown on all pages
-mixin froalaJS
-	//- Froala & Plugins
-	//- script(type="text/javascript" src="/froala/js/froala_editor.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/char_counter.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/emoticons.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/font_family.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/font_size.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/code_view.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/image.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/quick_insert.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/table.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/lists.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/entities.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/fullscreen.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/code_beautifier.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/paragraph_format.min.js")
-	//- script(type="text/javascript" src="/froala/js/plugins/link.min.js")
+mixin tinyMCEJS
 	script(type="text/javascript" src="/tinymce/tinymce.min.js")
-
-
-
+	script(type="text/javascript" src="/src/js/tinyMCEPackage.js")
 
 mixin froalaCSS
 	//- Froala CSS & Plugins CSS
 	link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css")
-	//- link(rel="stylesheet" type="text/css" href="/froala/css/froala_editor.min.css")
-	//- link(rel="stylesheet" type="text/css" href="/froala/css/froala_style.min.css")
-	//- link(rel="stylesheet" type="text/css" href="/froala/css/plugins/char_counter.min.css")
-	//- link(rel="stylesheet" type="text/css" href="/froala/css/plugins/emoticons.min.css")
-	//- link(rel="stylesheet" type="text/css" href="/froala/css/plugins/code_view.min.css")
-	//- link(rel="stylesheet" type="text/css" href="/froala/css/plugins/image.min.css")
-	//- link(rel="stylesheet" type="text/css" href="/froala/css/plugins/quick_insert.min.css")
-	//- link(rel="stylesheet" type="text/css" href="/froala/css/plugins/table.min.css")
-	//- link(rel="stylesheet" type="text/css" href="/froala/css/plugins/fullscreen.min.css")
-
 
 mixin navBar(user, page = null)
 	nav(id="main-nav")
@@ -135,8 +107,9 @@ mixin single-post-temp(post)
 		label#edit-sub-title-label.edit Sub-Title
 		input#single-post-sub-header-edit.edit
 		#single-post-body-wrap.front-end !{post.body}
-		label#edit-body-label.edit Body
-		textarea#single-post-body-edit.edit
+		#edit-body-container.edit
+			label#edit-body-label.edit Body
+			textarea#single-post-body-edit.edit
 		hr
 		if post.tags !== null
 			#post-tags.front-end
