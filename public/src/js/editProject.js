@@ -84,7 +84,7 @@ $(function() {
 			startDate: startDateEdit.val(),
 			endDate: endDateEdit.val(),
 			title: headerEdit.val(),
-			body: bodyEdit.val(),
+			body: tinymce.get('project-body-edit').getContent(),
 			tech: techEdit.val(),
 			link: siteLinkEdit.val()
 		};
@@ -174,9 +174,9 @@ $(function() {
 		toggleProjectEdit();
 
 		if ( editMode ) {
-			froalaEditorSitePackage('#project-body-edit');
+			tinyMCEPackage('#project-body-edit');
 		} else {
-			froalaEditorSitePackage('#project-body-edit', 'destroy');
+			tinyMCEPackage('#project-body-edit', 'destroy');
 		}
 	});
 
@@ -184,7 +184,7 @@ $(function() {
 		// Error check, and then confirm.
 		if (confirm('Change this Project?')) {
 			saveProjectChanges();
-			froalaEditorSitePackage('#project-body-edit', 'destroy');
+			tinyMCEPackage('#project-body-edit', 'destroy');
 		}
 		else {
 			return;

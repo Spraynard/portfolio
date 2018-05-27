@@ -26,7 +26,7 @@ $(function() {
 			'picture': null,
 			'date': null,
 			'technologies': null
-		}
+		};
 
 		$projectPicAlert.text("");
 		$projectTitleAlert.text("");
@@ -34,7 +34,7 @@ $(function() {
 		$projectDateAlert.text("");
 
 		var title = $title.val();
-		var body = $body.val();
+		var body = tinymce.get('project-input-body').getContent();
 		var pictures = $pictures.val();
 		var tech = $technologies.val();
 		var dateString = $startMonth + ' ' + $startDay + ', ' + $startYear;
@@ -81,5 +81,5 @@ $(function() {
 	$('#project-submit').on('click', function() {
 		newprojectSubmit();
 	})
-	
+
 })

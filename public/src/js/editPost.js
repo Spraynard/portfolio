@@ -32,7 +32,6 @@ $(function() {
 	function toggleEdit(editDoms) {
 		// Toggles visibility of all `.edit` classed html
 		editDoms = $(".edit").not("#single-post-body-edit");
-		console.log( editDoms );
 		$(editDoms).toggleClass('show');
 		var toggled = editDoms.is(':visible');
 		$('#start-edit-button').text(toggled == true ? 'Cancel' : 'Edit Post');

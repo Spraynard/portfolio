@@ -53,9 +53,9 @@ html
 							| (906) 231 - 0761
 					#copyright-wrapper
 						| &copy; <span id="cr-year"></span> Kellan Martin
+	if ( user )
+		+tinyMCEJS
 	block javascripts
 		script(type="text/javascript" src="/jquery/jquery.js")
 		script(type="text/javascript" src="/javascripts/navmenu.min.js")
 		script(type="text/javascript" src="/javascripts/footers.min.js")
-		if ( user )
-			+tinyMCEJS
