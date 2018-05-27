@@ -1,3 +1,3 @@
 // $(document).ready(function() {
-	froalaEditorSitePackage( "#input-body", "#newpost-body" );
+	tinyMCEPackage( "#input-body", "#newpost-body" );
 // });

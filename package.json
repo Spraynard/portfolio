@@ -8,9 +8,6 @@
     "start-prod-no-debug": "NODE_ENV=production PORT=8000 npm start",
     "start-dev": "NODE_ENV=development DEBUG=portfolio:* nodemon ./bin/www"
   },
-  "jshintConfig": {
-    "esversion": 6
-  },
   "dependencies": {
     "body-parser": "~1.17.1",
     "compression": "^1.7.1",

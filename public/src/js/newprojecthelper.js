@@ -50,7 +50,7 @@ $(function() {
 			view.renderEnd();
 			view.renderEndDays();
 			// Initialize froala in the view
-			froalaEditorSitePackage("#project-input-body");
+			tinyMCEPackage("#project-input-body");
 		},
 		renderStart: function() {
 			// Function for rendering the options on the `start`
